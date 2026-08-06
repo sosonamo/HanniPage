@@ -2,17 +2,12 @@ import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import {defineConfig} from 'vite';
-import react from '@vitejs/plugin-react'
+
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [react()],
-  base: '/HanniPage/', // 💡 여기에 1번에서 만든 깃헙 저장소 이름을 똑같이 적어주세요!
-})
-
-
 export default defineConfig(() => {
   return {
+    base: '/HanniPage/',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
