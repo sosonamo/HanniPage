@@ -1,6 +1,0 @@
-{
-  "name": "한늬 (Han-nui) - 여성 농구 클럽",
-  "description": "여성 농구 클럽 한늬의 공식 홈페이지 메인 페이지. 정모일정, 참가신청, 팀 소개, 선수 프로필을 제공합니다.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}

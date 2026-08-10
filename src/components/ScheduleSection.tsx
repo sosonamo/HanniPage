@@ -30,7 +30,7 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, onR
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20 text-xs font-bold uppercase tracking-wider mb-2">
               <Calendar className="w-3.5 h-3.5" />
-              1. 정모일정 & 체육관 안내
+              정모일정 & 체육관 안내
             </div>
             <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
               이번 주 <span className="text-orange-500">정기 훈련 & 매치</span> 일정
@@ -38,50 +38,6 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, onR
             <p className="text-slate-400 text-sm mt-1">
               체육관 위치, 주차 정보, 정모 참석(RSVP) 현황을 한눈에 확인하세요.
             </p>
-          </div>
-
-          {/* Filter Tabs */}
-          <div className="flex flex-wrap items-center gap-1.5 bg-slate-900 p-1.5 rounded-xl border border-slate-800">
-            <button
-              onClick={() => setSelectedType('all')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                selectedType === 'all'
-                  ? 'bg-orange-500 text-white shadow'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              전체 일정
-            </button>
-            <button
-              onClick={() => setSelectedType('tactics')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                selectedType === 'tactics'
-                  ? 'bg-orange-500 text-white shadow'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              전술 & 기본기
-            </button>
-            <button
-              onClick={() => setSelectedType('scrimmage')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                selectedType === 'scrimmage'
-                  ? 'bg-orange-500 text-white shadow'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              5:5 매치
-            </button>
-            <button
-              onClick={() => setSelectedType('beginner')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                selectedType === 'beginner'
-                  ? 'bg-orange-500 text-white shadow'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              초보자 클래스
-            </button>
           </div>
         </div>
 
@@ -217,40 +173,6 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, onR
                 <span className="text-amber-400 font-bold block mb-1">마포구민 체육센터</span>
                 <span className="text-slate-400">마포구청역 1번 출구 버스 환승</span>
               </div>
-            </div>
-          </div>
-
-          <div className="lg:col-span-6 bg-slate-950 rounded-2xl p-4 border border-slate-800 space-y-3">
-            <div className="aspect-video w-full rounded-xl overflow-hidden relative bg-slate-800 border border-slate-700">
-              {/* Map Illustration Placeholder */}
-              <img
-                src="https://images.unsplash.com/photo-1519766304817-4f37bda74a29?auto=format&fit=crop&q=80&w=800"
-                alt="체육관 실내 전경"
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover opacity-80"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent flex flex-col justify-end p-4">
-                <div className="flex items-center gap-2">
-                  <span className="px-2 py-0.5 rounded bg-orange-600 text-white font-bold text-[11px]">
-                    서초 체육관
-                  </span>
-                  <span className="text-xs text-slate-200 font-bold">
-                    서울 서초구 사임당로 143
-                  </span>
-                </div>
-              </div>
-            </div>
-            
-            <div className="flex items-center justify-between text-xs">
-              <span className="text-slate-400">카카오맵 / 네이버 지도에서 검색 가능</span>
-              <a
-                href="https://map.naver.com"
-                target="_blank"
-                rel="noreferrer"
-                className="text-orange-400 hover:underline font-bold flex items-center gap-1"
-              >
-                네이버 지도 바로가기 <Share2 className="w-3.5 h-3.5" />
-              </a>
             </div>
           </div>
         </div>

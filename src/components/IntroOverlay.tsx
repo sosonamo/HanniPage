@@ -40,7 +40,7 @@ export default function IntroOverlay({ onComplete }: IntroOverlayProps) {
     >
       <iframe
         className="h-full w-full border-0"
-        src={`${import.meta.env.BASE_URL}index_ball_smooth_roll_exit.html`}
+        src={`${import.meta.env.BASE_URL}index_ball.html`}
         title="농구공 시작 애니메이션"
       />
     </div>

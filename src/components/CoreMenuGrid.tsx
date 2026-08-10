@@ -11,30 +11,24 @@ export const CoreMenuGrid: React.FC<CoreMenuGridProps> = ({ onNavigate, onOpenJo
   const cards = [
     {
       id: 'schedule' as SectionId,
-      number: '01',
       icon: <Calendar className="w-8 h-8 text-orange-500" />,
-      emoji: '📅',
-      title: '정모일정',
+      emoji: '📅', title: '월간정모일정',
       titleEn: 'Schedule & Gym',
-      subtitle: '이번 주 훈련 일정 • 체육관 위치 • 월간 캘린더',
-      description: '수요일 야간 전술 훈련, 토요일 자체 매치, 일요일 초보자 클래스 및 서초/마포 체육관 오시는 길 안내.',
-      badge: '이번 주 3회 진행',
+      subtitle: '이번달 정모 일정',
+      description: '',
       badgeColor: 'bg-orange-500/10 text-orange-400 border-orange-500/30',
       gradient: 'from-orange-500/20 via-orange-500/5 to-transparent',
       borderColor: 'group-hover:border-orange-500/60',
-      actionText: '일정 및 지도 보기',
+      actionText: '일정 보기',
       action: () => onNavigate('schedule'),
     },
     {
       id: 'join' as SectionId,
-      number: '02',
       icon: <UserPlus className="w-8 h-8 text-amber-400" />,
-      emoji: '✍️',
-      title: '참가신청서',
+      emoji: '✍️', title: '정모참가신청서',
       titleEn: 'Join Us Form',
-      subtitle: '신입 부원 모집 • 가입 안내 • 온라인 신청 폼',
-      description: '입문자부터 경력자까지! 간단한 내 농구 경험 입력 후 바로 제출할 수 있는 1분 가입 신청서.',
-      badge: '모집 진행 중',
+      subtitle: '참가신청하러 가기',
+      description: '정모 참가를 원하시는 분은 신청서를 작성해 주세요. 담당자가 확인 후 연락드립니다.',
       badgeColor: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30',
       gradient: 'from-amber-500/20 via-amber-500/5 to-transparent',
       borderColor: 'group-hover:border-amber-400/60',
@@ -43,14 +37,12 @@ export const CoreMenuGrid: React.FC<CoreMenuGridProps> = ({ onNavigate, onOpenJo
     },
     {
       id: 'about' as SectionId,
-      number: '03',
       icon: <Dribbble className="w-8 h-8 text-orange-400" />,
-      emoji: '🏀',
-      title: '한늬소개',
+      emoji: '🏀', title: '한늬소개',
       titleEn: 'About Us',
-      subtitle: '팀 정체성 • 포용적 문화 • 클럽 히스토리',
+      subtitle: '한늬에 대하여',
       description: '"한늬"의 의미, 다양성을 존중하는 매너 코트 수칙, 2021년 창단부터 리그 우승까지의 스토리.',
-      badge: '2021 창단',
+      badge: '2008년 창단',
       badgeColor: 'bg-blue-500/10 text-blue-400 border-blue-500/30',
       gradient: 'from-orange-600/20 via-slate-800/10 to-transparent',
       borderColor: 'group-hover:border-orange-400/60',
@@ -59,14 +51,12 @@ export const CoreMenuGrid: React.FC<CoreMenuGridProps> = ({ onNavigate, onOpenJo
     },
     {
       id: 'roster' as SectionId,
-      number: '04',
       icon: <Users className="w-8 h-8 text-amber-500" />,
-      emoji: '🏃‍♀️',
-      title: '팀원소개',
+      emoji: '🏃‍♀️', title: '팀원소개',
       titleEn: 'Roster & Stats',
-      subtitle: '운영진/코치진 • 선수 프로필 • 포지션 스탯',
-      description: '주장, 코치진, 각 포지션별(가드, 포워드, 센터) 한늬 선수단의 스탯, 특기 기술, 한마디 소개.',
-      badge: '45명 Roster',
+      subtitle: '선수 프로필',
+      description: '주장, 코치진, 각 포지션별 한늬즈 소개.',
+      badge: '한늬즈',
       badgeColor: 'bg-purple-500/10 text-purple-400 border-purple-500/30',
       gradient: 'from-amber-600/20 via-slate-800/10 to-transparent',
       borderColor: 'group-hover:border-amber-500/60',
@@ -83,13 +73,13 @@ export const CoreMenuGrid: React.FC<CoreMenuGridProps> = ({ onNavigate, onOpenJo
         <div className="text-center max-w-3xl mx-auto space-y-3 mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20 text-xs font-bold uppercase tracking-wider">
             <Sparkles className="w-3.5 h-3.5" />
-            Core Navigation • 주요 안내
+            주요 안내
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            한늬 공식 클럽 <span className="text-orange-500">4대 핵심 서비스</span>
+            메뉴 <span className="text-orange-500">바로가기</span>
           </h2>
           <p className="text-sm sm:text-base text-slate-300">
-            원하시는 메뉴를 클릭하여 훈련 일정, 가입 신청, 클럽 소개, 선수 프로필을 바로 확인해 보세요.
+            원하시는 메뉴를 선택해주세요.
           </p>
         </div>
 
@@ -108,14 +98,6 @@ export const CoreMenuGrid: React.FC<CoreMenuGridProps> = ({ onNavigate, onOpenJo
 
               {/* Card Top Row: Emoji Icon + Number */}
               <div className="relative z-10 space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="w-14 h-14 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center group-hover:scale-110 group-hover:bg-slate-800 transition-all duration-300 shadow-inner">
-                    <span className="text-2xl">{card.emoji}</span>
-                  </div>
-                  <span className="font-mono text-xs font-bold text-slate-600 group-hover:text-orange-400 transition-colors">
-                    {card.number}
-                  </span>
-                </div>
 
                 {/* Badge */}
                 <div>
