@@ -25,14 +25,14 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ timeline, gallery })
         <div className="text-center max-w-3xl mx-auto space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20 text-xs font-bold uppercase tracking-wider">
             <Dribbble className="w-3.5 h-3.5" />
-            3. 한늬소개 (About Us)
+            한늬소개 (About Us)
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            코트 위에서 하나되는 <span className="text-orange-500">우리의 큰 물결, 한늬</span>
+            코트 위에서 하나되는 <span className="text-orange-500"> 한늬</span>
           </h2>
           <p className="text-sm sm:text-base text-slate-300">
-            '한늬'는 '하나의 커다란 물결'을 의미하는 순우리말 표현입니다. 
-            농구를 향한 개개인의 열정이 모여 큰 기쁨과 활력을 이루는 곳입니다.
+            '한늬'는 '끝까지 무언가를 꾸준히 그리고 열심히 함' 을 의미하는 순우리말 표현입니다. 
+            농구를 좋아하는 사람들이 모여 원팀이 되는 곳입니다.
           </p>
         </div>
 
@@ -44,7 +44,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ timeline, gallery })
             </div>
             <h3 className="text-xl font-extrabold text-white">포용적 팀 문화 (Inclusive)</h3>
             <p className="text-xs text-slate-300 leading-relaxed">
-              농구 경험이나 실력의 유무와 상관없이 서로를 칭찬하고 북돋우는 따뜻한 분위기를 지향합니다. 나이, 직업을 넘어 농구로 소통합니다.
+              서로를 칭찬하고 북돋우는 따뜻한 분위기를 지향합니다. 나이, 직업을 넘어 농구로 소통합니다.
             </p>
           </div>
 
@@ -52,9 +52,9 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ timeline, gallery })
             <div className="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
               <Sparkles className="w-6 h-6" />
             </div>
-            <h3 className="text-xl font-extrabold text-white">체계적인 성장 (Growth)</h3>
+            <h3 className="text-xl font-extrabold text-white">함께하는 성장 (Growth)</h3>
             <p className="text-xs text-slate-300 leading-relaxed">
-              체육학 지도사 및 코치진의 정교한 기본기 폼 교정, 안전 스트레칭, 그리고 실전 픽앤롤 전술 세션까지 함께 배웁니다.
+              팀원 서로가 가르쳐주고 배우며 함께 성장합니다.
             </p>
           </div>
 
@@ -64,7 +64,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ timeline, gallery })
             </div>
             <h3 className="text-xl font-extrabold text-white">안전 & 클린 코트 (Respect)</h3>
             <p className="text-xs text-slate-300 leading-relaxed">
-              부상 예방을 최우선으로 하며, 고의 파울이나 거친 비매너 행위를 엄격히 차단하여 누구나 안심하고 뛸 수 있는 환경을 만듭니다.
+              부상 예방을 최우선으로 하며, 거친 비매너 행위를 엄격히 차단하여 누구나 안심하고 뛸 수 있는 환경을 만듭니다.
             </p>
           </div>
         </div>
@@ -73,7 +73,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ timeline, gallery })
         <div className="bg-slate-900/90 rounded-3xl border border-slate-800 p-8 sm:p-12 space-y-8">
           <div className="flex items-center gap-3 border-b border-slate-800 pb-4">
             <History className="w-6 h-6 text-orange-500" />
-            <h3 className="text-2xl font-black text-white">한늬 클럽 발자취 & 히스토리</h3>
+            <h3 className="text-2xl font-black text-white">한늬 발자국</h3>
           </div>
 
           <div className="relative border-l-2 border-orange-500/30 pl-6 sm:pl-8 space-y-8 ml-2">

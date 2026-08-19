@@ -152,35 +152,44 @@ export const MOCK_ROSTER: RosterMember[] = [
 
 export const MOCK_TIMELINE: ClubTimelineItem[] = [
   {
-    year: '2021년 05월',
-    title: '여성 농구 클럽 "한늬" 창단',
-    description: '농구를 열정적으로 사랑하는 6명의 초기 멤버들이 모여 서초구에서 작은 주말 동호회로 첫발을 내딛었습니다.',
-    badge: '창단'
+    year: '2026년 현재',
+    title: '신입 부원 모집 & 브랜드 리뉴얼',
+    description: '성장하는 즐거움을 함께할 한늬즈 모집중.',
+    badge: '진행중'
   },
   {
-    year: '2022년 11월',
-    title: '서울시 생활체육 여성농구 대회 동상 입상',
-    description: '창단 1년 만에 공식 대회 참가, 팀워크를 바탕으로 준결승 진출 및 첫 트로피를 수상했습니다.',
+    year: '201?년 ?월',
+    title: '제??회 어셉배 준우승',
+    description: '선출대회에서 비선출멤버로 준우승을 해냈습니다',
     badge: '대회 입상'
   },
   {
-    year: '2023년 06월',
-    title: '정기 회원 40명 돌파 & 포용적 체계 구축',
-    description: '입문자 전용 멘토링 프로그램과 수요일 전술 클래스를 신설하여 누구나 편하게 참여하는 문화를 만들었습니다.',
-    badge: '확장'
+    year: '201?년 ?월',
+    title: '서울시 생활체육 여성농구 리그 3위',
+    description: '.',
+    badge: '대회 입상'
   },
   {
-    year: '2024년 10월',
-    title: '수도권 아마추어 여성농구 리그 우승',
-    description: '무패 신화로 정규 리그 1위 달성! 코치진과 부원들의 끈끈한 단합이 만들어낸 자랑스러운 결실입니다.',
-    badge: '리그 우승'
+    year: '2015년 10월',
+    title: '제2회 한늬배 우승',
+    description: '.',
+    badge: '우승'
   },
   {
-    year: '2026년 현재',
-    title: '2026 하반기 신입 부원 모집 & 브랜드 리뉴얼',
-    description: '함께 성장하는 즐거움을 계속 이어가기 위해 더 쾌적한 훈련 환경과 다채로운 소모임 프로그램을 운영 중입니다.',
-    badge: '진행중'
-  }
+    year: '2014년 10월',
+    title: '제1회 한늬배 개최',
+    description: '여자농구동호회 최초 자체 비선출대회 개최',
+    badge: '이벤트'
+  },
+  {
+    year: '2008년 05월',
+    title: '여성 농구 클럽 "한늬" 창단',
+    description: '농구를 열정적으로 사랑하는 6명의 초기 멤버들이 모여 주말 동호회로 첫발을 내딛었습니다.',
+    badge: '창단'
+  },
+
+  
+  
 ];
 
 export const MOCK_GALLERY: GalleryItem[] = [
