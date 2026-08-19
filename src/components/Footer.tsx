@@ -18,7 +18,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenJoinForm }) =>
 
         {/* Link */}
         <div className="pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-500">
-          <p> 인천부천 여자농구동호회 한늬 (HANNI Women's Basketball Club).</p>
+          <p> 여자농구동호회 한늬 (HANNI Women's Basketball Club).</p>
           <div className="flex items-center gap-3 pt-2">
               <a
                 href="https://www.instagram.com/hanni_basketball?igsh=MTByNjE3N2wzNWk1bA=="
@@ -60,9 +60,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenJoinForm }) =>
               </a>
             </div>
           <div className="flex items-center gap-4">
-            <span className="flex items-center gap-1">
-              Crafted with <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" /> for Women's Basketball
-            </span>
             <button
               onClick={scrollToTop}
               className="flex items-center gap-1.5 px-3 p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800"
