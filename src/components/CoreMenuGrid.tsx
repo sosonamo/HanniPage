@@ -101,8 +101,8 @@ export const CoreMenuGrid: React.FC<CoreMenuGridProps> = ({ onNavigate, onOpenJo
 
                 {/* Badge */}
                 <div>
-                  <span className={`inline-block text-[11px] font-bold px-2.5 py-0.5 rounded-full border ${card.badgeColor}`}>
-                    {card.badge}
+                  <span className={`inline-flex min-w-7 items-center justify-center text-[11px] font-bold px-2.5 py-0.5 rounded-full border ${card.badgeColor}`}>
+                    {card.badge ?? card.emoji}
                   </span>
                 </div>
 

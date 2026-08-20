@@ -7,15 +7,17 @@ export interface ScheduleEvent {
   date: string;
   dayOfWeek: string;
   time: string;
+  startDateTime?: string;
   location: string;
   address: string;
-  courtDetails: string;
-  parkingInfo: string;
+  courtDetails?: string;
+  parkingInfo?: string;
   mapUrl?: string;
-  maxCapacity: number;
-  currentRsvp: number;
+  maxCapacity?: number;
+  currentRsvp?: number;
   description: string;
-  coach: string;
+  coach?: string;
+  sourceUrl?: string;
 }
 
 export type PlayerPosition = 'PG' | 'SG' | 'SF' | 'PF' | 'C' | 'Coach' | 'Staff';

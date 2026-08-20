@@ -96,10 +96,10 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({ isOpenModal, o
         <div className="text-center max-w-3xl mx-auto space-y-3 mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20 text-xs font-bold uppercase tracking-wider">
             <UserPlus className="w-3.5 h-3.5" />
-            2. 참가신청서 (Join Us)
+            참가신청서 (Join Us)
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            한늬의 새로운 <span className="text-orange-500">팀원이 되어주세요!</span>
+            한늬랑 함께 농구하실 <span className="text-orange-500">게스트를 모집합니다!</span>
           </h2>
           <p className="text-sm sm:text-base text-slate-300">
             농구 경험이 전혀 없어도 괜찮습니다. 열정과 운동화만 있다면 누구나 환영받는 따뜻한 코트입니다.
@@ -147,17 +147,9 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({ isOpenModal, o
                   <div className="p-3 bg-slate-900 rounded-xl border border-slate-800">
                     <span className="text-slate-400 block text-[11px]">월 정기 회비</span>
                     <span className="text-lg font-bold text-amber-400 font-mono">40,000원</span>
-                    <p className="text-[10px] text-slate-500 mt-1">체육관 대관료 & 음료 지원</p>
+                    <p className="text-[10px] text-slate-500 mt-1">체육관 대관료 & 행사 지원</p>
                   </div>
                 </div>
-              </div>
-
-              {/* Guarantees */}
-              <div className="p-4 rounded-2xl bg-orange-500/10 border border-orange-500/20 text-xs space-y-1">
-                <span className="font-bold text-orange-300 block">💡 부담 없는 일일 체험 가능</span>
-                <p className="text-slate-300">
-                  정회원 등록 전에 1회 게스트 체험(10,000원)으로 분위기를 먼저 경험해 보실 수 있습니다!
-                </p>
               </div>
             </div>
           </div>

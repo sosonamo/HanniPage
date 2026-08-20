@@ -23,11 +23,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onOpenJoin
           {/* Left Column: Text Content & CTAs */}
           <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
             {/* Top Pill Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900 border border-orange-500/30 text-orange-400 text-xs sm:text-sm font-semibold shadow-inner">
+            {/*<div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900 border border-orange-500/30 text-orange-400 text-xs sm:text-sm font-semibold shadow-inner">
               <span className="flex h-2 w-2 rounded-full bg-orange-500 animate-ping" />
               <Dribbble className="w-4 h-4 text-orange-500" />
               <span>신입 부원 모집 중</span>
-            </div>
+            </div>*/}
 
             {/* Main Title & Slogan */}
             <div className="space-y-3">
@@ -39,7 +39,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onOpenJoin
               </h1>
               <p className="text-base sm:text-lg text-slate-300 font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0">
                 농구를 사랑하는 여성들이 모여 땀 흘리고 서로를 응원하는 코트!
-                함꼐 성장하는 따뜻하고 열정적인 한늬(HANNI)에서 함께하세요.
+                함께 성장하는 따뜻하고 열정적인 한늬(HANNI)에서 함께하세요.
               </p>
             </div>
 
@@ -76,18 +76,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onOpenJoin
                 <ArrowRight className="w-5 h-5" />
               </button>
             </div>
-
-            {/* Quick Stats Bar */}
-            <div className="pt-6 border-t border-slate-800/80 grid grid-cols-3 gap-4 text-center lg:text-left">
-              <div>
-                <div className="text-2xl sm:text-3xl font-extrabold text-white font-mono">
-                  2008<span className="text-amber-400">년</span>
-                </div>
-                <div className="text-xs text-slate-400 font-medium">동호회 창단</div>
-              </div>
-            </div>
           </div>
-
         </div>
       </div>
     </section>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SectionId, ScheduleEvent } from './types';
 import { MOCK_SCHEDULES, MOCK_ROSTER, MOCK_TIMELINE, MOCK_GALLERY, MOCK_FAQS } from './data/mockData';
 import { NoticeBanner } from './components/NoticeBanner';
@@ -13,11 +13,42 @@ import { FaqSection } from './components/FaqSection';
 import { Footer } from './components/Footer';
 import { AttendanceModal } from './components/AttendanceModal';
 import IntroOverlay from './components/IntroOverlay';
+import {
+  fetchGoogleCalendarSchedules,
+  isGoogleCalendarConfigured,
+} from './services/googleCalendar';
+
+export type CalendarStatus = 'fallback' | 'loading' | 'connected' | 'error';
 
 export default function App() {
   const [showIntro, setShowIntro] = useState(true);
   const [activeSection, setActiveSection] = useState<SectionId>('hero');
   const [selectedScheduleForRsvp, setSelectedScheduleForRsvp] = useState<ScheduleEvent | null>(null);
+  const [schedules, setSchedules] = useState<ScheduleEvent[]>(MOCK_SCHEDULES);
+  const [calendarStatus, setCalendarStatus] = useState<CalendarStatus>('fallback');
+
+  useEffect(() => {
+    if (!isGoogleCalendarConfigured()) return;
+
+    let isActive = true;
+    setCalendarStatus('loading');
+
+    fetchGoogleCalendarSchedules()
+      .then((events) => {
+        if (!isActive) return;
+        setSchedules(events);
+        setCalendarStatus('connected');
+      })
+      .catch((error) => {
+        if (!isActive) return;
+        console.error('Google Calendar 연동 실패:', error);
+        setCalendarStatus('error');
+      });
+
+    return () => {
+      isActive = false;
+    };
+  }, []);
 
   const scrollToSection = (sectionId: SectionId) => {
     setActiveSection(sectionId);
@@ -41,7 +72,8 @@ export default function App() {
 
       {/* Notice Banner */}
       <NoticeBanner
-        onRsvpClick={() => setSelectedScheduleForRsvp(MOCK_SCHEDULES[0])}
+        nextSchedule={schedules[0]}
+        onRsvpClick={() => schedules[0] && setSelectedScheduleForRsvp(schedules[0])}
         onJoinClick={handleOpenJoinForm}
       />
 
@@ -66,7 +98,8 @@ export default function App() {
 
       {/* 1. Schedule Section */}
       <ScheduleSection
-        schedules={MOCK_SCHEDULES}
+        schedules={schedules}
+        calendarStatus={calendarStatus}
         onRsvpClick={(schedule) => setSelectedScheduleForRsvp(schedule)}
       />
 

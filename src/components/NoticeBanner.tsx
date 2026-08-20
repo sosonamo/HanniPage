@@ -1,25 +1,37 @@
 import React, { useState, useEffect } from 'react';
+import { ScheduleEvent } from '../types';
 import { Bell, Flame, Calendar, MapPin, ChevronRight, Sparkles } from 'lucide-react';
 
 interface NoticeBannerProps {
+  nextSchedule?: ScheduleEvent;
   onRsvpClick: () => void;
   onJoinClick: () => void;
 }
 
-export const NoticeBanner: React.FC<NoticeBannerProps> = ({ onRsvpClick, onJoinClick }) => {
-  const [timeLeft, setTimeLeft] = useState({ hours: 48, minutes: 25, seconds: 12 });
+const getTimeLeft = (startDateTime?: string) => {
+  if (!startDateTime || !startDateTime.includes('T')) return null;
+
+  const difference = new Date(startDateTime).getTime() - Date.now();
+  if (difference <= 0) return null;
+
+  return {
+    days: Math.floor(difference / 86_400_000),
+    hours: Math.floor((difference / 3_600_000) % 24),
+    minutes: Math.floor((difference / 60_000) % 60),
+  };
+};
+
+export const NoticeBanner: React.FC<NoticeBannerProps> = ({ nextSchedule, onRsvpClick, onJoinClick }) => {
+  const [timeLeft, setTimeLeft] = useState(() => getTimeLeft(nextSchedule?.startDateTime));
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev.seconds > 0) return { ...prev, seconds: prev.seconds - 1 };
-        if (prev.minutes > 0) return { ...prev, minutes: 59, seconds: 59 };
-        if (prev.hours > 0) return { hours: prev.hours - 1, minutes: 59, seconds: 59 };
-        return prev;
-      });
-    }, 1000);
+    setTimeLeft(getTimeLeft(nextSchedule?.startDateTime));
+    const timer = setInterval(
+      () => setTimeLeft(getTimeLeft(nextSchedule?.startDateTime)),
+      60_000,
+    );
     return () => clearInterval(timer);
-  }, []);
+  }, [nextSchedule?.startDateTime]);
 
   return (
     <div className="bg-slate-950 text-slate-100 border-b border-orange-500/20 text-xs sm:text-sm py-2 px-4 relative z-40 overflow-hidden">
@@ -35,14 +47,21 @@ export const NoticeBanner: React.FC<NoticeBannerProps> = ({ onRsvpClick, onJoinC
           </span>
           <span className="text-slate-500 hidden sm:inline">|</span>
           <span className="text-orange-400 hidden sm:inline-flex items-center gap-1 font-medium">
-            <Calendar className="w-3.5 h-3.5" /> 이번 주 수요일 정모 D-3
+            <Calendar className="w-3.5 h-3.5" />
+            {nextSchedule
+              ? `다음 일정 · ${nextSchedule.dayOfWeek} ${nextSchedule.time}`
+              : '예정된 일정이 없습니다'}
           </span>
         </div>
 
         {/* Right countdown timer & CTA */}
         <div className="flex items-center gap-3 shrink-0">
-          <div className="hidden lg:flex items-center gap-1.5 text-xs text-slate-400">
+          {timeLeft && <div className="hidden lg:flex items-center gap-1.5 text-xs text-slate-400">
             <span>다음 정모까지</span>
+            <span className="bg-slate-800 text-orange-400 font-mono font-bold px-1.5 py-0.5 rounded border border-slate-700">
+              {timeLeft.days}d
+            </span>
+            <span>:</span>
             <span className="bg-slate-800 text-orange-400 font-mono font-bold px-1.5 py-0.5 rounded border border-slate-700">
               {String(timeLeft.hours).padStart(2, '0')}h
             </span>
@@ -50,18 +69,15 @@ export const NoticeBanner: React.FC<NoticeBannerProps> = ({ onRsvpClick, onJoinC
             <span className="bg-slate-800 text-orange-400 font-mono font-bold px-1.5 py-0.5 rounded border border-slate-700">
               {String(timeLeft.minutes).padStart(2, '0')}m
             </span>
-            <span>:</span>
-            <span className="bg-slate-800 text-orange-400 font-mono font-bold px-1.5 py-0.5 rounded border border-slate-700">
-              {String(timeLeft.seconds).padStart(2, '0')}s
-            </span>
-          </div>
+          </div>}
 
           <button
             onClick={onRsvpClick}
-            className="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium px-2.5 py-1 rounded transition-colors border border-slate-700 flex items-center gap-1"
+            disabled={!nextSchedule}
+            className="text-xs bg-slate-800 hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed text-slate-200 font-medium px-2.5 py-1 rounded transition-colors border border-slate-700 flex items-center gap-1"
           >
             <MapPin className="w-3 h-3 text-orange-400" />
-            서초체육관 참석
+            {nextSchedule ? '다음 일정 참석' : '일정 없음'}
           </button>
 
           <button

@@ -1,6 +1,6 @@
 import React from 'react';
 import { SectionId } from '../types';
-import { Dribbble, Instagram, MessageSquare, Mail, MapPin, Heart, ChevronUp } from 'lucide-react';
+import { Dribbble, Instagram, Youtube, Mail, MapPin, Heart, ChevronUp } from 'lucide-react';
 
 interface FooterProps {
   onNavigate: (sectionId: SectionId) => void;
@@ -53,10 +53,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenJoinForm }) =>
               </a>
               <a
                 href="mailto:contact@hannui-basketball.com"
-                className="p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 transition-colors"
+                className="p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-red-500 hover:text-red-400 border border-slate-800 transition-colors"
                 aria-label="Email"
               >
-                <MessageSquare className="w-4 h-4" />
+                <Youtube className="w-4 h-4" />
               </a>
             </div>
           <div className="flex items-center gap-4">
