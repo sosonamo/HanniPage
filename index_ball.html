@@ -60,11 +60,11 @@
       letter-spacing: 0.22em;
     }
 
-    h1 {
-      margin: 0;
-      font-size: clamp(36px, 7vw, 84px);
-      line-height: 0.98;
-      letter-spacing: -0.055em;
+    .hero-logo {
+      display: block;
+      width: clamp(220px, 34vw, 330px);
+      height: auto;
+      margin: 0 auto;
     }
 
     .description {
@@ -188,12 +188,11 @@
 <body>
   <main class="page-content" aria-label="메인 화면">
     <section class="hero">
-      <p class="eyebrow">INTERACTIVE INDEX</p>
-      <h1>BASKETBALL<br />STARTS HERE</h1>
-      <p class="description">
-        농구공이 크게 바운드한 뒤 작게 통통통 전진하고,<br />
-        마지막 움직임을 이어 오른쪽으로 부드럽게 굴러 퇴장합니다.
-      </p>
+      <img
+        class="hero-logo"
+        src="./assets/hanni-logo-white.png"
+        alt="한늬 더 블레이저스"
+      />
     </section>
   </main>
 
