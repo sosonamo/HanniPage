@@ -15,6 +15,7 @@ import { AttendanceModal } from './components/AttendanceModal';
 import IntroOverlay from './components/IntroOverlay';
 import {
   fetchGoogleCalendarSchedules,
+  getMillisecondsUntilNextCalendarWeek,
   isGoogleCalendarConfigured,
 } from './services/googleCalendar';
 
@@ -31,22 +32,40 @@ export default function App() {
     if (!isGoogleCalendarConfigured()) return;
 
     let isActive = true;
-    setCalendarStatus('loading');
+    let weeklyRefreshTimer: number | undefined;
 
-    fetchGoogleCalendarSchedules()
-      .then((events) => {
+    const loadSchedules = () => {
+      setCalendarStatus('loading');
+
+      fetchGoogleCalendarSchedules()
+        .then((events) => {
+          if (!isActive) return;
+          setSchedules(events);
+          setCalendarStatus('connected');
+        })
+        .catch((error) => {
+          if (!isActive) return;
+          console.error('Google Calendar 연동 실패:', error);
+          setCalendarStatus('error');
+        });
+    };
+
+    const scheduleNextWeeklyRefresh = () => {
+      weeklyRefreshTimer = window.setTimeout(() => {
         if (!isActive) return;
-        setSchedules(events);
-        setCalendarStatus('connected');
-      })
-      .catch((error) => {
-        if (!isActive) return;
-        console.error('Google Calendar 연동 실패:', error);
-        setCalendarStatus('error');
-      });
+        loadSchedules();
+        scheduleNextWeeklyRefresh();
+      }, getMillisecondsUntilNextCalendarWeek());
+    };
+
+    loadSchedules();
+    scheduleNextWeeklyRefresh();
 
     return () => {
       isActive = false;
+      if (weeklyRefreshTimer !== undefined) {
+        window.clearTimeout(weeklyRefreshTimer);
+      }
     };
   }, []);
 

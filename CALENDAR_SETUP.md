@@ -1,6 +1,6 @@
 # 한늬 Google Calendar 연동
 
-홈페이지는 Google Calendar의 공개 일정 중 오늘 이후 일정을 시작 시각순으로 가져옵니다. 캘린더 연결이 없거나 API 호출에 실패하면 기존 샘플 일정이 표시됩니다.
+홈페이지는 Google Calendar의 공개 일정 중 이번 주 월요일부터 일요일까지의 일정만 시작 시각순으로 가져옵니다. 페이지를 계속 열어둔 상태에서도 월요일 자정이 지나면 새 주를 기준으로 일정을 자동 갱신합니다. 캘린더 연결이 없거나 API 호출에 실패하면 기존 샘플 일정이 표시됩니다.
 
 ## 1. Google Calendar 공개 설정
 
@@ -28,8 +28,7 @@
 VITE_GOOGLE_CALENDAR_ID=your_calendar_id@group.calendar.google.com
 VITE_GOOGLE_CALENDAR_API_KEY=your_restricted_api_key
 VITE_CALENDAR_TIME_ZONE=Asia/Seoul
-VITE_GOOGLE_CALENDAR_MAX_RESULTS=12
-VITE_GOOGLE_CALENDAR_LOOKAHEAD_DAYS=120
+VITE_GOOGLE_CALENDAR_MAX_RESULTS=50
 ```
 
 설정 후 개발 서버를 다시 시작합니다.

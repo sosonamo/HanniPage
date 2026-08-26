@@ -52,9 +52,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenJoinForm }) =>
                 </svg>
               </a>
               <a
-                href="mailto:contact@hannui-basketball.com"
+                href="https://www.youtube.com/@LetsGoHanni"
+                target="_blank"
+                rel="noreferrer"
                 className="p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-red-500 hover:text-red-400 border border-slate-800 transition-colors"
-                aria-label="Email"
+                aria-label="YouTube"
               >
                 <Youtube className="w-4 h-4" />
               </a>

@@ -182,8 +182,8 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, cal
           {filteredSchedules.length === 0 && calendarStatus !== 'loading' && (
             <div className="lg:col-span-3 rounded-2xl border border-dashed border-slate-700 bg-slate-900/50 px-6 py-14 text-center">
               <Calendar className="w-8 h-8 text-slate-600 mx-auto mb-3" />
-              <p className="font-bold text-slate-200">예정된 한늬 일정이 없습니다.</p>
-              <p className="text-xs text-slate-500 mt-1">새 일정이 캘린더에 등록되면 자동으로 표시됩니다.</p>
+              <p className="font-bold text-slate-200">이번 주 한늬 일정이 없습니다.</p>
+              <p className="text-xs text-slate-500 mt-1">다음 주 월요일에 새 주의 일정을 다시 확인해주세요.</p>
             </div>
           )}
         </div>
