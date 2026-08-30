@@ -7,7 +7,7 @@ interface FaqSectionProps {
 }
 
 export const FaqSection: React.FC<FaqSectionProps> = ({ faqs }) => {
-  const [openId, setOpenId] = useState<string | null>('faq-1');
+  const [openId, setOpenId] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>('전체');
 
   const categories = ['전체', '가입안내', '준비물', '회비', '훈련/장소'];

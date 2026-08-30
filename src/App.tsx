@@ -11,7 +11,6 @@ import { AboutSection } from './components/AboutSection';
 import { RosterSection } from './components/RosterSection';
 import { FaqSection } from './components/FaqSection';
 import { Footer } from './components/Footer';
-import { AttendanceModal } from './components/AttendanceModal';
 import IntroOverlay from './components/IntroOverlay';
 import {
   fetchGoogleCalendarSchedules,
@@ -24,7 +23,6 @@ export type CalendarStatus = 'fallback' | 'loading' | 'connected' | 'error';
 export default function App() {
   const [showIntro, setShowIntro] = useState(true);
   const [activeSection, setActiveSection] = useState<SectionId>('hero');
-  const [selectedScheduleForRsvp, setSelectedScheduleForRsvp] = useState<ScheduleEvent | null>(null);
   const [schedules, setSchedules] = useState<ScheduleEvent[]>(MOCK_SCHEDULES);
   const [calendarStatus, setCalendarStatus] = useState<CalendarStatus>('fallback');
 
@@ -85,6 +83,11 @@ export default function App() {
     scrollToSection('join');
   };
 
+  const handleRsvpClick = (schedule?: ScheduleEvent) => {
+    if (!schedule?.rsvpUrl) return;
+    window.open(schedule.rsvpUrl, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-orange-500 selection:text-white">
       {showIntro && <IntroOverlay onComplete={() => setShowIntro(false)} />}
@@ -92,7 +95,7 @@ export default function App() {
       {/* Notice Banner */}
       <NoticeBanner
         nextSchedule={schedules[0]}
-        onRsvpClick={() => schedules[0] && setSelectedScheduleForRsvp(schedules[0])}
+        onRsvpClick={() => handleRsvpClick(schedules[0])}
         onJoinClick={handleOpenJoinForm}
       />
 
@@ -119,11 +122,14 @@ export default function App() {
       <ScheduleSection
         schedules={schedules}
         calendarStatus={calendarStatus}
-        onRsvpClick={(schedule) => setSelectedScheduleForRsvp(schedule)}
       />
 
       {/* 2. Join Form Section */}
-      <JoinFormSection />
+      <JoinFormSection
+        schedules={schedules}
+        calendarStatus={calendarStatus}
+        onRsvpClick={handleRsvpClick}
+      />
 
       {/* 3. About Us Section */}
       <AboutSection
@@ -143,11 +149,6 @@ export default function App() {
         onOpenJoinForm={handleOpenJoinForm}
       />
 
-      {/* Attendance RSVP Modal */}
-      <AttendanceModal
-        schedule={selectedScheduleForRsvp}
-        onClose={() => setSelectedScheduleForRsvp(null)}
-      />
     </div>
   );
 }

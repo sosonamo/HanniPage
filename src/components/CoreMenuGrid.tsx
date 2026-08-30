@@ -15,7 +15,8 @@ export const CoreMenuGrid: React.FC<CoreMenuGridProps> = ({ onNavigate, onOpenJo
       emoji: '📅', title: '월간정모일정',
       titleEn: 'Schedule & Gym',
       subtitle: '이번달 정모 일정',
-      description: '',
+      description: '이번달 정모 일정과 장소를 확인하실 수 있습니다.',
+      badge: '정모일정',
       badgeColor: 'bg-orange-500/10 text-orange-400 border-orange-500/30',
       gradient: 'from-orange-500/20 via-orange-500/5 to-transparent',
       borderColor: 'group-hover:border-orange-500/60',
@@ -29,6 +30,7 @@ export const CoreMenuGrid: React.FC<CoreMenuGridProps> = ({ onNavigate, onOpenJo
       titleEn: 'Join Us Form',
       subtitle: '참가신청하러 가기',
       description: '정모 참가를 원하시는 분은 신청서를 작성해 주세요. 담당자가 확인 후 연락드립니다.',
+      badge: '참가신청',
       badgeColor: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30',
       gradient: 'from-amber-500/20 via-amber-500/5 to-transparent',
       borderColor: 'group-hover:border-amber-400/60',
@@ -41,7 +43,7 @@ export const CoreMenuGrid: React.FC<CoreMenuGridProps> = ({ onNavigate, onOpenJo
       emoji: '🏀', title: '한늬소개',
       titleEn: 'About Us',
       subtitle: '한늬에 대하여',
-      description: '"한늬"의 의미, 다양성을 존중하는 매너 코트 수칙, 2021년 창단부터 리그 우승까지의 스토리.',
+      description: '"한늬"의 의미, 다양성을 존중하는 매너 코트 수칙, 2008년 창단부터 현재까지의 한늬 스토리.',
       badge: '2008년 창단',
       badgeColor: 'bg-blue-500/10 text-blue-400 border-blue-500/30',
       gradient: 'from-orange-600/20 via-slate-800/10 to-transparent',
@@ -55,7 +57,7 @@ export const CoreMenuGrid: React.FC<CoreMenuGridProps> = ({ onNavigate, onOpenJo
       emoji: '🏃‍♀️', title: '팀원소개',
       titleEn: 'Roster & Stats',
       subtitle: '선수 프로필',
-      description: '주장, 코치진, 각 포지션별 한늬즈 소개.',
+      description: '각 포지션별 한늬즈 소개.',
       badge: '한늬즈',
       badgeColor: 'bg-purple-500/10 text-purple-400 border-purple-500/30',
       gradient: 'from-amber-600/20 via-slate-800/10 to-transparent',
@@ -79,7 +81,7 @@ export const CoreMenuGrid: React.FC<CoreMenuGridProps> = ({ onNavigate, onOpenJo
             메뉴 <span className="text-orange-500">바로가기</span>
           </h2>
           <p className="text-sm sm:text-base text-slate-300">
-            원하시는 메뉴를 선택해주세요.
+            원하는 메뉴를 선택해주세요.
           </p>
         </div>
 
@@ -102,7 +104,7 @@ export const CoreMenuGrid: React.FC<CoreMenuGridProps> = ({ onNavigate, onOpenJo
                 {/* Badge */}
                 <div>
                   <span className={`inline-flex min-w-7 items-center justify-center text-[11px] font-bold px-2.5 py-0.5 rounded-full border ${card.badgeColor}`}>
-                    {card.badge ?? card.emoji}
+                    {card.badge && card.emoji}
                   </span>
                 </div>
 

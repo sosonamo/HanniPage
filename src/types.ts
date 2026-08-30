@@ -18,6 +18,7 @@ export interface ScheduleEvent {
   description: string;
   coach?: string;
   sourceUrl?: string;
+  rsvpUrl?: string;
 }
 
 export type PlayerPosition = 'PG' | 'SG' | 'SF' | 'PF' | 'C' | 'Coach' | 'Staff';
@@ -29,12 +30,12 @@ export interface RosterMember {
   nickname?: string;
   role: '운영진' | '코치진' | '주장' | '선수';
   position: PlayerPosition;
-  positionFull: string;
   heightCm?: number;
-  experienceYears: number;
+  /** 농구를 시작한 연도 (예: 2012) */
+  experienceStartYear: number;
   favoriteMove: string;
-  quote: string;
   image: string;
+  animatedImage?: string;
   stats: {
     shooting: number;
     passing: number;

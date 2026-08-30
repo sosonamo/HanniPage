@@ -1,15 +1,85 @@
 import React, { useState } from 'react';
-import { JoinFormData, PlayerPosition } from '../types';
-import { UserPlus, Sparkles, CheckCircle, HelpCircle, ShieldCheck, ArrowRight, Dribbble, Check, AlertCircle, MessageSquare } from 'lucide-react';
+import { JoinFormData, PlayerPosition, ScheduleEvent } from '../types';
+import {
+  UserPlus,
+  Sparkles,
+  CheckCircle,
+  HelpCircle,
+  ShieldCheck,
+  ArrowRight,
+  Dribbble,
+  Check,
+  AlertCircle,
+  MessageSquare,
+  Calendar,
+  MapPin,
+  Clock,
+  Users,
+  Car,
+  CheckCircle2,
+  Copy,
+  ChevronRight,
+  ExternalLink,
+} from 'lucide-react';
+import type { CalendarStatus } from '../App';
+
+const CALENDAR_TIME_ZONE = import.meta.env.VITE_CALENDAR_TIME_ZONE || 'Asia/Seoul';
+const SHOW_HOMEPAGE_APPLICATION_FORM = false;
+
+const getCurrentWeekRange = () => {
+  const parts = new Intl.DateTimeFormat('en-CA', {
+    timeZone: CALENDAR_TIME_ZONE,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).formatToParts(new Date());
+  const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+  const todayAsUtc = Date.UTC(
+    Number(values.year),
+    Number(values.month) - 1,
+    Number(values.day),
+  );
+  const dayOfWeek = new Date(todayAsUtc).getUTCDay();
+  const daysSinceMonday = (dayOfWeek + 6) % 7;
+  const weekStart = new Date(todayAsUtc - daysSinceMonday * 86_400_000);
+  const nextWeekStart = new Date(weekStart.getTime() + 7 * 86_400_000);
+
+  return {
+    startDate: weekStart.toISOString().slice(0, 10),
+    endDateExclusive: nextWeekStart.toISOString().slice(0, 10),
+  };
+};
 
 interface JoinFormSectionProps {
+  schedules: ScheduleEvent[];
+  calendarStatus: CalendarStatus;
+  onRsvpClick: (schedule: ScheduleEvent) => void;
   isOpenModal?: boolean;
   onCloseModal?: () => void;
 }
 
-export const JoinFormSection: React.FC<JoinFormSectionProps> = ({ isOpenModal, onCloseModal }) => {
+export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
+  schedules,
+  calendarStatus,
+  onRsvpClick,
+  isOpenModal,
+  onCloseModal,
+}) => {
   const [step, setStep] = useState<number>(1);
   const [submitted, setSubmitted] = useState<boolean>(false);
+  const [copiedAddress, setCopiedAddress] = useState<string | null>(null);
+
+  const { startDate, endDateExclusive } = getCurrentWeekRange();
+  const filteredSchedules = schedules
+    .filter((schedule) => (
+      schedule.date >= startDate
+      && schedule.date < endDateExclusive
+      && schedule.title.trim() === '정모'
+    ))
+    .sort((a, b) => (
+      a.date.localeCompare(b.date)
+      || (a.startDateTime ?? a.time).localeCompare(b.startDateTime ?? b.time)
+    ));
 
   const [formData, setFormData] = useState<JoinFormData>({
     name: '',
@@ -26,6 +96,12 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({ isOpenModal, o
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const handleCopyAddress = (address: string) => {
+    navigator.clipboard.writeText(address);
+    setCopiedAddress(address);
+    window.setTimeout(() => setCopiedAddress(null), 2000);
+  };
 
   const handleInputChange = (field: keyof JoinFormData, value: any) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -106,53 +182,148 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({ isOpenModal, o
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
-          {/* Left Column: Membership Guide & Fees Info */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="bg-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-800 space-y-6 shadow-xl">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-orange-500/20 border border-orange-500/40 flex items-center justify-center text-orange-400">
-                  <Sparkles className="w-5 h-5" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-white">신입 부원 혜택 & 안내</h3>
-                  <p className="text-xs text-slate-400">한늬 가입 프로세스 및 회비 투명 운영</p>
-                </div>
-              </div>
-
-              {/* Recruitment Eligibility */}
-              <div className="space-y-3 text-xs text-slate-300">
-                <h4 className="font-bold text-slate-100 text-sm flex items-center gap-1.5">
-                  <CheckCircle className="w-4 h-4 text-orange-400" /> 모집 대상
-                </h4>
-                <ul className="space-y-1.5 pl-6 list-disc text-slate-300">
-                  <li>20대 ~ 40대 이상 농구를 좋아하는 모든 성인 여성</li>
-                  <li>농구가 처음이거나 오랜만에 다시 시작하시는 분</li>
-                  <li>매너 있는 코트 에티켓과 상호 존중 마인드를 가지신 분</li>
-                </ul>
-              </div>
-
-              {/* Membership Fee Breakdown */}
-              <div className="space-y-3 pt-4 border-t border-slate-800">
-                <h4 className="font-bold text-slate-100 text-sm flex items-center gap-1.5">
-                  <Dribbble className="w-4 h-4 text-orange-400" /> 회비 및 지원 내역
-                </h4>
-                <div className="grid grid-cols-2 gap-3 text-xs">
-                  <div className="p-3 bg-slate-900 rounded-xl border border-slate-800">
-                    <span className="text-slate-400 block text-[11px]">입단비 (최초 1회)</span>
-                    <span className="text-lg font-bold text-orange-400 font-mono">30,000원</span>
-                    <p className="text-[10px] text-slate-500 mt-1">웰컴 유니폼 패키지 제공</p>
+                {/* Schedule Cards Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {filteredSchedules.map((item) => {
+            const hasCapacity = item.currentRsvp !== undefined && item.maxCapacity !== undefined;
+            const isFull = hasCapacity && item.currentRsvp! >= item.maxCapacity!;
+            const isRsvpUnavailable = isFull || !item.rsvpUrl;
+            return (
+              <div
+                key={item.id}
+                className="bg-slate-900/90 rounded-2xl border border-slate-800 p-6 flex flex-col justify-between hover:border-orange-500/40 transition-all shadow-xl group"
+              >
+                <div className="space-y-4">
+                  {/* Top Badge & Time */}
+                  <div className="flex items-center justify-between">
+                    <span className="px-3 py-1 rounded-full text-xs font-bold bg-orange-500/15 text-orange-400 border border-orange-500/30">
+                      {item.dayOfWeek}
+                    </span>
+                    <span className="text-xs text-slate-400 font-mono font-medium flex items-center gap-1">
+                      <Clock className="w-3.5 h-3.5 text-slate-500" />
+                      {item.time}
+                    </span>
                   </div>
-                  <div className="p-3 bg-slate-900 rounded-xl border border-slate-800">
-                    <span className="text-slate-400 block text-[11px]">월 정기 회비</span>
-                    <span className="text-lg font-bold text-amber-400 font-mono">40,000원</span>
-                    <p className="text-[10px] text-slate-500 mt-1">체육관 대관료 & 행사 지원</p>
+
+                  {/* Title */}
+                  <h3 className="text-xl font-bold text-white group-hover:text-orange-400 transition-colors">
+                    {item.title}
+                  </h3>
+
+                  {/* Location & Details */}
+                  <div className="space-y-2 text-xs text-slate-300">
+                    <div className="flex items-start gap-2">
+                      <MapPin className="w-4 h-4 text-orange-400 shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-bold text-slate-100">{item.location}</p>
+                        <p className="text-slate-400 text-[11px]">{item.address}</p>
+                      </div>
+                    </div>
+
+                    {item.courtDetails && (
+                      <div className="flex items-center justify-between text-[11px] text-slate-400 pt-1">
+                        <span>🏀 코트: {item.courtDetails}</span>
+                      </div>
+                    )}
+
+                    {item.parkingInfo && (
+                      <div className="flex items-center gap-1.5 text-[11px] text-slate-400">
+                        <Car className="w-3.5 h-3.5 text-slate-500" />
+                        <span>{item.parkingInfo}</span>
+                      </div>
+                    )}
                   </div>
+
+                  {/* Capacity Progress */}
+                  {hasCapacity && <div className="space-y-1.5 pt-2">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="text-slate-400 font-medium flex items-center gap-1">
+                        <Users className="w-3.5 h-3.5 text-orange-400" />
+                        참석 확정 현황
+                      </span>
+                      <span className="font-bold text-slate-200">
+                        {item.currentRsvp} / {item.maxCapacity}명
+                      </span>
+                    </div>
+                    <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
+                      <div
+                        className={`h-full rounded-full transition-all duration-500 ${
+                          isFull
+                            ? 'bg-rose-500'
+                            : 'bg-gradient-to-r from-orange-500 to-amber-400'
+                        }`}
+                        style={{
+                          width: `${Math.min((item.currentRsvp! / item.maxCapacity!) * 100, 100)}%`,
+                        }}
+                      />
+                    </div>
+                  </div>}
+                </div>
+
+                {/* Card Footer Actions */}
+                <div className="pt-6 mt-6 border-t border-slate-800 flex items-center gap-2">
+                  <button
+                    onClick={() => handleCopyAddress(item.address)}
+                    className="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition-colors text-xs font-semibold flex items-center gap-1"
+                    title="주소 복사"
+                  >
+                    {copiedAddress === item.address ? (
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                    ) : (
+                      <Copy className="w-4 h-4" />
+                    )}
+                    <span>{copiedAddress === item.address ? '복사됨' : '주소복사'}</span>
+                  </button>
+
+                  {item.sourceUrl && (
+                    <a
+                      href={item.sourceUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition-colors"
+                      title="Google Calendar에서 보기"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  )}
+
+                  <button
+                    onClick={() => onRsvpClick(item)}
+                    disabled={isRsvpUnavailable}
+                    className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                      isRsvpUnavailable
+                        ? 'bg-slate-800 text-slate-500 cursor-not-allowed'
+                        : 'bg-gradient-to-r from-orange-600 to-amber-500 hover:from-orange-500 hover:to-amber-400 text-white shadow-md shadow-orange-950/50'
+                    }`}
+                  >
+                    <span>
+                      {isFull
+                        ? '마감됨'
+                        : item.rsvpUrl
+                          ? '게스트 신청'
+                          : '신청 링크 준비 중'}
+                    </span>
+                    {!isRsvpUnavailable && <ChevronRight className="w-4 h-4" />}
+                  </button>
                 </div>
               </div>
+            );
+          })}
+          {filteredSchedules.length === 0 && calendarStatus !== 'loading' && (
+            <div className="lg:col-span-3 rounded-2xl border border-dashed border-slate-700 bg-slate-900/50 px-6 py-14 text-center">
+              <Calendar className="w-8 h-8 text-slate-600 mx-auto mb-3" />
+              <p className="font-bold text-slate-200">이번 주 한늬 일정이 없습니다.</p>
+              <p className="text-xs text-slate-500 mt-1">다음 주 월요일에 일정을 다시 확인해주세요.</p>
             </div>
-          </div>
+          )}
+        </div>
+
+        {/*
+          TODO: Google Calendar 신청 대신 홈페이지 신청 방식을 확정한 뒤
+          SHOW_HOMEPAGE_APPLICATION_FORM을 true로 변경해 다시 노출합니다.
+        */}
+        {SHOW_HOMEPAGE_APPLICATION_FORM && (
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
           {/* Right Column: Multi-Step Interactive Form */}
           <div className="lg:col-span-7 bg-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-2xl relative">
@@ -516,6 +687,7 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({ isOpenModal, o
           </div>
 
         </div>
+        )}
 
       </div>
     </section>

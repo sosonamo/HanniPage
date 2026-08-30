@@ -73,11 +73,15 @@ export const NoticeBanner: React.FC<NoticeBannerProps> = ({ nextSchedule, onRsvp
 
           <button
             onClick={onRsvpClick}
-            disabled={!nextSchedule}
+            disabled={!nextSchedule?.rsvpUrl}
             className="text-xs bg-slate-800 hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed text-slate-200 font-medium px-2.5 py-1 rounded transition-colors border border-slate-700 flex items-center gap-1"
           >
             <MapPin className="w-3 h-3 text-orange-400" />
-            {nextSchedule ? '다음 일정 참석' : '일정 없음'}
+            {nextSchedule?.rsvpUrl
+              ? '다음 일정 참석'
+              : nextSchedule
+                ? '신청 링크 준비 중'
+                : '일정 없음'}
           </button>
 
           <button

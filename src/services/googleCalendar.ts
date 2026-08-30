@@ -153,6 +153,25 @@ const getCurrentWeekRange = (timeZone: string) => {
   return { weekStart, weekEnd };
 };
 
+const getCurrentAndNextMonthRange = (timeZone: string) => {
+  const today = getDatePartsInTimeZone(new Date(), timeZone);
+  const rangeStart = getStartOfDayInTimeZone(
+    { year: today.year, month: today.month, day: 1 },
+    timeZone,
+  );
+  const monthAfterNextAsUtc = new Date(Date.UTC(today.year, today.month + 1, 1));
+  const rangeEnd = getStartOfDayInTimeZone(
+    {
+      year: monthAfterNextAsUtc.getUTCFullYear(),
+      month: monthAfterNextAsUtc.getUTCMonth() + 1,
+      day: 1,
+    },
+    timeZone,
+  );
+
+  return { rangeStart, rangeEnd };
+};
+
 export const getMillisecondsUntilNextCalendarWeek = () => {
   const timeZone = import.meta.env.VITE_CALENDAR_TIME_ZONE || DEFAULT_TIME_ZONE;
   const { weekEnd } = getCurrentWeekRange(timeZone);
@@ -181,6 +200,14 @@ const parseDescription = (description = ''): CalendarMetadata => {
     ...metadata,
     body: bodyLines.join(' '),
   };
+};
+
+const extractGoogleFormUrl = (description = '') => {
+  const match = description.match(
+    /https:\/\/(?:docs\.google\.com\/forms\/d\/(?:e\/)?[\w-]+\/viewform|forms\.gle\/[\w-]+)(?:\?[^\s<>"']*)?/i,
+  );
+
+  return match?.[0].replace(/[),.]+$/, '');
 };
 
 const inferScheduleType = (
@@ -274,6 +301,7 @@ const mapCalendarEvent = (
       '자세한 내용은 Google Calendar 일정을 확인해주세요.',
     coach: metadata.coach,
     sourceUrl: event.htmlLink,
+    rsvpUrl: extractGoogleFormUrl(event.description),
   };
 };
 
@@ -295,15 +323,15 @@ export const fetchGoogleCalendarSchedules = async (): Promise<ScheduleEvent[]> =
   const maxResults =
     getPositiveInteger(import.meta.env.VITE_GOOGLE_CALENDAR_MAX_RESULTS) ||
     DEFAULT_MAX_RESULTS;
-  const { weekStart, weekEnd } = getCurrentWeekRange(timeZone);
+  const { rangeStart, rangeEnd } = getCurrentAndNextMonthRange(timeZone);
 
   const query = new URLSearchParams({
     key: apiKey,
     singleEvents: 'true',
     orderBy: 'startTime',
     showDeleted: 'false',
-    timeMin: weekStart.toISOString(),
-    timeMax: weekEnd.toISOString(),
+    timeMin: rangeStart.toISOString(),
+    timeMax: rangeEnd.toISOString(),
     maxResults: String(maxResults),
     timeZone,
   });

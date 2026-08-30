@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ClubTimelineItem, GalleryItem } from '../types';
-import { Dribbble, Heart, Shield, Sparkles, Award, History, Image as ImageIcon, X, ChevronRight } from 'lucide-react';
+import { Dribbble, Heart, Shield, Sparkles, Award, History, Image as ImageIcon, X, ChevronRight, CheckCircle } from 'lucide-react';
 
 interface AboutSectionProps {
   timeline: ClubTimelineItem[];
@@ -66,6 +66,51 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ timeline, gallery })
             <p className="text-xs text-slate-300 leading-relaxed">
               부상 예방을 최우선으로 하며, 거친 비매너 행위를 엄격히 차단하여 누구나 안심하고 뛸 수 있는 환경을 만듭니다.
             </p>
+          </div>
+        </div>
+
+        {/* Left Column: Membership Guide & Fees Info */}
+        <div className="lg:col-span-5 space-y-6">
+          <div className="bg-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-800 space-y-6 shadow-xl">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-orange-500/20 border border-orange-500/40 flex items-center justify-center text-orange-400">
+                <Sparkles className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-white">신입 부원 혜택 & 안내</h3>
+                <p className="text-xs text-slate-400">한늬 가입 프로세스 및 회비 투명 운영</p>
+              </div>
+            </div>
+
+            {/* Recruitment Eligibility */}
+            <div className="space-y-3 text-xs text-slate-300">
+              <h4 className="font-bold text-slate-100 text-sm flex items-center gap-1.5">
+                <CheckCircle className="w-4 h-4 text-orange-400" /> 모집 대상
+              </h4>
+              <ul className="space-y-1.5 pl-6 list-disc text-slate-300">
+                <li>농구를 좋아하는 모든 성인 여성</li>
+                <li>매너 있는 코트 에티켓과 상호 존중 마인드를 가지신 분</li>
+              </ul>
+            </div>
+
+            {/* Membership Fee Breakdown */}
+            <div className="space-y-3 pt-4 border-t border-slate-800">
+              <h4 className="font-bold text-slate-100 text-sm flex items-center gap-1.5">
+                <Dribbble className="w-4 h-4 text-orange-400" /> 회비 및 지원 내역
+              </h4>
+              <div className="grid grid-cols-2 gap-3 text-xs">
+                <div className="p-3 bg-slate-900 rounded-xl border border-slate-800">
+                  <span className="text-slate-400 block text-[11px]">입단비 (최초 1회)</span>
+                  <span className="text-lg font-bold text-orange-400 font-mono">30,000원</span>
+                  <p className="text-[10px] text-slate-500 mt-1"></p>
+                </div>
+                <div className="p-3 bg-slate-900 rounded-xl border border-slate-800">
+                  <span className="text-slate-400 block text-[11px]">월 회비</span>
+                  <span className="text-lg font-bold text-amber-400 font-mono">30,000원</span>
+                  <p className="text-[10px] text-slate-500 mt-1">체육관 대관료 & 행사 지원</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 

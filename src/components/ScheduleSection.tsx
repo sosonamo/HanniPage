@@ -1,32 +1,72 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
+import { Calendar, CheckCircle2, Navigation, LoaderCircle, MapPin } from 'lucide-react';
 import { ScheduleEvent } from '../types';
-import { Calendar, MapPin, Clock, Users, Car, CheckCircle2, Navigation, Copy, ChevronRight, ExternalLink, LoaderCircle } from 'lucide-react';
 import type { CalendarStatus } from '../App';
 
 interface ScheduleSectionProps {
   schedules: ScheduleEvent[];
   calendarStatus: CalendarStatus;
-  onRsvpClick: (schedule: ScheduleEvent) => void;
 }
 
-export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, calendarStatus, onRsvpClick }) => {
-  const [selectedType, setSelectedType] = useState<string>('all');
-  const [copiedAddress, setCopiedAddress] = useState<string | null>(null);
+type MonthOffset = 0 | 1;
 
-  const filteredSchedules = selectedType === 'all'
-    ? schedules
-    : schedules.filter(s => s.type === selectedType);
+const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토'];
+const MONTH_OPTIONS: Array<{ label: string; offset: MonthOffset }> = [
+  { label: '이번 달', offset: 0 },
+  { label: '다음 달', offset: 1 },
+];
 
-  const handleCopyAddress = (address: string) => {
-    navigator.clipboard.writeText(address);
-    setCopiedAddress(address);
-    setTimeout(() => setCopiedAddress(null), 2000);
-  };
+const toDateKey = (date: Date) => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
+const createMonthCells = (year: number, month: number) => {
+  const firstDay = new Date(year, month, 1);
+  const firstCell = new Date(year, month, 1 - firstDay.getDay());
+
+  return Array.from({ length: 42 }, (_, index) => (
+    new Date(firstCell.getFullYear(), firstCell.getMonth(), firstCell.getDate() + index)
+  ));
+};
+
+const getStartTime = (time: string) => {
+  if (time === '종일') return time;
+  return time.split(' - ')[0];
+};
+
+export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, calendarStatus }) => {
+  const [monthOffset, setMonthOffset] = useState<MonthOffset>(0);
+  const today = useMemo(() => new Date(), []);
+  const todayKey = toDateKey(today);
+  const visibleMonth = useMemo(
+    () => new Date(today.getFullYear(), today.getMonth() + monthOffset, 1),
+    [monthOffset, today],
+  );
+  const visibleYear = visibleMonth.getFullYear();
+  const visibleMonthIndex = visibleMonth.getMonth();
+  const monthCells = useMemo(
+    () => createMonthCells(visibleYear, visibleMonthIndex),
+    [visibleYear, visibleMonthIndex],
+  );
+  const schedulesByDate = useMemo(() => {
+    const grouped = new Map<string, ScheduleEvent[]>();
+
+    schedules.forEach((schedule) => {
+      const dateKey = schedule.date.slice(0, 10);
+      const items = grouped.get(dateKey) ?? [];
+      items.push(schedule);
+      grouped.set(dateKey, items);
+    });
+
+    return grouped;
+  }, [schedules]);
 
   return (
     <section id="schedule" className="py-20 bg-slate-950 text-white relative border-b border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
         {/* Section Title */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 pb-6 border-b border-slate-800">
           <div>
@@ -35,10 +75,10 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, cal
               정모일정 & 체육관 안내
             </div>
             <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
-              이번 주 <span className="text-orange-500">정기 훈련 & 매치</span> 일정
+              월간 <span className="text-orange-500">정모</span> 일정
             </h2>
             <p className="text-slate-400 text-sm mt-1">
-              체육관 위치, 주차 정보, 정모 참석(RSVP) 현황을 한눈에 확인하세요.
+              이번 달과 다음 달 정모 날짜를 달력에서 확인하세요.
             </p>
           </div>
           <div className="text-xs font-semibold text-slate-400 flex items-center gap-2">
@@ -54,138 +94,119 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, cal
           </div>
         </div>
 
-        {/* Schedule Cards Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {filteredSchedules.map((item) => {
-            const hasCapacity = item.currentRsvp !== undefined && item.maxCapacity !== undefined;
-            const isFull = hasCapacity && item.currentRsvp! >= item.maxCapacity!;
-            return (
-              <div
-                key={item.id}
-                className="bg-slate-900/90 rounded-2xl border border-slate-800 p-6 flex flex-col justify-between hover:border-orange-500/40 transition-all shadow-xl group"
-              >
-                <div className="space-y-4">
-                  {/* Top Badge & Time */}
-                  <div className="flex items-center justify-between">
-                    <span className="px-3 py-1 rounded-full text-xs font-bold bg-orange-500/15 text-orange-400 border border-orange-500/30">
-                      {item.dayOfWeek}
-                    </span>
-                    <span className="text-xs text-slate-400 font-mono font-medium flex items-center gap-1">
-                      <Clock className="w-3.5 h-3.5 text-slate-500" />
-                      {item.time}
-                    </span>
-                  </div>
+        {/* Monthly Calendar */}
+        <div className="overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/80 shadow-2xl">
+          <div className="flex flex-col gap-4 border-b border-slate-800 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-7">
+            <div>
+              <p className="text-xs font-bold text-orange-400">MONTHLY SCHEDULE</p>
+              <h3 className="mt-1 text-2xl font-black text-white">
+                {visibleYear}년 {visibleMonthIndex + 1}월
+              </h3>
+            </div>
+            <div className="inline-flex w-fit rounded-xl border border-slate-700 bg-slate-950 p-1">
+              {MONTH_OPTIONS.map((option) => (
+                <button
+                  key={option.offset}
+                  type="button"
+                  onClick={() => setMonthOffset(option.offset)}
+                  className={`rounded-lg px-4 py-2 text-xs font-bold transition-colors ${
+                    monthOffset === option.offset
+                      ? 'bg-orange-500 text-white'
+                      : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  {option.label}
+                </button>
+              ))}
+            </div>
+          </div>
 
-                  {/* Title */}
-                  <h3 className="text-xl font-bold text-white group-hover:text-orange-400 transition-colors">
-                    {item.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-xs text-slate-300 bg-slate-950/60 p-3 rounded-xl border border-slate-800/80 leading-relaxed">
-                    {item.description}
-                  </p>
-
-                  {/* Location & Details */}
-                  <div className="space-y-2 text-xs text-slate-300">
-                    <div className="flex items-start gap-2">
-                      <MapPin className="w-4 h-4 text-orange-400 shrink-0 mt-0.5" />
-                      <div>
-                        <p className="font-bold text-slate-100">{item.location}</p>
-                        <p className="text-slate-400 text-[11px]">{item.address}</p>
-                      </div>
-                    </div>
-
-                    {item.courtDetails && (
-                      <div className="flex items-center justify-between text-[11px] text-slate-400 pt-1">
-                        <span>🏀 코트: {item.courtDetails}</span>
-                      </div>
-                    )}
-
-                    {item.parkingInfo && (
-                      <div className="flex items-center gap-1.5 text-[11px] text-slate-400">
-                        <Car className="w-3.5 h-3.5 text-slate-500" />
-                        <span>{item.parkingInfo}</span>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Capacity Progress */}
-                  {hasCapacity && <div className="space-y-1.5 pt-2">
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="text-slate-400 font-medium flex items-center gap-1">
-                        <Users className="w-3.5 h-3.5 text-orange-400" />
-                        참석 확정 현황
-                      </span>
-                      <span className="font-bold text-slate-200">
-                        {item.currentRsvp} / {item.maxCapacity}명
-                      </span>
-                    </div>
-                    <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
-                      <div
-                        className={`h-full rounded-full transition-all duration-500 ${
-                          isFull
-                            ? 'bg-rose-500'
-                            : 'bg-gradient-to-r from-orange-500 to-amber-400'
-                        }`}
-                        style={{
-                          width: `${Math.min((item.currentRsvp! / item.maxCapacity!) * 100, 100)}%`,
-                        }}
-                      />
-                    </div>
-                  </div>}
-                </div>
-
-                {/* Card Footer Actions */}
-                <div className="pt-6 mt-6 border-t border-slate-800 flex items-center gap-2">
-                  <button
-                    onClick={() => handleCopyAddress(item.address)}
-                    className="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition-colors text-xs font-semibold flex items-center gap-1"
-                    title="주소 복사"
-                  >
-                    {copiedAddress === item.address ? (
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                    ) : (
-                      <Copy className="w-4 h-4" />
-                    )}
-                    <span>{copiedAddress === item.address ? '복사됨' : '주소복사'}</span>
-                  </button>
-
-                  {item.sourceUrl && (
-                    <a
-                      href={item.sourceUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition-colors"
-                      title="Google Calendar에서 보기"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
-                  )}
-
-                  <button
-                    onClick={() => onRsvpClick(item)}
-                    disabled={isFull}
-                    className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
-                      isFull
-                        ? 'bg-slate-800 text-slate-500 cursor-not-allowed'
-                        : 'bg-gradient-to-r from-orange-600 to-amber-500 hover:from-orange-500 hover:to-amber-400 text-white shadow-md shadow-orange-950/50'
+          <div className="overflow-x-auto">
+            <div className="min-w-[720px]">
+              <div className="grid grid-cols-7 border-b border-slate-800 bg-slate-950/70">
+                {WEEKDAYS.map((weekday, index) => (
+                  <div
+                    key={weekday}
+                    className={`py-3 text-center text-xs font-bold ${
+                      index === 0
+                        ? 'text-rose-400'
+                        : index === 6
+                          ? 'text-blue-400'
+                          : 'text-slate-400'
                     }`}
                   >
-                    <span>{isFull ? '마감됨' : '참석 / 게스트 RSVP 신청'}</span>
-                    {!isFull && <ChevronRight className="w-4 h-4" />}
-                  </button>
-                </div>
+                    {weekday}
+                  </div>
+                ))}
               </div>
-            );
-          })}
-          {filteredSchedules.length === 0 && calendarStatus !== 'loading' && (
-            <div className="lg:col-span-3 rounded-2xl border border-dashed border-slate-700 bg-slate-900/50 px-6 py-14 text-center">
-              <Calendar className="w-8 h-8 text-slate-600 mx-auto mb-3" />
-              <p className="font-bold text-slate-200">이번 주 한늬 일정이 없습니다.</p>
-              <p className="text-xs text-slate-500 mt-1">다음 주 월요일에 새 주의 일정을 다시 확인해주세요.</p>
+
+              <div className="grid grid-cols-7">
+                {monthCells.map((date) => {
+                  const dateKey = toDateKey(date);
+                  const isVisibleMonth = date.getFullYear() === visibleYear
+                    && date.getMonth() === visibleMonthIndex;
+                  const isToday = dateKey === todayKey;
+                  const daySchedules = isVisibleMonth
+                    ? schedulesByDate.get(dateKey) ?? []
+                    : [];
+
+                  return (
+                    <div
+                      key={dateKey}
+                      className={`min-h-28 border-b border-r border-slate-800 p-2.5 ${
+                        isVisibleMonth ? 'bg-slate-900/40' : 'bg-slate-950/70'
+                      }`}
+                    >
+                      <div className="mb-2 flex items-center justify-between">
+                        <span
+                          className={`flex h-7 min-w-7 items-center justify-center rounded-full px-1 text-xs font-bold ${
+                            isToday
+                              ? 'bg-orange-500 text-white'
+                              : isVisibleMonth
+                                ? date.getDay() === 0
+                                  ? 'text-rose-400'
+                                  : date.getDay() === 6
+                                    ? 'text-blue-400'
+                                    : 'text-slate-200'
+                                : 'text-slate-600'
+                          }`}
+                        >
+                          {date.getDate()}
+                        </span>
+                      </div>
+
+                      <div className="space-y-1.5">
+                        {daySchedules.slice(0, 2).map((schedule) => (
+                          <div
+                            key={schedule.id}
+                            className="w-full rounded-md bg-orange-500/10 px-2 py-1.5 text-left text-[10px] font-semibold text-slate-200"
+                            title={`${schedule.time} · ${schedule.title} · ${schedule.location}`}
+                          >
+                            <div className="flex items-start gap-1.5">
+                              <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-orange-400" />
+                              <span className="min-w-0 truncate">
+                                <span className="font-mono text-orange-300">{getStartTime(schedule.time)}</span>{' '}
+                                {schedule.title}
+                              </span>
+                            </div>
+                            <div className="mt-1 flex min-w-0 items-center gap-1 text-slate-400">
+                              <MapPin className="h-3 w-3 shrink-0 text-orange-400/80" />
+                              <span className="truncate">{schedule.location}</span>
+                            </div>
+                          </div>
+                        ))}
+                        {daySchedules.length > 2 && (
+                          <p className="px-2 text-[10px] font-bold text-slate-500">
+                            +{daySchedules.length - 2}개 일정
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-          )}
+          </div>
         </div>
 
         {/* Gym Location Interactive Card Box */}
@@ -214,7 +235,6 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, cal
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );

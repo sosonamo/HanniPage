@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { SectionId } from '../types';
-import { Dribbble, Menu, X, ChevronRight, UserPlus, Calendar, Users, Info, HelpCircle } from 'lucide-react';
+import { Menu, X, ChevronRight, UserPlus, Calendar, Users, Info, HelpCircle } from 'lucide-react';
 
 interface HeaderProps {
   activeSection: SectionId;
@@ -53,7 +53,11 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate, onOpe
         >
           <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-tr from-orange-600 via-orange-500 to-amber-400 p-0.5 shadow-md shadow-orange-950/50 group-hover:scale-105 transition-transform duration-300">
             <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-              <Dribbble className="w-6 h-6 text-orange-500 group-hover:rotate-12 transition-transform duration-300" />
+              <img
+                src={`${import.meta.env.BASE_URL}assets/hanni-logo-white.png`}
+                alt="한늬 로고"
+                className="w-9 h-9 object-contain transition-transform duration-300 group-hover:scale-105"
+              />
             </div>
           </div>
           <div>
@@ -62,7 +66,7 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate, onOpe
                 한늬
               </span>
               <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/30">
-                HAN-NUI
+                HANNI
               </span>
             </div>
             <p className="text-[10px] text-slate-400 font-medium tracking-wide">
@@ -143,19 +147,6 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate, onOpe
                 </button>
               );
             })}
-          </div>
-
-          <div className="pt-4 border-t border-slate-800/80 flex flex-col gap-2">
-            <button
-              onClick={() => {
-                onOpenJoinForm();
-                setMobileMenuOpen(false);
-              }}
-              className="w-full py-3 px-4 rounded-xl font-bold text-white bg-gradient-to-r from-orange-600 to-amber-500 flex items-center justify-center gap-2 shadow-lg shadow-orange-900/50"
-            >
-              <UserPlus className="w-5 h-5" />
-              신입 부원 가입 신청서 작성하기
-            </button>
           </div>
         </div>
       )}
