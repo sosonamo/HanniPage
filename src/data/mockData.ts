@@ -1,5 +1,7 @@
 import { ScheduleEvent, RosterMember, ClubTimelineItem, GalleryItem, FaqItem } from '../types';
-import characterNo7 from '../../assets/character_No7_7th.png';
+import characterNo3 from '../../assets/character_No3_final.png';
+import characterNo6 from '../../assets/character_No6_final.png';
+import characterNo7 from '../../assets/character_No7_final.png';
 import characterNo11 from '../../assets/character_No11_final.png';
 
 const placeholderCharacter = '/assets/hanni-logo-white.png';
@@ -94,7 +96,7 @@ export const MOCK_ROSTER: RosterMember[] = [
     heightCm: 168,
     experienceStartYear: 2021,
     favoriteMove: '미들슛 / 리바운드 / 블록슛',
-    image: placeholderCharacter,
+    image: characterNo6,
     stats: { shooting: 96, passing: 75, defense: 78, speed: 85, stamina: 82 },
     intro: '한늬 최고의 블록슛 마스터! 경기의 흐름을 바꾸는 멋진 블록슛.'
   },
@@ -136,7 +138,7 @@ export const MOCK_ROSTER: RosterMember[] = [
     heightCm: 156,
     experienceStartYear: 2024,
     favoriteMove: '돌파 & 패스',
-    image: placeholderCharacter,
+    image: characterNo3,
     stats: { shooting: 75, passing: 82, defense: 98, speed: 70, stamina: 86 },
     intro: '넓은 시야의 포인트가드. 팀의 공격을 조율하며 경기 흐름을 지배하는 플레이메이커'
   },

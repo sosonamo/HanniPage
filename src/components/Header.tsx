@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { SectionId } from '../types';
-import { Menu, X, ChevronRight, UserPlus, Calendar, Users, Info, HelpCircle } from 'lucide-react';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
+import hanniLogo from '../../assets/한늬로고_최종_White.png';
 
 interface HeaderProps {
   activeSection: SectionId;
@@ -24,12 +25,12 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate, onOpe
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navItems: { id: SectionId; label: string; icon: React.ReactNode }[] = [
-    { id: 'schedule', label: '정모일정', icon: <Calendar className="w-4 h-4" /> },
-    { id: 'join', label: '참가신청서', icon: <UserPlus className="w-4 h-4" /> },
-    { id: 'about', label: '한늬소개', icon: <Info className="w-4 h-4" /> },
-    { id: 'roster', label: '팀원소개', icon: <Users className="w-4 h-4" /> },
-    { id: 'faq', label: 'FAQ', icon: <HelpCircle className="w-4 h-4" /> },
+  const navItems: { id: SectionId; label: string; index: string }[] = [
+    { id: 'schedule', label: 'SCHEDULE', index: '01' },
+    { id: 'join', label: 'JOIN US', index: '02' },
+    { id: 'about', label: 'ABOUT', index: '03' },
+    { id: 'roster', label: 'ROSTER', index: '04' },
+    { id: 'faq', label: 'FAQ', index: '05' },
   ];
 
   const handleNavClick = (id: SectionId) => {
@@ -39,57 +40,48 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate, onOpe
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-all duration-300 ${
+      className={`hanni-header sticky top-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-slate-950/95 backdrop-blur-md shadow-lg shadow-black/30 border-b border-slate-800/80 py-3'
-          : 'bg-slate-950/90 backdrop-blur-sm border-b border-slate-800/50 py-4'
+          ? 'bg-black/95 backdrop-blur-md border-b border-red-500/35 py-2'
+          : 'bg-black/90 backdrop-blur-sm border-b border-white/10 py-3'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Brand Logo */}
         <div
           onClick={() => handleNavClick('hero')}
-          className="flex items-center gap-3 cursor-pointer group"
+          className="flex items-center gap-3 cursor-pointer group shrink-0"
         >
-          <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-tr from-orange-600 via-orange-500 to-amber-400 p-0.5 shadow-md shadow-orange-950/50 group-hover:scale-105 transition-transform duration-300">
-            <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-              <img
-                src={`${import.meta.env.BASE_URL}assets/hanni-logo-white.png`}
-                alt="한늬 로고"
-                className="w-9 h-9 object-contain transition-transform duration-300 group-hover:scale-105"
-              />
-            </div>
-          </div>
+          <img
+            src={hanniLogo}
+            alt="한늬 더 블레이저스 로고"
+            className="w-12 h-12 object-contain transition-transform duration-300 group-hover:scale-105"
+          />
           <div>
-            <div className="flex items-center gap-1.5">
-              <span className="font-extrabold text-xl tracking-tight text-white font-sans">
-                한늬
-              </span>
-              <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/30">
-                HANNI
-              </span>
+            <div className="headline-font text-lg sm:text-xl tracking-[0.05em] text-white leading-none">
+              HANNI <span className="text-red-500">THE BLAZERS</span>
             </div>
-            <p className="text-[10px] text-slate-400 font-medium tracking-wide">
-              여성 농구 클럽 • Women's Basketball Club
+            <p className="mt-1 text-[9px] text-slate-400 font-semibold tracking-[0.22em] uppercase">
+              Women's Basketball Club · Since 2008
             </p>
           </div>
         </div>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-1 bg-slate-900/80 p-1.5 rounded-2xl border border-slate-800">
+        <nav className="hidden xl:flex items-center gap-9">
           {navItems.map((item) => {
             const isActive = activeSection === item.id;
             return (
               <button
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 ${
+                className={`nav-cut relative flex items-center gap-2 py-2 text-[11px] font-black tracking-[0.12em] transition-all duration-200 ${
                   isActive
-                    ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-md shadow-orange-900/30'
-                    : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
+                    ? 'text-red-500'
+                    : 'text-slate-300 hover:text-white'
                 }`}
               >
-                <span className={isActive ? 'text-white' : 'text-slate-400'}>{item.icon}</span>
+                <span className="font-mono text-[9px] text-slate-600">{item.index}</span>
                 {item.label}
               </button>
             );
@@ -97,24 +89,22 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate, onOpe
         </nav>
 
         {/* Desktop CTA Button */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden xl:flex items-center gap-3">
           <button
             onClick={onOpenJoinForm}
-            className="group relative inline-flex items-center justify-center px-5 py-2.5 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-orange-600 via-orange-500 to-amber-500 shadow-md shadow-orange-900/40 hover:shadow-lg hover:shadow-orange-600/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 border border-orange-400/30 overflow-hidden"
+            className="btn-primary group inline-flex items-center justify-center px-5 py-3 text-xs font-black tracking-[0.08em] text-white transition-all duration-200"
           >
             <span className="relative z-10 flex items-center gap-1.5">
-              <UserPlus className="w-4 h-4" />
-              신입 부원 가입
-              <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+              JOIN THE TEAM
+              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </span>
-            <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />
           </button>
         </div>
 
         {/* Mobile Hamburger Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 rounded-xl bg-slate-900 text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-800 transition-colors"
+          className="xl:hidden p-2 bg-slate-900 text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-700 transition-colors"
           aria-label="Toggle menu"
         >
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -123,7 +113,7 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate, onOpe
 
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-slate-950 border-b border-slate-800 px-4 pt-3 pb-6 space-y-2 animate-in fade-in slide-in-from-top-2 duration-200">
+        <div className="xl:hidden bg-black border-b border-red-500/30 px-4 pt-3 pb-6 space-y-2 animate-in fade-in slide-in-from-top-2 duration-200">
           <div className="grid grid-cols-1 gap-1.5 pt-2">
             {navItems.map((item) => {
               const isActive = activeSection === item.id;
@@ -131,19 +121,17 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate, onOpe
                 <button
                   key={item.id}
                   onClick={() => handleNavClick(item.id)}
-                  className={`flex items-center justify-between px-4 py-3 rounded-xl text-base font-semibold transition-all ${
+                  className={`flex items-center justify-between px-4 py-3 border-b text-sm font-black tracking-wider transition-all ${
                     isActive
-                      ? 'bg-orange-500/20 text-orange-400 border border-orange-500/40'
-                      : 'text-slate-200 hover:bg-slate-900'
+                      ? 'bg-red-500/10 text-red-400 border-red-500'
+                      : 'text-slate-200 border-slate-800 hover:bg-slate-900'
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <span className={isActive ? 'text-orange-400' : 'text-slate-400'}>
-                      {item.icon}
-                    </span>
+                    <span className="font-mono text-[10px] text-slate-500">{item.index}</span>
                     <span>{item.label}</span>
                   </div>
-                  <ChevronRight className="w-4 h-4 text-slate-500" />
+                  <ArrowUpRight className="w-4 h-4 text-slate-500" />
                 </button>
               );
             })}

@@ -67,11 +67,11 @@ export const RosterSection: React.FC<RosterSectionProps> = ({ roster }) => {
               key={member.id}
               onMouseEnter={() => setHoveredMemberId(member.id)}
               onMouseLeave={() => setHoveredMemberId(null)}
-              className="bg-slate-950 rounded-3xl border border-slate-800 overflow-hidden shadow-xl flex flex-col justify-between"
+              className="roster-card group bg-slate-950 border border-slate-800 overflow-hidden flex flex-col justify-between"
             >
               <div>
                 {/* Image & Number Header */}
-                <div className="relative aspect-[4/3] overflow-hidden bg-slate-900">
+                <div className="roster-visual relative aspect-[4/3] overflow-hidden bg-slate-900">
                   <img
                     src={
                       hoveredMemberId === member.id && member.animatedImage
@@ -80,21 +80,21 @@ export const RosterSection: React.FC<RosterSectionProps> = ({ roster }) => {
                     }
                     alt={member.name}
                     referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain p-5 pb-0 transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
 
                   {/* Back Number Badge */}
-                  <div className="absolute top-3 right-3 w-10 h-10 rounded-2xl bg-slate-950/80 backdrop-blur-md border border-slate-700/80 flex items-center justify-center font-mono text-lg font-black text-orange-400 shadow-md">
+                  <div className="absolute top-3 right-3 min-w-12 h-11 px-2 bg-red-600 border border-red-400/50 flex items-center justify-center font-mono text-lg font-black text-white">
                     #{member.number}
                   </div>
 
                   {/* Position Badge */}
                   <div className="absolute bottom-3 left-3 flex items-center gap-2">
-                    <span className="px-2.5 py-0.5 rounded-full bg-orange-600 text-white text-xs font-black shadow-sm">
+                    <span className="px-2.5 py-1 bg-red-600 text-white text-[10px] font-black tracking-widest">
                       {member.position}
                     </span>
-                    <span className="px-2 py-0.5 rounded-full bg-slate-900/90 text-slate-300 text-[11px] font-semibold border border-slate-700">
+                    <span className="px-2 py-1 bg-black/90 text-slate-300 text-[10px] font-bold border border-slate-700">
                       {member.role}
                     </span>
                   </div>
@@ -114,6 +114,8 @@ export const RosterSection: React.FC<RosterSectionProps> = ({ roster }) => {
                       )}
                     </div>
                   </div>
+
+                  <p className="text-xs leading-relaxed text-slate-400 break-keep">{member.intro}</p>
 
                   {SHOW_FAVORITE_MOVE && (
                     <div className="p-3 bg-slate-900/80 rounded-xl border border-slate-800 text-xs space-y-1">

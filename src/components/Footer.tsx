@@ -1,6 +1,7 @@
 import React from 'react';
 import { SectionId } from '../types';
-import { Dribbble, Instagram, Youtube, Mail, MapPin, Heart, ChevronUp } from 'lucide-react';
+import { Instagram, Youtube, ArrowUp } from 'lucide-react';
+import hanniLogo from '../../assets/한늬로고_최종_White.png';
 
 interface FooterProps {
   onNavigate: (sectionId: SectionId) => void;
@@ -13,18 +14,34 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenJoinForm }) =>
   };
 
   return (
-    <footer className="bg-slate-950 text-slate-400 text-xs border-t border-slate-800 relative pt-16 pb-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">      
+    <footer className="footer-shell bg-black text-slate-400 text-xs border-t border-red-500/40 relative pt-16 pb-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <div className="grid gap-10 md:grid-cols-[1fr_auto] md:items-end">
+          <div className="flex items-center gap-5">
+            <img src={hanniLogo} alt="한늬 더 블레이저스" className="h-20 w-20 object-contain" />
+            <div>
+              <p className="headline-font text-3xl sm:text-5xl leading-none text-white">
+                DREAM. TRAIN.<br /><span className="text-red-500">BE CHAMPIONS.</span>
+              </p>
+              <p className="mt-3 text-[9px] font-black uppercase tracking-[0.28em] text-slate-500">
+                Hanni The Blazers · We Blaze Together
+              </p>
+            </div>
+          </div>
+          <button onClick={onOpenJoinForm} className="btn-primary px-7 py-4 text-xs font-black tracking-[0.1em] text-white">
+            JOIN THE TEAM
+          </button>
+        </div>
 
         {/* Link */}
         <div className="pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-500">
-          <p> 여자농구동호회 한늬 (HANNI Women's Basketball Club).</p>
+          <p>© 2026 HANNI WOMEN'S BASKETBALL CLUB. ALL RIGHTS RESERVED.</p>
           <div className="flex items-center gap-3 pt-2">
               <a
                 href="https://www.instagram.com/hanni_basketball?igsh=MTByNjE3N2wzNWk1bA=="
                 target="_blank"
                 rel="noreferrer"
-                className="p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-orange-400 border border-slate-800 transition-colors"
+                className="p-2.5 bg-slate-900 hover:bg-red-600 text-white border border-slate-800 transition-colors"
                 aria-label="Instagram"
               >
                 <Instagram className="w-4 h-4" />
@@ -33,7 +50,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenJoinForm }) =>
                 href="https://open.kakao.com/o/gm9r16ub"
                 target="_blank"
                 rel="noreferrer"
-                className="p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-amber-400 border border-slate-800 transition-colors"
+                className="p-2.5 bg-slate-900 hover:bg-red-600 text-white border border-slate-800 transition-colors"
                 aria-label="KakaoTalk"
               >
                 <svg
@@ -55,7 +72,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenJoinForm }) =>
                 href="https://www.youtube.com/@LetsGoHanni"
                 target="_blank"
                 rel="noreferrer"
-                className="p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-red-500 hover:text-red-400 border border-slate-800 transition-colors"
+                className="p-2.5 bg-slate-900 hover:bg-red-600 text-white border border-slate-800 transition-colors"
                 aria-label="YouTube"
               >
                 <Youtube className="w-4 h-4" />
@@ -64,11 +81,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenJoinForm }) =>
           <div className="flex items-center gap-4">
             <button
               onClick={scrollToTop}
-              className="flex items-center gap-1.5 px-3 p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800"
+              className="flex items-center gap-1.5 px-3 p-2 bg-slate-900 hover:bg-red-600 text-slate-300 border border-slate-800"
               title="맨 위로"
             >
               <span>맨 위로</span>
-              <ChevronUp className="w-4 h-4" />
+              <ArrowUp className="w-4 h-4" />
             </button>
           </div>
         </div>

@@ -33,7 +33,7 @@ export default function IntroOverlay({ onComplete }: IntroOverlayProps) {
 
   return (
     <div
-      className={`fixed inset-0 z-[1000] bg-slate-950 transition-opacity duration-[800ms] ease-out ${
+      className={`fixed inset-0 z-[1000] bg-black transition-opacity duration-[800ms] ease-out ${
         isExiting ? 'pointer-events-none opacity-0' : 'opacity-100'
       }`}
       aria-label="한늬 농구클럽 시작 인트로"

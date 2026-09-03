@@ -1,6 +1,11 @@
 import React from 'react';
 import { SectionId } from '../types';
-import { Dribbble, ArrowRight, Sparkles, Users, Award, ShieldCheck, PlayCircle, MapPin } from 'lucide-react';
+import { ArrowRight, Flame, MapPin, ShieldCheck } from 'lucide-react';
+import hanniLogo from '../../assets/한늬로고_최종_White.png';
+import characterNo3 from '../../assets/character_No3_final.png';
+import characterNo6 from '../../assets/character_No6_final.png';
+import characterNo7 from '../../assets/character_No7_final.png';
+import characterNo11 from '../../assets/character_No11_final.png';
 
 interface HeroSectionProps {
   onNavigate: (sectionId: SectionId) => void;
@@ -9,53 +14,45 @@ interface HeroSectionProps {
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onOpenJoinForm }) => {
   return (
-    <section className="relative bg-slate-950 text-white overflow-hidden pt-6 pb-16 lg:py-20 border-b border-slate-800">
-      {/* Background Ambient Glow & Grid Pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-25 pointer-events-none" />
-      
-      {/* Basketball Accent Orbs */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-orange-600/15 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+    <section className="hero-shell relative overflow-hidden border-b border-slate-800 text-white">
+      <div className="hero-court" aria-hidden="true" />
+      <div className="hero-slash hero-slash-one" aria-hidden="true" />
+      <div className="hero-slash hero-slash-two" aria-hidden="true" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-16 sm:py-20 lg:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center min-h-[580px] lg:min-h-[650px]">
           
           {/* Left Column: Text Content & CTAs */}
-          <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-            {/* Top Pill Badge */}
-            {/*<div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900 border border-orange-500/30 text-orange-400 text-xs sm:text-sm font-semibold shadow-inner">
-              <span className="flex h-2 w-2 rounded-full bg-orange-500 animate-ping" />
-              <Dribbble className="w-4 h-4 text-orange-500" />
-              <span>신입 부원 모집 중</span>
-            </div>*/}
+          <div className="lg:col-span-7 space-y-7 text-center lg:text-left">
+            <div className="inline-flex items-center gap-3 border-l-2 border-red-500 pl-3 text-[10px] sm:text-xs font-black tracking-[0.24em] text-slate-300 uppercase">
+              <Flame className="w-4 h-4 text-red-500" />
+              Since 2008 · Women's Basketball Club
+            </div>
 
-            {/* Main Title & Slogan */}
-            <div className="space-y-3">
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.15] text-white">
-                함께 달리고 성장하는 즐거움 <br />
-                <span className="bg-gradient-to-r from-orange-500 via-amber-400 to-orange-400 bg-clip-text text-transparent drop-shadow-sm">
-                  여자농구동호회 한늬
-                </span>
+            <div className="space-y-4">
+              <h1 className="hero-title headline-font text-[3.8rem] sm:text-[5.5rem] lg:text-[7.2rem] tracking-[-0.035em] leading-[0.78] text-white">
+                WE BLAZE
+                <span className="block text-red-500">TOGETHER.</span>
               </h1>
-              <p className="text-base sm:text-lg text-slate-300 font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                농구를 사랑하는 여성들이 모여 땀 흘리고 서로를 응원하는 코트!
-                함께 성장하는 따뜻하고 열정적인 한늬(HANNI)에서 함께하세요.
+              <p className="text-sm sm:text-base text-slate-300 font-medium leading-relaxed max-w-xl mx-auto lg:mx-0 break-keep">
+                농구를 사랑하는 여성들이 함께 달리고, 부딪히고, 성장하는 코트.
+                열정으로 하나 되는 <strong className="text-white">한늬 더 블레이저스</strong>에서 당신의 플레이를 시작하세요.
               </p>
             </div>
 
             {/* Feature Highlights Badges */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-2 text-xs sm:text-sm text-slate-300 font-medium">
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-800">
-                <ShieldCheck className="w-4 h-4 text-orange-400" />
-                <span>초보자 맞춤 멘토링</span>
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-3 pt-1 text-[11px] sm:text-xs text-slate-300 font-bold tracking-wide">
+              <div className="flex items-center gap-2 border-l border-red-500 pl-3">
+                <ShieldCheck className="w-4 h-4 text-red-400" />
+                <span>초보자 환영</span>
               </div>
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-800">
-                <MapPin className="w-4 h-4 text-orange-400" />
+              <div className="flex items-center gap-2 border-l border-red-500 pl-3">
+                <MapPin className="w-4 h-4 text-red-400" />
                 <span>인천·부천 실내체육관</span>
               </div>
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-800">
-                <Sparkles className="w-4 h-4 text-amber-400" />
-                <span>토요일 or 일요일 정기 훈련</span>
+              <div className="flex items-center gap-2 border-l border-red-500 pl-3">
+                <Flame className="w-4 h-4 text-red-400" />
+                <span>주말 정기 훈련</span>
               </div>
             </div>
 
@@ -63,18 +60,38 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onOpenJoin
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-4">
               <button
                 onClick={() => onNavigate('schedule')}
-                className="w-full sm:w-auto px-6 py-4 rounded-xl font-semibold text-base text-slate-200 bg-slate-900 hover:bg-slate-800 border border-slate-700/80 hover:text-white transition-all flex items-center justify-center gap-2 cursor-pointer"
+                className="btn-secondary w-full sm:w-auto px-7 py-4 font-black text-xs tracking-[0.08em] text-white transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
-                <span>📅 이번 주 정모 일정 보기</span>
+                <span>VIEW SCHEDULE</span>
               </button>
 
               <button
                 onClick={onOpenJoinForm}
-                className="w-full sm:w-auto px-7 py-4 rounded-xl font-bold text-base text-white bg-gradient-to-r from-orange-600 via-orange-500 to-amber-500 shadow-xl shadow-orange-950/60 hover:shadow-orange-600/30 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 border border-orange-400/30 cursor-pointer"
+                className="btn-primary w-full sm:w-auto px-7 py-4 font-black text-xs tracking-[0.08em] text-white transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
-                <span>✍️ 정모 참가신청서 작성</span>
+                <span>JOIN THE TEAM</span>
                 <ArrowRight className="w-5 h-5" />
               </button>
+            </div>
+          </div>
+
+          <div className="lg:col-span-5 relative h-[410px] sm:h-[520px] lg:h-[620px]" aria-label="한늬 선수 캐릭터">
+            <div className="hero-logo-halo" aria-hidden="true">
+              <img src={hanniLogo} alt="" className="h-full w-full object-contain opacity-[0.14] grayscale" />
+            </div>
+            <div className="absolute inset-x-2 bottom-6 h-[68%] border border-white/10 bg-black/25 backdrop-blur-[1px] hero-player-frame" />
+            <img src={characterNo11} alt="한늬 11번 선수 캐릭터" className="hero-character hero-character-11" />
+            <img src={characterNo3} alt="한늬 3번 선수 캐릭터" className="hero-character hero-character-3" />
+            <img src={characterNo6} alt="한늬 6번 선수 캐릭터" className="hero-character hero-character-6" />
+            <img src={characterNo7} alt="한늬 7번 선수 캐릭터" className="hero-character hero-character-7" />
+            <div className="absolute right-2 top-4 border-r border-red-500 pr-3 text-right">
+              <span className="headline-font block text-4xl text-white">ONE TEAM.</span>
+              <span className="text-[9px] font-black tracking-[0.28em] text-red-400">PASSION · GROWTH · VICTORY</span>
+            </div>
+            <div className="absolute bottom-0 left-2 right-2 flex items-center gap-3 text-[9px] font-black tracking-[0.24em] text-slate-500">
+              <span>HANNI THE BLAZERS</span>
+              <span className="h-px flex-1 bg-gradient-to-r from-red-500 to-transparent" />
+              <span>08 — 26</span>
             </div>
           </div>
         </div>
