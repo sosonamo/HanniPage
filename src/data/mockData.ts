@@ -2,9 +2,11 @@ import { ScheduleEvent, RosterMember, ClubTimelineItem, GalleryItem, FaqItem } f
 import characterNo3 from '../../assets/character_No3_final.png';
 import characterNo6 from '../../assets/character_No6_final.png';
 import characterNo7 from '../../assets/character_No7_final.png';
+import characterNo9 from '../../assets/character_No9_final.png';
+import characterNo10 from '../../assets/character_No10_final.png';
 import characterNo11 from '../../assets/character_No11_final.png';
-
-const placeholderCharacter = '/assets/hanni-logo-white.png';
+import characterNo13 from '../../assets/character_No13_final.png';
+import characterNo33 from '../../assets/character_No33_final.png';
 
 export const MOCK_SCHEDULES: ScheduleEvent[] = [
   {
@@ -110,7 +112,7 @@ export const MOCK_ROSTER: RosterMember[] = [
     heightCm: 166,
     experienceStartYear: 2023,
     favoriteMove: '원드리블 점퍼 / 훅슛',
-    image: placeholderCharacter,
+    image: characterNo9,
     stats: { shooting: 82, passing: 83, defense: 92, speed: 88, stamina: 96 },
     intro: '왼손 훅슛 마스터.'
   },
@@ -124,7 +126,7 @@ export const MOCK_ROSTER: RosterMember[] = [
     heightCm: 170,
     experienceStartYear: 2024,
     favoriteMove: '캐치 앤 슛',
-    image: placeholderCharacter,
+    image: characterNo10,
     stats: { shooting: 78, passing: 76, defense: 94, speed: 76, stamina: 90 },
     intro: '적극적인 박스아웃과 허슬 플레이로 팀의 골밑을 든든하게 지켜주는 파워풀한 보물 포워드입니다.'
   },
@@ -152,7 +154,7 @@ export const MOCK_ROSTER: RosterMember[] = [
     heightCm: 180,
     experienceStartYear: 2021,
     favoriteMove: '리바운드',
-    image: placeholderCharacter,
+    image: characterNo13,
     stats: { shooting: 75, passing: 82, defense: 98, speed: 70, stamina: 86 },
     intro: '달리는 센터의 정석. 스피드와 높이를 함께 갖춘 팀의 골밑 지킴이. 리바운드와 블록슛에 강점을 가진 센터.'
   },
@@ -166,7 +168,7 @@ export const MOCK_ROSTER: RosterMember[] = [
     heightCm: 170,
     experienceStartYear: 2021,
     favoriteMove: '리바운드',
-    image: placeholderCharacter,
+    image: characterNo33,
     stats: { shooting: 75, passing: 82, defense: 98, speed: 70, stamina: 86 },
     intro: '정통센터. 골밑에서의 리바운드와 블록슛에 강점을 가진 센터.'
   }

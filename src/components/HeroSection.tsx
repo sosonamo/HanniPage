@@ -5,7 +5,11 @@ import hanniLogo from '../../assets/한늬로고_최종_White.png';
 import characterNo3 from '../../assets/character_No3_final.png';
 import characterNo6 from '../../assets/character_No6_final.png';
 import characterNo7 from '../../assets/character_No7_final.png';
+import characterNo9 from '../../assets/character_No9_final.png';
+import characterNo10 from '../../assets/character_No10_final.png';
 import characterNo11 from '../../assets/character_No11_final.png';
+import characterNo13 from '../../assets/character_No13_final.png';
+import characterNo33 from '../../assets/character_No33_final.png';
 
 interface HeroSectionProps {
   onNavigate: (sectionId: SectionId) => void;
@@ -75,15 +79,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onOpenJoin
             </div>
           </div>
 
-          <div className="lg:col-span-5 relative h-[410px] sm:h-[520px] lg:h-[620px]" aria-label="한늬 선수 캐릭터">
+          <div className="lg:col-span-5 relative h-[410px] sm:h-[520px] lg:h-[620px]" aria-label="한늬 선수 캐릭터 8명">
             <div className="hero-logo-halo" aria-hidden="true">
               <img src={hanniLogo} alt="" className="h-full w-full object-contain opacity-[0.14] grayscale" />
             </div>
             <div className="absolute inset-x-2 bottom-6 h-[68%] border border-white/10 bg-black/25 backdrop-blur-[1px] hero-player-frame" />
-            <img src={characterNo11} alt="한늬 11번 선수 캐릭터" className="hero-character hero-character-11" />
+            <img src={characterNo9} alt="한늬 9번 선수 캐릭터" className="hero-character hero-character-9" />
             <img src={characterNo3} alt="한늬 3번 선수 캐릭터" className="hero-character hero-character-3" />
             <img src={characterNo6} alt="한늬 6번 선수 캐릭터" className="hero-character hero-character-6" />
             <img src={characterNo7} alt="한늬 7번 선수 캐릭터" className="hero-character hero-character-7" />
+            <img src={characterNo10} alt="한늬 10번 선수 캐릭터" className="hero-character hero-character-10" />
+            <img src={characterNo11} alt="한늬 11번 선수 캐릭터" className="hero-character hero-character-11" />
+            <img src={characterNo13} alt="한늬 13번 선수 캐릭터" className="hero-character hero-character-13" />
+            <img src={characterNo33} alt="한늬 33번 선수 캐릭터" className="hero-character hero-character-33" />
             <div className="absolute right-2 top-4 border-r border-red-500 pr-3 text-right">
               <span className="headline-font block text-4xl text-white">ONE TEAM.</span>
               <span className="text-[9px] font-black tracking-[0.28em] text-white">PASSION · GROWTH · VICTORY</span>
