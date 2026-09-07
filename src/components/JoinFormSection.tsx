@@ -170,12 +170,12 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3 mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20 text-xs font-bold uppercase tracking-wider">
-            <UserPlus className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-white border border-orange-500/20 text-xs font-bold uppercase tracking-wider">
+            <UserPlus className="w-3.5 h-3.5 text-orange-400" />
             참가신청서 (Join Us)
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            한늬랑 함께 농구하실 <span className="text-orange-500">게스트를 모집합니다!</span>
+            한늬랑 함께 농구하실 <span className="text-white">게스트를 모집합니다!</span>
           </h2>
           <p className="text-sm sm:text-base text-slate-300">
             농구 경험이 전혀 없어도 괜찮습니다. 열정과 운동화만 있다면 누구나 환영받는 따뜻한 코트입니다.
@@ -196,7 +196,7 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
                 <div className="space-y-4">
                   {/* Top Badge & Time */}
                   <div className="flex items-center justify-between">
-                    <span className="px-3 py-1 rounded-full text-xs font-bold bg-orange-500/15 text-orange-400 border border-orange-500/30">
+                    <span className="px-3 py-1 rounded-full text-xs font-bold bg-orange-500/15 text-white border border-orange-500/30">
                       {item.dayOfWeek}
                     </span>
                     <span className="text-xs text-slate-400 font-mono font-medium flex items-center gap-1">
@@ -206,7 +206,7 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-xl font-bold text-white group-hover:text-orange-400 transition-colors">
+                  <h3 className="text-xl font-bold text-white transition-colors">
                     {item.title}
                   </h3>
 
@@ -367,7 +367,7 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
                       {/* Name */}
                       <div>
                         <label className="block text-xs font-bold text-slate-300 mb-1">
-                          이름 / 닉네임 <span className="text-orange-500">*</span>
+                          이름 / 닉네임 <span className="text-white">*</span>
                         </label>
                         <input
                           type="text"
@@ -376,14 +376,14 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
                           placeholder="예: 김한늬"
                           className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-orange-500 transition-colors"
                         />
-                        {errors.name && <p className="text-xs text-rose-400 mt-1">{errors.name}</p>}
+                        {errors.name && <p className="text-xs text-white mt-1">{errors.name}</p>}
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {/* Phone */}
                         <div>
                           <label className="block text-xs font-bold text-slate-300 mb-1">
-                            연락처 (핸드폰) <span className="text-orange-500">*</span>
+                            연락처 (핸드폰) <span className="text-white">*</span>
                           </label>
                           <input
                             type="tel"
@@ -392,7 +392,7 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
                             placeholder="010-0000-0000"
                             className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-orange-500 transition-colors"
                           />
-                          {errors.phone && <p className="text-xs text-rose-400 mt-1">{errors.phone}</p>}
+                          {errors.phone && <p className="text-xs text-white mt-1">{errors.phone}</p>}
                         </div>
 
                         {/* Age Group */}
@@ -546,7 +546,7 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
                                 onClick={() => toggleDay(day)}
                                 className={`p-3 rounded-xl border text-xs font-semibold flex items-center justify-between transition-all ${
                                   isChecked
-                                    ? 'bg-orange-500/15 border-orange-500 text-orange-300'
+                                    ? 'bg-orange-500/15 border-orange-500 text-white'
                                     : 'bg-slate-900 border-slate-800 text-slate-400'
                                 }`}
                               >
@@ -585,7 +585,7 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
                             [필수] 신입 부원 가입 안내 연락을 위한 개인정보 수집·이용에 동의합니다.
                           </span>
                         </label>
-                        {errors.terms && <p className="text-xs text-rose-400">{errors.terms}</p>}
+                        {errors.terms && <p className="text-xs text-white">{errors.terms}</p>}
                       </div>
                     </div>
                   )}
@@ -637,7 +637,7 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
                     {formData.name}님, 참가신청이 정상 완료되었습니다! 🎉
                   </h3>
                   <p className="text-xs sm:text-sm text-slate-300 max-w-md mx-auto">
-                    한늬 입단 안내 담당 매니저가 기재해주신 연락처(<span className="text-orange-400 font-bold">{formData.phone}</span>)로 24시간 이내에 안내 문자를 보내드립니다.
+                    한늬 입단 안내 담당 매니저가 기재해주신 연락처(<span className="text-white font-bold">{formData.phone}</span>)로 24시간 이내에 안내 문자를 보내드립니다.
                   </p>
                 </div>
 
@@ -649,7 +649,7 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
                   </div>
                   <div className="flex justify-between border-b border-slate-800 pb-2">
                     <span className="text-slate-400">선택 경험:</span>
-                    <span className="font-bold text-orange-400">{formData.experienceLevel}</span>
+                    <span className="font-bold text-white">{formData.experienceLevel}</span>
                   </div>
                   <div className="flex justify-between border-b border-slate-800 pb-2">
                     <span className="text-slate-400">희망 포지션:</span>

@@ -23,12 +23,12 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ timeline, gallery })
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20 text-xs font-bold uppercase tracking-wider">
-            <Dribbble className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-white border border-orange-500/20 text-xs font-bold uppercase tracking-wider">
+            <Dribbble className="w-3.5 h-3.5 text-orange-400" />
             한늬소개 (About Us)
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            코트 위에서 하나되는 <span className="text-orange-500"> 한늬</span>
+            코트 위에서 하나되는 <span className="text-white"> 한늬</span>
           </h2>
           <p className="text-sm sm:text-base text-slate-300">
             '한늬'는 '끝까지 무언가를 꾸준히 그리고 열심히 함' 을 의미하는 순우리말 표현입니다. 
@@ -101,12 +101,12 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ timeline, gallery })
               <div className="grid grid-cols-2 gap-3 text-xs">
                 <div className="p-3 bg-slate-900 rounded-xl border border-slate-800">
                   <span className="text-slate-400 block text-[11px]">입단비 (최초 1회)</span>
-                  <span className="text-lg font-bold text-orange-400 font-mono">30,000원</span>
+                  <span className="text-lg font-bold text-white font-mono">30,000원</span>
                   <p className="text-[10px] text-slate-500 mt-1"></p>
                 </div>
                 <div className="p-3 bg-slate-900 rounded-xl border border-slate-800">
                   <span className="text-slate-400 block text-[11px]">월 회비</span>
-                  <span className="text-lg font-bold text-amber-400 font-mono">30,000원</span>
+                  <span className="text-lg font-bold text-white font-mono">30,000원</span>
                   <p className="text-[10px] text-slate-500 mt-1">체육관 대관료 & 행사 지원</p>
                 </div>
               </div>
@@ -129,14 +129,14 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ timeline, gallery })
                 
                 <div className="space-y-1">
                   <div className="flex items-center gap-3">
-                    <span className="font-mono text-xs font-bold text-orange-400">{item.year}</span>
+                    <span className="font-mono text-xs font-bold text-white">{item.year}</span>
                     {item.badge && (
                       <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-800 text-slate-300 border border-slate-700">
                         {item.badge}
                       </span>
                     )}
                   </div>
-                  <h4 className="text-lg font-bold text-white group-hover:text-orange-400 transition-colors">
+                  <h4 className="text-lg font-bold text-white transition-colors">
                     {item.title}
                   </h4>
                   <p className="text-xs text-slate-300 leading-relaxed">
@@ -190,12 +190,12 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ timeline, gallery })
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent opacity-80 group-hover:opacity-95 transition-opacity" />
                 <div className="absolute inset-0 p-4 flex flex-col justify-between">
-                  <span className="self-start text-[10px] font-bold px-2 py-0.5 rounded bg-slate-950/80 text-orange-400 border border-slate-800">
+                  <span className="self-start text-[10px] font-bold px-2 py-0.5 rounded bg-slate-950/80 text-white border border-slate-800">
                     {img.category}
                   </span>
                   <div>
                     <span className="text-[10px] text-slate-400 font-mono block">{img.date}</span>
-                    <h4 className="text-sm font-bold text-white group-hover:text-orange-300 transition-colors">
+                    <h4 className="text-sm font-bold text-white transition-colors">
                       {img.title}
                     </h4>
                   </div>
@@ -233,7 +233,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ timeline, gallery })
 
             <div className="space-y-1">
               <div className="flex items-center gap-2">
-                <span className="text-xs text-orange-400 font-bold">{activeImageModal.category}</span>
+                <span className="text-xs text-white font-bold">{activeImageModal.category}</span>
                 <span className="text-xs text-slate-500">• {activeImageModal.date}</span>
               </div>
               <h3 className="text-xl font-bold text-white">{activeImageModal.title}</h3>

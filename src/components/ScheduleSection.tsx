@@ -70,12 +70,12 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, cal
         {/* Section Title */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 pb-6 border-b border-slate-800">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20 text-xs font-bold uppercase tracking-wider mb-2">
-              <Calendar className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-white border border-orange-500/20 text-xs font-bold uppercase tracking-wider mb-2">
+              <Calendar className="w-3.5 h-3.5 text-orange-400" />
               정모일정 & 체육관 안내
             </div>
             <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
-              월간 <span className="text-orange-500">정모</span> 일정
+              월간 <span className="!text-white">정모</span> 일정
             </h2>
             <p className="text-slate-400 text-sm mt-1">
               이번 달과 다음 달 정모 날짜를 달력에서 확인하세요.
@@ -89,7 +89,7 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, cal
               <><CheckCircle2 className="w-4 h-4 text-emerald-400" /> Google Calendar 연동됨</>
             )}
             {calendarStatus === 'error' && (
-              <span className="text-amber-400">캘린더 연결 실패 · 임시 일정을 표시합니다</span>
+              <span className="text-white">캘린더 연결 실패 · 임시 일정을 표시합니다</span>
             )}
           </div>
         </div>
@@ -98,7 +98,7 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, cal
         <div className="overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/80 shadow-2xl">
           <div className="flex flex-col gap-4 border-b border-slate-800 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-7">
             <div>
-              <p className="text-xs font-bold text-orange-400">MONTHLY SCHEDULE</p>
+              <p className="text-xs font-bold text-white">MONTHLY SCHEDULE</p>
               <h3 className="mt-1 text-2xl font-black text-white">
                 {visibleYear}년 {visibleMonthIndex + 1}월
               </h3>
@@ -121,15 +121,15 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, cal
             </div>
           </div>
 
-          <div className="overflow-x-auto">
-            <div className="min-w-[720px]">
-              <div className="grid grid-cols-7 border-b border-slate-800 bg-slate-950/70">
+          <div className="w-full min-w-0 overflow-hidden">
+            <div className="w-full min-w-0">
+              <div className="grid grid-cols-[minmax(0,2fr)_repeat(5,minmax(0,1fr))_minmax(0,2fr)] border-b border-slate-800 bg-slate-950/70">
                 {WEEKDAYS.map((weekday, index) => (
                   <div
                     key={weekday}
                     className={`py-3 text-center text-xs font-bold ${
                       index === 0
-                        ? 'text-rose-400'
+                        ? 'text-white'
                         : index === 6
                           ? 'text-blue-400'
                           : 'text-slate-400'
@@ -140,7 +140,7 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, cal
                 ))}
               </div>
 
-              <div className="grid grid-cols-7">
+              <div className="grid grid-cols-[minmax(0,2fr)_repeat(5,minmax(0,1fr))_minmax(0,2fr)]">
                 {monthCells.map((date) => {
                   const dateKey = toDateKey(date);
                   const isVisibleMonth = date.getFullYear() === visibleYear
@@ -153,18 +153,18 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, cal
                   return (
                     <div
                       key={dateKey}
-                      className={`min-h-28 border-b border-r border-slate-800 p-2.5 ${
+                      className={`min-w-0 min-h-20 border-b border-r border-slate-800 p-0.5 sm:min-h-28 sm:p-2.5 ${
                         isVisibleMonth ? 'bg-slate-900/40' : 'bg-slate-950/70'
                       }`}
                     >
-                      <div className="mb-2 flex items-center justify-between">
+                      <div className="mb-1 flex items-center justify-between sm:mb-2">
                         <span
-                          className={`flex h-7 min-w-7 items-center justify-center rounded-full px-1 text-xs font-bold ${
+                          className={`flex h-6 min-w-6 items-center justify-center rounded-full px-0.5 text-[10px] font-bold sm:h-7 sm:min-w-7 sm:px-1 sm:text-xs ${
                             isToday
                               ? 'bg-orange-500 text-white'
                               : isVisibleMonth
                                 ? date.getDay() === 0
-                                  ? 'text-rose-400'
+                                  ? 'text-white'
                                   : date.getDay() === 6
                                     ? 'text-blue-400'
                                     : 'text-slate-200'
@@ -175,21 +175,21 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, cal
                         </span>
                       </div>
 
-                      <div className="space-y-1.5">
+                      <div className="min-w-0 space-y-1 sm:space-y-1.5">
                         {daySchedules.slice(0, 2).map((schedule) => (
                           <div
                             key={schedule.id}
-                            className="w-full rounded-md bg-orange-500/10 px-2 py-1.5 text-left text-[10px] font-semibold text-slate-200"
+                            className="w-full min-w-0 overflow-hidden rounded-md bg-orange-500/10 px-1 py-1 text-left text-[9px] font-semibold text-slate-200 sm:px-2 sm:py-1.5 sm:text-[10px]"
                             title={`${schedule.time} · ${schedule.title} · ${schedule.location}`}
                           >
-                            <div className="flex items-start gap-1.5">
-                              <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-orange-400" />
+                            <div className="flex min-w-0 items-start gap-1 sm:gap-1.5">
+                              <span className="mt-1 h-1 w-1 shrink-0 rounded-full bg-orange-400 sm:h-1.5 sm:w-1.5" />
                               <span className="min-w-0 truncate">
-                                <span className="font-mono text-orange-300">{getStartTime(schedule.time)}</span>{' '}
+                                <span className="hidden font-mono text-white sm:inline">{getStartTime(schedule.time)}{' '}</span>
                                 {schedule.title}
                               </span>
                             </div>
-                            <div className="mt-1 flex min-w-0 items-center gap-1 text-slate-400">
+                            <div className="mt-1 hidden min-w-0 items-center gap-1 text-slate-400 sm:flex">
                               <MapPin className="h-3 w-3 shrink-0 text-orange-400/80" />
                               <span className="truncate">{schedule.location}</span>
                             </div>
@@ -212,8 +212,8 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, cal
         {/* Gym Location Interactive Card Box */}
         <div className="mt-12 bg-slate-900 rounded-3xl border border-slate-800 p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-6 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-orange-400 text-xs font-bold">
-              <Navigation className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-white text-xs font-bold">
+              <Navigation className="w-3.5 h-3.5 text-orange-400" />
               체육관 오시는 길
             </div>
             <h3 className="text-2xl font-bold text-white">
@@ -221,15 +221,15 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, cal
             </h3>
             <div className="grid grid-cols-3 gap-4 text-xs pt-2">
               <div className="p-3 bg-slate-950 rounded-xl border border-slate-800">
-                <span className="text-orange-400 font-bold block mb-1">부천 소사</span>
+                <span className="text-white font-bold block mb-1">부천 소사</span>
                 <span className="text-slate-400">서해선 소새울역 인근</span>
               </div>
               <div className="p-3 bg-slate-950 rounded-xl border border-slate-800">
-                <span className="text-amber-400 font-bold block mb-1">부천 오정</span>
+                <span className="text-white font-bold block mb-1">부천 오정</span>
                 <span className="text-slate-400">서해선 원종역 인근</span>
               </div>
               <div className="p-3 bg-slate-950 rounded-xl border border-slate-800">
-                <span className="text-amber-400 font-bold block mb-1">인천 검암</span>
+                <span className="text-white font-bold block mb-1">인천 검암</span>
                 <span className="text-slate-400">인천1호선 검암역 인근</span>
               </div>
             </div>

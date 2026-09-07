@@ -59,7 +59,7 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate, onOpe
           />
           <div>
             <div className="headline-font text-lg sm:text-xl tracking-[0.05em] text-white leading-none">
-              HANNI <span className="text-red-500">THE BLAZERS</span>
+              HANNI <span className="text-white">THE BLAZERS</span>
             </div>
             <p className="mt-1 text-[9px] text-slate-400 font-semibold tracking-[0.22em] uppercase">
               Women's Basketball Club · Since 2008
@@ -77,7 +77,7 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate, onOpe
                 onClick={() => handleNavClick(item.id)}
                 className={`nav-cut relative flex items-center gap-2 py-2 text-[11px] font-black tracking-[0.12em] transition-all duration-200 ${
                   isActive
-                    ? 'text-red-500'
+                    ? 'text-white'
                     : 'text-slate-300 hover:text-white'
                 }`}
               >
@@ -123,7 +123,7 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate, onOpe
                   onClick={() => handleNavClick(item.id)}
                   className={`flex items-center justify-between px-4 py-3 border-b text-sm font-black tracking-wider transition-all ${
                     isActive
-                      ? 'bg-red-500/10 text-red-400 border-red-500'
+                      ? 'bg-red-500/10 text-white border-red-500'
                       : 'text-slate-200 border-slate-800 hover:bg-slate-900'
                   }`}
                 >

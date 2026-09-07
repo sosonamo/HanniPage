@@ -45,8 +45,8 @@ export const NoticeBanner: React.FC<NoticeBannerProps> = ({ nextSchedule, onRsvp
           <span className="text-white font-black tracking-wide">
             2026 하반기 신입 부원 & 게스트 정기 모집 중 — 초보자 환영
           </span>
-          <span className="text-red-200 hidden sm:inline">/</span>
-          <span className="text-red-100 hidden sm:inline-flex items-center gap-1 font-semibold">
+          <span className="text-white hidden sm:inline">/</span>
+          <span className="text-white hidden sm:inline-flex items-center gap-1 font-semibold">
             <Calendar className="w-3.5 h-3.5" />
             {nextSchedule
               ? `다음 일정 · ${nextSchedule.dayOfWeek} ${nextSchedule.time}`
@@ -56,7 +56,7 @@ export const NoticeBanner: React.FC<NoticeBannerProps> = ({ nextSchedule, onRsvp
 
         {/* Right countdown timer & CTA */}
         <div className="flex items-center gap-3 shrink-0">
-          {timeLeft && <div className="hidden lg:flex items-center gap-1.5 text-[10px] font-bold text-red-100">
+          {timeLeft && <div className="hidden lg:flex items-center gap-1.5 text-[10px] font-bold text-white">
             <span>다음 정모까지</span>
             <span className="bg-black text-white font-mono font-bold px-1.5 py-0.5 border border-black">
               {timeLeft.days}d

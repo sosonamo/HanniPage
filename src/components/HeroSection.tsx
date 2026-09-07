@@ -32,7 +32,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onOpenJoin
             <div className="space-y-4">
               <h1 className="hero-title headline-font text-[3.8rem] sm:text-[5.5rem] lg:text-[7.2rem] tracking-[-0.035em] leading-[0.78] text-white">
                 WE BLAZE
-                <span className="block text-red-500">TOGETHER.</span>
+                <span className="block text-white">TOGETHER.</span>
               </h1>
               <p className="text-sm sm:text-base text-slate-300 font-medium leading-relaxed max-w-xl mx-auto lg:mx-0 break-keep">
                 농구를 사랑하는 여성들이 함께 달리고, 부딪히고, 성장하는 코트.
@@ -86,7 +86,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onOpenJoin
             <img src={characterNo7} alt="한늬 7번 선수 캐릭터" className="hero-character hero-character-7" />
             <div className="absolute right-2 top-4 border-r border-red-500 pr-3 text-right">
               <span className="headline-font block text-4xl text-white">ONE TEAM.</span>
-              <span className="text-[9px] font-black tracking-[0.28em] text-red-400">PASSION · GROWTH · VICTORY</span>
+              <span className="text-[9px] font-black tracking-[0.28em] text-white">PASSION · GROWTH · VICTORY</span>
             </div>
             <div className="absolute bottom-0 left-2 right-2 flex items-center gap-3 text-[9px] font-black tracking-[0.24em] text-slate-500">
               <span>HANNI THE BLAZERS</span>

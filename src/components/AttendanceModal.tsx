@@ -41,7 +41,7 @@ export const AttendanceModal: React.FC<AttendanceModalProps> = ({ schedule, onCl
         {!submitted ? (
           <div className="space-y-5">
             <div>
-              <span className="text-xs font-bold text-orange-400 bg-orange-500/10 px-2.5 py-0.5 rounded border border-orange-500/20">
+              <span className="text-xs font-bold text-white bg-orange-500/10 px-2.5 py-0.5 rounded border border-orange-500/20">
                 정모 참석 (RSVP) 신청
               </span>
               <h3 className="text-2xl font-black text-white mt-1">{schedule.title}</h3>
@@ -59,7 +59,7 @@ export const AttendanceModal: React.FC<AttendanceModalProps> = ({ schedule, onCl
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-xs font-bold text-slate-300 mb-1">
-                  이름 / 닉네임 <span className="text-orange-500">*</span>
+                  이름 / 닉네임 <span className="text-white">*</span>
                 </label>
                 <input
                   type="text"
@@ -73,7 +73,7 @@ export const AttendanceModal: React.FC<AttendanceModalProps> = ({ schedule, onCl
 
               <div>
                 <label className="block text-xs font-bold text-slate-300 mb-1">
-                  연락처 <span className="text-orange-500">*</span>
+                  연락처 <span className="text-white">*</span>
                 </label>
                 <input
                   type="tel"

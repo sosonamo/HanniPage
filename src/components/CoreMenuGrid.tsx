@@ -54,7 +54,7 @@ export const CoreMenuGrid: React.FC<CoreMenuGridProps> = ({ onNavigate, onOpenJo
           <div>
             <p className="section-kicker">Explore Hanni</p>
             <h2 className="headline-font mt-2 text-4xl sm:text-6xl text-white">
-              FIND YOUR <span className="text-red-500">PLAY.</span>
+              FIND YOUR <span className="text-white">PLAY.</span>
             </h2>
           </div>
           <p className="max-w-sm text-xs leading-relaxed text-slate-400 sm:text-right">
@@ -74,14 +74,14 @@ export const CoreMenuGrid: React.FC<CoreMenuGridProps> = ({ onNavigate, onOpenJo
               >
                 <div className="relative z-10 flex h-full flex-col">
                   <div className="flex items-start justify-between">
-                    <span className="headline-font text-6xl text-white/[0.08] transition-colors group-hover:text-red-500/20">
+                    <span className="headline-font text-6xl text-white/[0.08] transition-colors group-hover:text-white/20">
                       {card.number}
                     </span>
                     <Icon className="h-6 w-6 text-red-500" strokeWidth={1.6} />
                   </div>
 
                   <div className="mt-auto">
-                    <p className="mb-2 text-[9px] font-black uppercase tracking-[0.28em] text-red-400">
+                    <p className="mb-2 text-[9px] font-black uppercase tracking-[0.28em] text-white">
                       {card.eyebrow}
                     </p>
                     <h3 className="headline-font text-4xl text-white transition-transform duration-300 group-hover:translate-x-1">

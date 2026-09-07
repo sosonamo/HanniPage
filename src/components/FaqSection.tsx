@@ -26,12 +26,12 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ faqs }) => {
         
         {/* Section Header */}
         <div className="text-center space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20 text-xs font-bold uppercase tracking-wider">
-            <HelpCircle className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-white border border-orange-500/20 text-xs font-bold uppercase tracking-wider">
+            <HelpCircle className="w-3.5 h-3.5 text-orange-400" />
             자주 묻는 질문 (FAQ)
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            궁금하신 사항을 <span className="text-orange-500">빠르고 명쾌하게</span> 안내해 드립니다
+            궁금하신 사항을 <span className="text-white">빠르고 명쾌하게</span> 안내해 드립니다
           </h2>
           <p className="text-sm text-slate-400">
             신입 가입, 준비물, 체육관 주차, 회비 관련 궁금한 내용을 확인하세요.
@@ -66,10 +66,10 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ faqs }) => {
               >
                 <button
                   onClick={() => toggleAccordion(faq.id)}
-                  className="w-full p-5 text-left flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-slate-100 hover:text-orange-400 transition-colors"
+                  className="w-full p-5 text-left flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-slate-100 hover:text-white transition-colors"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="px-2.5 py-0.5 rounded bg-orange-500/10 text-orange-400 text-xs font-mono font-bold shrink-0">
+                    <span className="px-2.5 py-0.5 rounded bg-orange-500/10 text-white text-xs font-mono font-bold shrink-0">
                       Q
                     </span>
                     <span>{faq.question}</span>

@@ -21,7 +21,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenJoinForm }) =>
             <img src={hanniLogo} alt="한늬 더 블레이저스" className="h-20 w-20 object-contain" />
             <div>
               <p className="headline-font text-3xl sm:text-5xl leading-none text-white">
-                DREAM. TRAIN.<br /><span className="text-red-500">BE CHAMPIONS.</span>
+                DREAM. TRAIN.<br /><span className="text-white">BE CHAMPIONS.</span>
               </p>
               <p className="mt-3 text-[9px] font-black uppercase tracking-[0.28em] text-slate-500">
                 Hanni The Blazers · We Blaze Together

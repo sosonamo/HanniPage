@@ -30,12 +30,12 @@ export const RosterSection: React.FC<RosterSectionProps> = ({ roster }) => {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-800 pb-6">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20 text-xs font-bold uppercase tracking-wider mb-2">
-              <Users className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-white border border-orange-500/20 text-xs font-bold uppercase tracking-wider mb-2">
+              <Users className="w-3.5 h-3.5 text-orange-400" />
               팀원소개 (Roster)
             </div>
             <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
-              코트를 빛내는 <span className="text-orange-500">한늬 선수단 & 코치진</span>
+              코트를 빛내는 <span className="text-white">한늬 선수단 & 코치진</span>
             </h2>
             <p className="text-sm text-slate-400 mt-1">
               각 포지션에서 열정을 다하는 멤버들의 프로필을 확인하세요.
@@ -108,7 +108,7 @@ export const RosterSection: React.FC<RosterSectionProps> = ({ roster }) => {
                         {member.name}
                       </h3>
                       {member.nickname && (
-                        <span className="text-xs text-amber-400 font-semibold bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">
+                        <span className="text-xs text-white font-semibold bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">
                           "{member.nickname}"
                         </span>
                       )}
@@ -134,7 +134,7 @@ export const RosterSection: React.FC<RosterSectionProps> = ({ roster }) => {
                   <div className="space-y-2 text-xs">
                     <div className="flex justify-between text-[11px]">
                       <span className="text-slate-400">슈팅 (Shooting)</span>
-                      <span className="font-bold font-mono text-orange-400">{member.stats.shooting}</span>
+                      <span className="font-bold font-mono text-white">{member.stats.shooting}</span>
                     </div>
                     <div className="w-full h-1.5 rounded-full bg-slate-800 overflow-hidden">
                       <div
@@ -145,7 +145,7 @@ export const RosterSection: React.FC<RosterSectionProps> = ({ roster }) => {
 
                     <div className="flex justify-between text-[11px]">
                       <span className="text-slate-400">수비 & 허슬 (Defense)</span>
-                      <span className="font-bold font-mono text-orange-400">{member.stats.defense}</span>
+                      <span className="font-bold font-mono text-white">{member.stats.defense}</span>
                     </div>
                     <div className="w-full h-1.5 rounded-full bg-slate-800 overflow-hidden">
                       <div
