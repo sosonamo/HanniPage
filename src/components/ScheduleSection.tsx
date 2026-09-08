@@ -153,7 +153,7 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, cal
                   return (
                     <div
                       key={dateKey}
-                      className={`min-w-0 min-h-20 border-b border-r border-slate-800 p-0.5 sm:min-h-28 sm:p-2.5 ${
+                      className={`min-w-0 min-h-24 border-b border-r border-slate-800 p-0.5 sm:min-h-28 sm:p-2.5 ${
                         isVisibleMonth ? 'bg-slate-900/40' : 'bg-slate-950/70'
                       }`}
                     >
@@ -184,13 +184,18 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, cal
                           >
                             <div className="flex min-w-0 items-start gap-1 sm:gap-1.5">
                               <span className="mt-1 h-1 w-1 shrink-0 rounded-full bg-orange-400 sm:h-1.5 sm:w-1.5" />
-                              <span className="min-w-0 truncate">
-                                <span className="hidden font-mono text-white sm:inline">{getStartTime(schedule.time)}{' '}</span>
-                                {schedule.title}
+                              <span className="min-w-0 flex-1">
+                                <span className="block truncate font-mono text-white sm:inline">
+                                  {getStartTime(schedule.time)}
+                                </span>
+                                <span className="block truncate sm:inline">
+                                  <span className="hidden sm:inline"> · </span>
+                                  {schedule.title}
+                                </span>
                               </span>
                             </div>
-                            <div className="mt-1 hidden min-w-0 items-center gap-1 text-slate-400 sm:flex">
-                              <MapPin className="h-3 w-3 shrink-0 text-orange-400/80" />
+                            <div className="mt-0.5 flex min-w-0 items-center gap-1 text-[9px] text-slate-400 sm:mt-1 sm:text-[10px]">
+                              <MapPin className="hidden h-3 w-3 shrink-0 text-orange-400/80 sm:block" />
                               <span className="truncate">{schedule.location}</span>
                             </div>
                           </div>

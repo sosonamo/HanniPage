@@ -1,22 +1,12 @@
-import React, { useState } from 'react';
-import { ClubTimelineItem, GalleryItem } from '../types';
-import { Dribbble, Heart, Shield, Sparkles, Award, History, Image as ImageIcon, X, ChevronRight, CheckCircle } from 'lucide-react';
+import React from 'react';
+import { ClubTimelineItem } from '../types';
+import { Dribbble, Heart, Shield, Sparkles, History, CheckCircle } from 'lucide-react';
 
 interface AboutSectionProps {
   timeline: ClubTimelineItem[];
-  gallery: GalleryItem[];
 }
 
-export const AboutSection: React.FC<AboutSectionProps> = ({ timeline, gallery }) => {
-  const [selectedGalleryCategory, setSelectedGalleryCategory] = useState<string>('전체');
-  const [activeImageModal, setActiveImageModal] = useState<GalleryItem | null>(null);
-
-  const galleryCategories = ['전체', '훈련', '대회', '소모임', '단체사진'];
-
-  const filteredGallery = selectedGalleryCategory === '전체'
-    ? gallery
-    : gallery.filter(g => g.category === selectedGalleryCategory);
-
+export const AboutSection: React.FC<AboutSectionProps> = ({ timeline }) => {
   return (
     <section id="about" className="py-20 bg-slate-950 text-white relative border-b border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
@@ -148,100 +138,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ timeline, gallery })
           </div>
         </div>
 
-        {/* Club Gallery */}
-        <div className="space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div className="flex items-center gap-2">
-              <ImageIcon className="w-5 h-5 text-orange-400" />
-              <h3 className="text-2xl font-extrabold text-white">클럽 갤러리 & 활동 모습</h3>
-            </div>
-
-            {/* Category Filter */}
-            <div className="flex flex-wrap gap-1.5 bg-slate-900 p-1.5 rounded-xl border border-slate-800">
-              {galleryCategories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setSelectedGalleryCategory(cat)}
-                  className={`px-3 py-1 rounded-lg text-xs font-bold transition-all ${
-                    selectedGalleryCategory === cat
-                      ? 'bg-orange-500 text-white shadow'
-                      : 'text-slate-400 hover:text-white'
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Gallery Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {filteredGallery.map((img) => (
-              <div
-                key={img.id}
-                onClick={() => setActiveImageModal(img)}
-                className="group relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 aspect-[4/3] cursor-pointer hover:border-orange-500/50 transition-all shadow-lg"
-              >
-                <img
-                  src={img.imageUrl}
-                  alt={img.title}
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent opacity-80 group-hover:opacity-95 transition-opacity" />
-                <div className="absolute inset-0 p-4 flex flex-col justify-between">
-                  <span className="self-start text-[10px] font-bold px-2 py-0.5 rounded bg-slate-950/80 text-white border border-slate-800">
-                    {img.category}
-                  </span>
-                  <div>
-                    <span className="text-[10px] text-slate-400 font-mono block">{img.date}</span>
-                    <h4 className="text-sm font-bold text-white transition-colors">
-                      {img.title}
-                    </h4>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
       </div>
-
-      {/* Lightbox Modal */}
-      {activeImageModal && (
-        <div
-          onClick={() => setActiveImageModal(null)}
-          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4"
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="relative bg-slate-950 rounded-3xl max-w-3xl w-full border border-slate-800 overflow-hidden space-y-4 p-4 sm:p-6"
-          >
-            <button
-              onClick={() => setActiveImageModal(null)}
-              className="absolute top-4 right-4 p-2 rounded-full bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700"
-            >
-              <X className="w-5 h-5" />
-            </button>
-
-            <img
-              src={activeImageModal.imageUrl}
-              alt={activeImageModal.title}
-              referrerPolicy="no-referrer"
-              className="w-full h-80 sm:h-96 object-cover rounded-2xl"
-            />
-
-            <div className="space-y-1">
-              <div className="flex items-center gap-2">
-                <span className="text-xs text-white font-bold">{activeImageModal.category}</span>
-                <span className="text-xs text-slate-500">• {activeImageModal.date}</span>
-              </div>
-              <h3 className="text-xl font-bold text-white">{activeImageModal.title}</h3>
-              <p className="text-xs text-slate-300">{activeImageModal.caption}</p>
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 };
