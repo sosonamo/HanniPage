@@ -28,9 +28,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenJoinForm }) =>
               </p>
             </div>
           </div>
-          <button onClick={onOpenJoinForm} className="btn-primary px-7 py-4 text-xs font-black tracking-[0.1em] text-white">
-            JOIN THE TEAM
-          </button>
         </div>
 
         {/* Link */}
@@ -45,6 +42,15 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenJoinForm }) =>
                 aria-label="Instagram"
               >
                 <Instagram className="w-4 h-4" />
+              </a>
+                            <a
+                href="https://www.youtube.com/@LetsGoHanni"
+                target="_blank"
+                rel="noreferrer"
+                className="p-2.5 bg-slate-900 hover:bg-red-600 text-white border border-slate-800 transition-colors"
+                aria-label="YouTube"
+              >
+                <Youtube className="w-4 h-4" />
               </a>
               <a
                 href="https://open.kakao.com/o/gm9r16ub"
@@ -67,15 +73,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenJoinForm }) =>
                     d="M8.5 11.5a1 1 0 110-2 1 1 0 010 2zm7 0a1 1 0 110-2 1 1 0 010 2z" 
                   />
                 </svg>
-              </a>
-              <a
-                href="https://www.youtube.com/@LetsGoHanni"
-                target="_blank"
-                rel="noreferrer"
-                className="p-2.5 bg-slate-900 hover:bg-red-600 text-white border border-slate-800 transition-colors"
-                aria-label="YouTube"
-              >
-                <Youtube className="w-4 h-4" />
               </a>
             </div>
           <div className="flex items-center gap-4">

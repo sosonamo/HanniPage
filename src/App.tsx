@@ -11,7 +11,6 @@ import { AboutSection } from './components/AboutSection';
 import { RosterSection } from './components/RosterSection';
 import { FaqSection } from './components/FaqSection';
 import { Footer } from './components/Footer';
-import { CursorMascot } from './components/CursorMascot';
 import IntroOverlay from './components/IntroOverlay';
 import {
   fetchGoogleCalendarSchedules,
@@ -91,7 +90,6 @@ export default function App() {
 
   return (
     <>
-      <CursorMascot />
       <div className="hanni-site min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-orange-500 selection:text-white">
         {showIntro && <IntroOverlay onComplete={() => setShowIntro(false)} />}
 
