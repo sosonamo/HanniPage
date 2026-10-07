@@ -62,7 +62,7 @@ export const CoreMenuGrid: React.FC<CoreMenuGridProps> = ({ onNavigate, onOpenJo
           </p>
         </div>
 
-        <div className="grid grid-cols-1 border-l border-t border-slate-800 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-2 border-l border-t border-slate-800 lg:grid-cols-4">
           {cards.map((card) => {
             const Icon = card.icon;
             return (
@@ -70,28 +70,28 @@ export const CoreMenuGrid: React.FC<CoreMenuGridProps> = ({ onNavigate, onOpenJo
                 key={card.number}
                 type="button"
                 onClick={card.action}
-                className="menu-card group relative min-h-[330px] overflow-hidden border-b border-r border-slate-800 p-6 text-left sm:p-7"
+                className="menu-card group relative min-w-0 min-h-0 aspect-square sm:aspect-auto sm:min-h-[330px] overflow-hidden border-b border-r border-slate-800 p-3 text-left sm:p-7"
               >
                 <div className="relative z-10 flex h-full flex-col">
                   <div className="flex items-start justify-between">
-                    <span className="headline-font text-6xl text-white/[0.08] transition-colors group-hover:text-white/20">
+                    <span className="headline-font text-5xl sm:text-6xl text-white/[0.08] transition-colors group-hover:text-white/20">
                       {card.number}
                     </span>
                     <Icon className="h-6 w-6 text-red-500" strokeWidth={1.6} />
                   </div>
 
                   <div className="mt-auto">
-                    <p className="mb-2 text-[9px] font-black uppercase tracking-[0.28em] text-white">
+                    <p className="hidden sm:block mb-2 text-[9px] font-black uppercase tracking-[0.12em] sm:tracking-[0.28em] text-white">
                       {card.eyebrow}
                     </p>
-                    <h3 className="headline-font text-4xl text-white transition-transform duration-300 group-hover:translate-x-1">
+                    <h3 className="headline-font text-2xl sm:text-4xl text-white transition-transform duration-300 group-hover:translate-x-1">
                       {card.title}
                     </h3>
-                    <p className="mt-1 text-sm font-black text-slate-200">{card.korean}</p>
-                    <p className="mt-4 max-w-[16rem] text-xs leading-relaxed text-slate-500 transition-colors group-hover:text-slate-300">
+                    <p className="mt-1 text-xs sm:text-sm font-black text-slate-200">{card.korean}</p>
+                    <p className="hidden sm:block mt-4 max-w-[16rem] text-xs leading-relaxed text-slate-500 transition-colors group-hover:text-slate-300">
                       {card.description}
                     </p>
-                    <div className="mt-6 flex items-center justify-between border-t border-slate-800 pt-4 text-[10px] font-black tracking-[0.16em] text-white">
+                    <div className="hidden sm:flex mt-6 items-center justify-between border-t border-slate-800 pt-4 text-[10px] font-black tracking-[0.16em] text-white">
                       <span>VIEW MORE</span>
                       <ArrowUpRight className="h-4 w-4 text-red-500 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
                     </div>

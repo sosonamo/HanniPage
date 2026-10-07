@@ -9,7 +9,10 @@ import characterNo9 from '../../assets/character_No9_final.png';
 import characterNo10 from '../../assets/character_No10_final.png';
 import characterNo11 from '../../assets/character_No11_final.png';
 import characterNo13 from '../../assets/character_No13_final.png';
+import characterNo17 from '../../assets/character_No17_final.png';
+import characterNo22 from '../../assets/character_No22_final.png';
 import characterNo33 from '../../assets/character_No33_final.png';
+import characterNo37 from '../../assets/character_No37_final.png';
 
 interface HeroSectionProps {
   onNavigate: (sectionId: SectionId) => void;
@@ -23,11 +26,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onOpenJoin
       <div className="hero-slash hero-slash-one" aria-hidden="true" />
       <div className="hero-slash hero-slash-two" aria-hidden="true" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-16 sm:py-20 lg:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center min-h-[580px] lg:min-h-[650px]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-20 lg:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center sm:min-h-[580px] lg:min-h-[650px]">
           
           {/* Left Column: Text Content & CTAs */}
-          <div className="lg:col-span-7 space-y-7 text-center lg:text-left">
+          <div className="hidden sm:block lg:col-span-7 space-y-7 text-center lg:text-left">
             <div className="inline-flex items-center gap-3 border-l-2 border-red-500 pl-3 text-[10px] sm:text-xs font-black tracking-[0.24em] text-slate-300 uppercase">
               <Flame className="w-4 h-4 text-red-500" />
               Since 2008 · Women's Basketball Club
@@ -56,7 +59,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onOpenJoin
               </div>
               <div className="flex items-center gap-2 border-l border-red-500 pl-3">
                 <Flame className="w-4 h-4 text-red-400" />
-                <span>주말 정기 훈련</span>
+                <span>주말 정기모임</span>
               </div>
             </div>
 
@@ -79,11 +82,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onOpenJoin
             </div>
           </div>
 
-          <div className="lg:col-span-5 relative h-[410px] sm:h-[520px] lg:h-[620px]" aria-label="한늬 선수 캐릭터 8명">
+          <div className="lg:col-span-5 relative h-[410px] sm:h-[520px] lg:h-[620px]" aria-label="한늬 선수 캐릭터 11명">
             <div className="hero-logo-halo" aria-hidden="true">
               <img src={hanniLogo} alt="" className="h-full w-full object-contain opacity-[0.14] grayscale" />
             </div>
             <div className="absolute inset-x-2 bottom-6 h-[68%] border border-white/10 bg-black/25 backdrop-blur-[1px] hero-player-frame" />
+            <img src={characterNo17} alt="한늬 17번 선수 캐릭터" className="hero-character hero-character-17" />
+            <img src={characterNo22} alt="한늬 22번 선수 캐릭터" className="hero-character hero-character-22" />
+            <img src={characterNo37} alt="한늬 37번 선수 캐릭터" className="hero-character hero-character-37" />
             <img src={characterNo9} alt="한늬 9번 선수 캐릭터" className="hero-character hero-character-9" />
             <img src={characterNo3} alt="한늬 3번 선수 캐릭터" className="hero-character hero-character-3" />
             <img src={characterNo6} alt="한늬 6번 선수 캐릭터" className="hero-character hero-character-6" />
@@ -100,6 +106,20 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onOpenJoin
               <span>HANNI THE BLAZERS</span>
               <span className="h-px flex-1 bg-gradient-to-r from-red-500 to-transparent" />
               <span>08 — 26</span>
+            </div>
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-3 text-[11px] text-slate-300 font-bold sm:hidden">
+            <div className="flex items-center gap-2 border-l border-red-500 pl-3 whitespace-nowrap">
+              <ShieldCheck className="w-4 h-4 shrink-0 text-red-400" aria-hidden="true" />
+              <span>초보자 환영</span>
+            </div>
+            <div className="flex items-center gap-2 border-l border-red-500 pl-3 whitespace-nowrap">
+              <MapPin className="w-4 h-4 shrink-0 text-red-400" aria-hidden="true" />
+              <span>인천·부천</span>
+            </div>
+            <div className="flex items-center gap-2 border-l border-red-500 pl-3 whitespace-nowrap">
+              <Flame className="w-4 h-4 shrink-0 text-red-400" aria-hidden="true" />
+              <span>주말 정모</span>
             </div>
           </div>
         </div>
