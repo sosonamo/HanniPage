@@ -12,17 +12,17 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ timeline }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-3">
+        <div className="text-center sm:text-left max-w-3xl mx-auto sm:mx-0 space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-white border border-orange-500/20 text-xs font-bold uppercase tracking-wider">
             <Dribbble className="w-3.5 h-3.5 text-orange-400" />
             한늬소개 (About Us)
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            코트 위에서 하나되는 <span className="text-white"> 한늬</span>
+            코트 위에서 <span className="heading-accent">하나되는 한늬</span>
           </h2>
           <p className="text-sm sm:text-base text-slate-300">
-            '한늬'는 '끝까지 무언가를 꾸준히 그리고 열심히 함' 을 의미하는 순우리말 표현입니다. 
-            농구를 좋아하는 사람들이 모여 원팀이 되는 곳입니다.
+            '한늬'는 '끝까지 무언가를 꾸준히 그리고 열심히 함'<br className="sm:hidden" /> 을 의미하는 순우리말 표현입니다. 
+            <br/>농구를 좋아하는 사람들이 모여 원팀이 되는 곳입니다.
           </p>
         </div>
 
@@ -34,7 +34,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ timeline }) => {
             </div>
             <h3 className="text-xl font-extrabold text-white">포용적 팀 문화 (Inclusive)</h3>
             <p className="text-xs text-slate-300 leading-relaxed">
-              서로를 칭찬하고 북돋우는 따뜻한 분위기를 지향합니다. 나이, 직업을 넘어 농구로 소통합니다.
+              서로를 북돋우는 따뜻한 분위기를 지향합니다.<br/>나이, 직업을 넘어 농구로 소통합니다.
             </p>
           </div>
 
@@ -52,9 +52,9 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ timeline }) => {
             <div className="w-12 h-12 rounded-2xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center text-orange-400">
               <Shield className="w-6 h-6" />
             </div>
-            <h3 className="text-xl font-extrabold text-white">안전 & 클린 코트 (Respect)</h3>
+            <h3 className="text-xl font-extrabold text-white">클린 코트 (Respect)</h3>
             <p className="text-xs text-slate-300 leading-relaxed">
-              부상 예방을 최우선으로 하며, 거친 비매너 행위를 엄격히 차단하여 누구나 안심하고 뛸 수 있는 환경을 만듭니다.
+              부상 예방을 최우선으로 하고, 비매너 행위를 차단합니다.<br/>누구나 즐겁게 농구하는 환경을 만듭니다.
             </p>
           </div>
         </div>

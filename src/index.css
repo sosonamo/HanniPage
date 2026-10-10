@@ -39,6 +39,7 @@
   color-scheme: dark;
   font-synthesis: none;
   --hanni-red: #e31e24;
+  --hanni-heading-accent: #FFAD5A;
   --hanni-red-dark: #a90d16;
   --hanni-black: #030303;
   --hanni-panel: #0b0b0d;
@@ -124,6 +125,10 @@ textarea:focus-visible {
 
 .hanni-site section h2 span {
   color: #fff;
+}
+
+.hanni-site section .heading-accent {
+  color: var(--hanni-heading-accent);
 }
 
 .hanni-site section [class*="rounded-full"] {

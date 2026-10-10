@@ -7,6 +7,9 @@ import characterNo10 from '../../assets/character_No10_final.png';
 import characterNo11 from '../../assets/character_No11_final.png';
 import characterNo13 from '../../assets/character_No13_final.png';
 import characterNo33 from '../../assets/character_No33_final.png';
+import characterNo17 from '../../assets/character_No17_final.png';
+import characterNo22 from '../../assets/character_No22_final.png';
+import characterNo37 from '../../assets/character_No37_final.png';
 
 export const MOCK_SCHEDULES: ScheduleEvent[] = [
   {
@@ -171,6 +174,33 @@ export const MOCK_ROSTER: RosterMember[] = [
     image: characterNo33,
     stats: { shooting: 75, passing: 82, defense: 98, speed: 70, stamina: 86 },
     intro: '정통센터. 골밑에서의 리바운드와 블록슛에 강점을 가진 센터.'
+  },
+  {
+    id: 'm-17',
+    number: 17,
+    name: '17번 선수',
+    role: '선수',
+    position: 'PF',
+    image: characterNo17,
+    intro: '넓은 활동범위로 코트 곳곳에 힘을 보태는 파워포워드. 상황을 읽는 센스 있는 플레이로 팀에 활력을 더합니다.'
+  },
+  {
+    id: 'm-22',
+    number: 22,
+    name: '22번 선수',
+    role: '선수',
+    position: 'SG',
+    image: characterNo22,
+    intro: '매 경기 무서운 성장세를 보여주는 신입 슈팅가드. 새로운 플레이를 빠르게 익히며 다음 경기를 더욱 기대하게 만드는 선수입니다.'
+  },
+  {
+    id: 'm-37',
+    number: 37,
+    name: '37번 선수',
+    role: '선수',
+    position: 'SF',
+    image: characterNo37,
+    intro: '공격과 수비를 두루 소화하는 다재다능한 스몰포워드. 어느 자리에서든 제 몫을 해내며 한늬의 차기 에이스로 기대를 모으고 있습니다.'
   }
 ];
 

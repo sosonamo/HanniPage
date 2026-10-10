@@ -30,7 +30,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onOpenJoin
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center sm:min-h-[580px] lg:min-h-[650px]">
           
           {/* Left Column: Text Content & CTAs */}
-          <div className="hidden sm:block lg:col-span-7 space-y-7 text-center lg:text-left">
+          <div className="hidden sm:block lg:col-span-7 space-y-7 text-center sm:text-left">
             <div className="inline-flex items-center gap-3 border-l-2 border-red-500 pl-3 text-[10px] sm:text-xs font-black tracking-[0.24em] text-slate-300 uppercase">
               <Flame className="w-4 h-4 text-red-500" />
               Since 2008 · Women's Basketball Club

@@ -68,14 +68,14 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, cal
     <section id="schedule" className="py-20 bg-slate-950 text-white relative border-b border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Title */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 pb-6 border-b border-slate-800">
+        <div className="flex flex-col items-center text-center sm:items-stretch sm:text-left md:flex-row md:items-end justify-between gap-4 mb-10 pb-6 border-b border-slate-800">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-white border border-orange-500/20 text-xs font-bold uppercase tracking-wider mb-2">
               <Calendar className="w-3.5 h-3.5 text-orange-400" />
               정모일정 & 체육관 안내
             </div>
             <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
-              월간 <span className="!text-white">정모</span> 일정
+              월간 <span className="heading-accent">정모</span> 일정
             </h2>
             <p className="text-slate-400 text-sm mt-1">
               이번 달과 다음 달 정모 날짜를 달력에서 확인하세요.
@@ -96,7 +96,7 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, cal
 
         {/* Monthly Calendar */}
         <div className="overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/80 shadow-2xl">
-          <div className="flex flex-col gap-4 border-b border-slate-800 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-7">
+          <div className="flex flex-col items-center text-center gap-4 border-b border-slate-800 px-5 py-5 sm:flex-row sm:text-left sm:items-center sm:justify-between sm:px-7">
             <div>
               <p className="text-xs font-bold text-white">MONTHLY SCHEDULE</p>
               <h3 className="mt-1 text-2xl font-black text-white">
@@ -222,20 +222,21 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, cal
               체육관 오시는 길
             </div>
             <h3 className="text-2xl font-bold text-white">
-              부천/인천 소재의 실내체육관에서 진행합니다
+              <span className="heading-accent">부천/인천</span> 소재의<br className="sm:hidden" /> 실내체육관에서 진행합니다
             </h3>
             <div className="grid grid-cols-3 gap-4 text-xs pt-2">
-              <div className="p-3 bg-slate-950 rounded-xl border border-slate-800">
+              <div className="min-w-0 p-3 bg-slate-950 rounded-xl border border-slate-800 [container-type:inline-size] sm:[container-type:normal]">
                 <span className="text-white font-bold block mb-1">부천 소사</span>
-                <span className="text-slate-400">서해선 소새울역 인근</span>
+                <span className="block sm:inline text-xs text-slate-400">서해선</span>{' '}
+                <span className="block sm:inline text-slate-400 text-[15.8cqw] sm:text-xs whitespace-nowrap">소새울역 인근</span>
               </div>
               <div className="p-3 bg-slate-950 rounded-xl border border-slate-800">
                 <span className="text-white font-bold block mb-1">부천 오정</span>
-                <span className="text-slate-400">서해선 원종역 인근</span>
+                <span className="text-slate-400">서해선<br className="sm:hidden" /> 원종역 인근</span>
               </div>
               <div className="p-3 bg-slate-950 rounded-xl border border-slate-800">
                 <span className="text-white font-bold block mb-1">인천 검암</span>
-                <span className="text-slate-400">인천1호선 검암역 인근</span>
+                <span className="text-slate-400">인천1호선<br className="sm:hidden" /> 검암역 인근</span>
               </div>
             </div>
           </div>

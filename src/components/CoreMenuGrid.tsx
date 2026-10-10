@@ -50,14 +50,14 @@ export const CoreMenuGrid: React.FC<CoreMenuGridProps> = ({ onNavigate, onOpenJo
   return (
     <section id="core-menu" className="core-menu-shell relative overflow-hidden border-b border-slate-800 py-16 sm:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-10 flex flex-col gap-4 border-b border-slate-800 pb-6 sm:flex-row sm:items-end sm:justify-between">
+        <div className="mb-10 flex flex-col items-center text-center sm:text-left gap-4 border-b border-slate-800 pb-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="section-kicker">Explore Hanni</p>
             <h2 className="headline-font mt-2 text-4xl sm:text-6xl text-white">
               FIND YOUR <span className="text-white">PLAY.</span>
             </h2>
           </div>
-          <p className="max-w-sm text-xs leading-relaxed text-slate-400 sm:text-right">
+          <p className="max-w-sm text-xs leading-relaxed text-slate-400 sm:text-left">
             일정 확인부터 참가 신청, 팀 스토리와 선수단까지.<br />원하는 메뉴를 선택해 바로 이동하세요.
           </p>
         </div>

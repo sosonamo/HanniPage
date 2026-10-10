@@ -3,6 +3,7 @@ import { RosterMember } from '../types';
 import { Flame, Users } from 'lucide-react';
 
 const SHOW_FAVORITE_MOVE = false;
+const SHOW_PLAYER_NAMES = false;
 
 interface RosterSectionProps {
   roster: RosterMember[];
@@ -28,14 +29,14 @@ export const RosterSection: React.FC<RosterSectionProps> = ({ roster }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-800 pb-6">
+        <div className="flex flex-col text-center sm:text-left md:flex-row md:items-end justify-between gap-4 border-b border-slate-800 pb-6">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-white border border-orange-500/20 text-xs font-bold uppercase tracking-wider mb-2">
               <Users className="w-3.5 h-3.5 text-orange-400" />
               팀원소개 (Roster)
             </div>
             <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
-              코트를 빛내는 <span className="text-white">한늬 선수단 & 코치진</span>
+              코트를 빛내는 <span className="heading-accent">한늬즈</span>
             </h2>
             <p className="text-sm text-slate-400 mt-1">
               각 포지션에서 열정을 다하는 멤버들의 프로필을 확인하세요.
@@ -78,7 +79,7 @@ export const RosterSection: React.FC<RosterSectionProps> = ({ roster }) => {
                         ? member.animatedImage
                         : member.image
                     }
-                    alt={member.name}
+                    alt={`한늬 ${member.number}번 선수 캐릭터`}
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-contain p-5 pb-0 transition-transform duration-500 group-hover:scale-105"
                   />
@@ -102,6 +103,7 @@ export const RosterSection: React.FC<RosterSectionProps> = ({ roster }) => {
 
                 {/* Card Content */}
                 <div className="p-6 space-y-4">
+                  {SHOW_PLAYER_NAMES && (
                   <div>
                     <div className="flex items-center justify-between">
                       <h3 className="text-xl font-black text-white">
@@ -114,10 +116,11 @@ export const RosterSection: React.FC<RosterSectionProps> = ({ roster }) => {
                       )}
                     </div>
                   </div>
+                  )}
 
                   <p className="text-xs leading-relaxed text-slate-400 break-keep">{member.intro}</p>
 
-                  {SHOW_FAVORITE_MOVE && (
+                  {SHOW_FAVORITE_MOVE && member.favoriteMove && (
                     <div className="p-3 bg-slate-900/80 rounded-xl border border-slate-800 text-xs space-y-1">
                       <span className="text-slate-400 text-[10px] uppercase font-bold block">주무기 / 시그니처 무브</span>
                       <span className="font-bold text-slate-200 flex items-center gap-1">

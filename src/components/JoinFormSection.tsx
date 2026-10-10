@@ -169,16 +169,16 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-3 mb-12">
+        <div className="text-center sm:text-left max-w-3xl mx-auto sm:mx-0 space-y-3 mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-white border border-orange-500/20 text-xs font-bold uppercase tracking-wider">
             <UserPlus className="w-3.5 h-3.5 text-orange-400" />
             참가신청서 (Join Us)
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            한늬랑 함께 농구하실 <span className="text-white">게스트를 모집합니다!</span>
+            한늬랑 농구하실<br className="sm:hidden" /><span className="heading-accent"> 게스트를 모집</span>합니다!
           </h2>
           <p className="text-sm sm:text-base text-slate-300">
-            농구 경험이 전혀 없어도 괜찮습니다. 열정과 운동화만 있다면 누구나 환영받는 따뜻한 코트입니다.
+            농구 경험이 없어도 괜찮습니다.<br className="sm:hidden" /> 열정만 있다면 누구나 환영받는 따뜻한 코트입니다.
           </p>
         </div>
 

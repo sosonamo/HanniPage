@@ -25,13 +25,13 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ faqs }) => {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         
         {/* Section Header */}
-        <div className="text-center space-y-3">
+        <div className="text-center sm:text-left space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-white border border-orange-500/20 text-xs font-bold uppercase tracking-wider">
             <HelpCircle className="w-3.5 h-3.5 text-orange-400" />
             자주 묻는 질문 (FAQ)
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            궁금하신 사항을 <span className="text-white">빠르고 명쾌하게</span> 안내해 드립니다
+            궁금하신 사항을 <span className="heading-accent">빠르고 명쾌하게</span> 안내해 드립니다
           </h2>
           <p className="text-sm text-slate-400">
             신입 가입, 준비물, 체육관 주차, 회비 관련 궁금한 내용을 확인하세요.
@@ -94,8 +94,8 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ faqs }) => {
         {/* Kakao Customer Support Banner */}
         <div className="p-6 rounded-3xl bg-slate-900 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3 text-center sm:text-left">
-            <div className="w-10 h-10 rounded-2xl bg-amber-400 text-slate-950 flex items-center justify-center font-bold shrink-0">
-              <MessageSquare className="w-5 h-5" />
+            <div className="w-10 h-10 rounded-2xl bg-[#FEE500] text-[#3C1E1E] flex items-center justify-center font-bold shrink-0">
+              <MessageSquare className="w-5 h-5" strokeWidth={3} />
             </div>
             <div>
               <h4 className="text-sm font-bold text-white">더 궁금한 점이 있으신가요?</h4>
@@ -106,7 +106,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ faqs }) => {
             href="https://open.kakao.com"
             target="_blank"
             rel="noreferrer"
-            className="px-5 py-2.5 rounded-xl bg-amber-400 text-slate-950 font-bold text-xs hover:bg-amber-300 transition-colors shrink-0"
+            className="px-5 py-2.5 rounded-xl bg-[#FEE500] text-[#3C1E1E] font-black text-xs hover:bg-[#FADA0A] transition-colors shrink-0"
           >
             카카오톡 문의하기
           </a>

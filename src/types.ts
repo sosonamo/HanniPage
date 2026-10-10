@@ -32,11 +32,11 @@ export interface RosterMember {
   position: PlayerPosition;
   heightCm?: number;
   /** 농구를 시작한 연도 (예: 2012) */
-  experienceStartYear: number;
-  favoriteMove: string;
+  experienceStartYear?: number;
+  favoriteMove?: string;
   image: string;
   animatedImage?: string;
-  stats: {
+  stats?: {
     shooting: number;
     passing: number;
     defense: number;
