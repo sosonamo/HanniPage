@@ -142,6 +142,7 @@
       font-size: 10px;
     }
 
+    .skip-button,
     .replay-button {
       position: fixed;
       z-index: 30;
@@ -165,6 +166,26 @@
       align-items: center;
     }
 
+    .skip-button {
+      top: max(24px, env(safe-area-inset-top));
+      bottom: auto;
+      right: max(24px, env(safe-area-inset-right));
+    }
+
+    .skip-button:not([hidden]) {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .skip-button:hover {
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .skip-button:focus-visible {
+      outline: 2px solid white;
+      outline-offset: 4px;
+    }
+
     @media (max-width: 640px) {
       :root {
         --ball-size: 48px;
@@ -181,6 +202,11 @@
       .replay-button {
         right: 16px;
         bottom: 18px;
+      }
+
+      .skip-button {
+        top: max(16px, env(safe-area-inset-top));
+        right: max(16px, env(safe-area-inset-right));
       }
     }
   </style>
@@ -205,6 +231,10 @@
     </button>
   </div>
 
+  <button class="skip-button" id="skipButton" type="button" aria-label="인트로 건너뛰기" hidden>
+    Skip
+  </button>
+
   <button class="replay-button" id="replayButton" type="button">
     다시 보기
   </button>
@@ -216,6 +246,7 @@
       const ball = document.getElementById("basketball");
       const startLayer = document.getElementById("startLayer");
       const replayButton = document.getElementById("replayButton");
+      const skipButton = document.getElementById("skipButton");
 
       const TIMELINE = {
         firstImpact: 1.15,
@@ -331,6 +362,7 @@
         impactTimes.forEach((impactTime, index) => {
           if (!playedImpacts[index] && elapsedSeconds >= impactTime) {
             playedImpacts[index] = true;
+            if (index === 0) skipButton.hidden = false;
             playBounceSound(index);
           }
         });
@@ -495,8 +527,17 @@
           return;
         }
 
+        completeAnimation();
+      }
+
+      function completeAnimation() {
+        if (!isRunning) return;
+
         isRunning = false;
+        cancelAnimationFrame(animationFrameId);
         animationFrameId = null;
+        skipButton.hidden = true;
+        renderBall(getPosition(TIMELINE.finish, activeMetrics), activeMetrics);
 
         if (window.parent !== window) {
           window.parent.postMessage(
@@ -513,6 +554,7 @@
         previousX = metrics.start.x;
         accumulatedRotation = 0;
         playedImpacts = [false, false, false, false, false, false];
+        skipButton.hidden = true;
 
         const translateX = metrics.start.x - metrics.radius;
         const translateY = metrics.start.y - metrics.radius;
@@ -550,6 +592,7 @@
       });
 
       replayButton.addEventListener("click", startAnimation);
+      skipButton.addEventListener("click", completeAnimation);
 
       window.addEventListener("keydown", (event) => {
         if (event.key.toLowerCase() === "r" && !isRunning) {
