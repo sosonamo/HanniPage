@@ -216,7 +216,7 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, cal
 
         {/* Gym Location Interactive Card Box */}
         <div className="mt-12 bg-slate-900 rounded-3xl border border-slate-800 p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          <div className="lg:col-span-6 space-y-4">
+          <div className="lg:col-span-6 space-y-4 text-center sm:text-left">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-white text-xs font-bold">
               <Navigation className="w-3.5 h-3.5 text-orange-400" />
               체육관 오시는 길

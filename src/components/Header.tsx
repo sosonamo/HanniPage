@@ -35,6 +35,10 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate, onOpe
   ];
 
   const handleNavClick = (id: SectionId) => {
+    if (id === 'members') {
+      window.location.assign(`${import.meta.env.BASE_URL}members.html`);
+      return;
+    }
     onNavigate(id);
     setMobileMenuOpen(false);
   };
@@ -63,7 +67,7 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate, onOpe
               HANNI <span className="text-white">THE BLAZERS</span>
             </div>
             <p className="mt-1 text-[9px] text-slate-400 font-semibold tracking-[0.22em] uppercase">
-              Women's Basketball Club · Since 2008
+              Women's Basketball Club
             </p>
           </div>
         </div>

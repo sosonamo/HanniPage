@@ -23,8 +23,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onOpenJoin
   return (
     <section className="hero-shell relative overflow-hidden border-b border-slate-800 text-white">
       <div className="hero-court" aria-hidden="true" />
-      <div className="hero-slash hero-slash-one" aria-hidden="true" />
-      <div className="hero-slash hero-slash-two" aria-hidden="true" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-20 lg:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center sm:min-h-[580px] lg:min-h-[650px]">
@@ -86,7 +84,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onOpenJoin
             <div className="hero-logo-halo" aria-hidden="true">
               <img src={hanniLogo} alt="" className="h-full w-full object-contain opacity-[0.14] grayscale" />
             </div>
-            <div className="absolute inset-x-2 bottom-6 h-[68%] border border-white/10 bg-black/25 backdrop-blur-[1px] hero-player-frame" />
             <img src={characterNo17} alt="한늬 17번 선수 캐릭터" className="hero-character hero-character-17" />
             <img src={characterNo22} alt="한늬 22번 선수 캐릭터" className="hero-character hero-character-22" />
             <img src={characterNo37} alt="한늬 37번 선수 캐릭터" className="hero-character hero-character-37" />
@@ -98,10 +95,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onOpenJoin
             <img src={characterNo11} alt="한늬 11번 선수 캐릭터" className="hero-character hero-character-11" />
             <img src={characterNo13} alt="한늬 13번 선수 캐릭터" className="hero-character hero-character-13" />
             <img src={characterNo33} alt="한늬 33번 선수 캐릭터" className="hero-character hero-character-33" />
-            <div className="absolute right-2 top-4 border-r border-red-500 pr-3 text-right">
-              <span className="headline-font block text-4xl text-white">ONE TEAM.</span>
-              <span className="text-[9px] font-black tracking-[0.28em] text-white">PASSION · GROWTH · VICTORY</span>
-            </div>
             <div className="absolute bottom-0 left-2 right-2 flex items-center gap-3 text-[9px] font-black tracking-[0.24em] text-slate-500">
               <span>HANNI THE BLAZERS</span>
               <span className="h-px flex-1 bg-gradient-to-r from-red-500 to-transparent" />

@@ -94,7 +94,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ faqs }) => {
         {/* Kakao Customer Support Banner */}
         <div className="p-6 rounded-3xl bg-slate-900 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3 text-center sm:text-left">
-            <div className="w-10 h-10 rounded-2xl bg-[#FEE500] text-[#3C1E1E] flex items-center justify-center font-bold shrink-0">
+            <div className="w-10 h-10 rounded-2xl bg-[#FEE500] text-[#3C1E1E] hidden sm:flex items-center justify-center font-bold shrink-0">
               <MessageSquare className="w-5 h-5" strokeWidth={3} />
             </div>
             <div>

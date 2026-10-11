@@ -16,15 +16,15 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenJoinForm }) =>
   return (
     <footer className="footer-shell bg-black text-slate-400 text-xs border-t border-red-500/40 relative pt-16 pb-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        <div className="grid gap-10 md:grid-cols-[1fr_auto] md:items-end">
-          <div className="flex items-center gap-5">
+        <div className="flex justify-center">
+          <div className="flex items-center justify-center gap-5 text-center">
             <img src={hanniLogo} alt="한늬 더 블레이저스" className="h-20 w-20 object-contain" />
             <div>
               <p className="headline-font text-3xl sm:text-5xl leading-none text-white">
-                ONE TEAM<br /><span className="text-white">TOGETHER</span>
+                ONE TEAM
               </p>
               <p className="mt-3 text-[9px] font-black uppercase tracking-[0.28em] text-slate-500">
-                Hanni The Blazers · We Blaze Together
+                Hanni The Blazers
               </p>
             </div>
           </div>
@@ -32,7 +32,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenJoinForm }) =>
 
         {/* Link */}
         <div className="pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-500">
-          <p>© 2026 HANNI WOMEN'S BASKETBALL CLUB. ALL RIGHTS RESERVED.</p>
+          <p>© HANNI WOMEN'S BASKETBALL CLUB. ALL RIGHTS RESERVED.</p>
           <div className="flex items-center gap-6 pt-2">
               <a
                 href="https://www.instagram.com/hanni_basketball?igsh=MTByNjE3N2wzNWk1bA=="

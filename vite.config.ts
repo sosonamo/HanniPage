@@ -9,6 +9,14 @@ export default defineConfig(() => {
   return {
     base: '/HanniPage/',
     plugins: [react(), tailwindcss()],
+    build: {
+      rollupOptions: {
+        input: {
+          main: path.resolve(__dirname, 'index.html'),
+          members: path.resolve(__dirname, 'members.html'),
+        },
+      },
+    },
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
