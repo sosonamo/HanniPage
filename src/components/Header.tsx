@@ -30,7 +30,8 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate, onOpe
     { id: 'join', label: 'JOIN US', index: '02' },
     { id: 'about', label: 'ABOUT', index: '03' },
     { id: 'roster', label: 'ROSTER', index: '04' },
-    { id: 'faq', label: 'FAQ', index: '05' },
+    { id: 'members', label: 'MEMBERS', index: '05' },
+    { id: 'faq', label: 'FAQ', index: '06' },
   ];
 
   const handleNavClick = (id: SectionId) => {
@@ -68,7 +69,7 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate, onOpe
         </div>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden xl:flex items-center gap-9">
+        <nav className="hidden xl:flex items-center gap-5">
           {navItems.map((item) => {
             const isActive = activeSection === item.id;
             return (

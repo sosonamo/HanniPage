@@ -12,6 +12,7 @@ import { RosterSection } from './components/RosterSection';
 import { FaqSection } from './components/FaqSection';
 import { Footer } from './components/Footer';
 import IntroOverlay from './components/IntroOverlay';
+import { MembersSection } from './components/MembersSection';
 import {
   fetchGoogleCalendarSchedules,
   getMillisecondsUntilNextCalendarWeek,
@@ -141,6 +142,8 @@ export default function App() {
       <RosterSection roster={MOCK_ROSTER} />
 
       {/* FAQ Section */}
+      <MembersSection />
+
       <FaqSection faqs={MOCK_FAQS} />
 
       {/* Footer */}

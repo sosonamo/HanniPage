@@ -1,4 +1,4 @@
-export type SectionId = 'hero' | 'schedule' | 'join' | 'about' | 'roster' | 'faq';
+export type SectionId = 'hero' | 'schedule' | 'join' | 'about' | 'roster' | 'members' | 'faq';
 
 export interface ScheduleEvent {
   id: string;

@@ -553,6 +553,10 @@ textarea:focus-visible {
 }
 
 @media (max-width: 639px) {
+  .hero-character-33 {
+    z-index: 4;
+  }
+
   .hero-title {
     font-size: clamp(3.2rem, 17vw, 4.7rem);
   }

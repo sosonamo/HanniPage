@@ -1,6 +1,6 @@
 import React from 'react';
 import { ClubTimelineItem } from '../types';
-import { Dribbble, Heart, Shield, Sparkles, History, CheckCircle } from 'lucide-react';
+import { Dribbble, Heart, Shield, Sparkles, History, CheckCircle, ExternalLink } from 'lucide-react';
 
 interface AboutSectionProps {
   timeline: ClubTimelineItem[];
@@ -67,8 +67,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ timeline }) => {
                 <Sparkles className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-white">신입 부원 혜택 & 안내</h3>
-                <p className="text-xs text-slate-400">한늬 가입 프로세스 및 회비 투명 운영</p>
+                <h3 className="text-lg font-bold text-white">신입 팀원 가입 안내</h3>
+                <p className="text-xs text-slate-400">한늬 가입 방법 및 회비 안내</p>
               </div>
             </div>
 
@@ -80,17 +80,18 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ timeline }) => {
               <ul className="space-y-1.5 pl-6 list-disc text-slate-300">
                 <li>농구를 좋아하는 모든 성인 여성</li>
                 <li>매너 있는 코트 에티켓과 상호 존중 마인드를 가지신 분</li>
+                <li>정모 1회 이상 참석 (필수)</li>
               </ul>
             </div>
 
             {/* Membership Fee Breakdown */}
             <div className="space-y-3 pt-4 border-t border-slate-800">
               <h4 className="font-bold text-slate-100 text-sm flex items-center gap-1.5">
-                <Dribbble className="w-4 h-4 text-orange-400" /> 회비 및 지원 내역
+                <CheckCircle className="w-4 h-4 text-orange-400" /> 가입비 및 회비
               </h4>
               <div className="grid grid-cols-2 gap-3 text-xs">
                 <div className="p-3 bg-slate-900 rounded-xl border border-slate-800">
-                  <span className="text-slate-400 block text-[11px]">입단비 (최초 1회)</span>
+                  <span className="text-slate-400 block text-[11px]">가입비 (최초 1회)</span>
                   <span className="text-lg font-bold text-white font-mono">30,000원</span>
                   <p className="text-[10px] text-slate-500 mt-1"></p>
                 </div>
@@ -100,6 +101,23 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ timeline }) => {
                   <p className="text-[10px] text-slate-500 mt-1">체육관 대관료 & 행사 지원</p>
                 </div>
               </div>
+            </div>
+
+            {/* Membership Registration Information */}
+            <div className="space-y-3 pt-4 border-t border-slate-800">
+              <h4 className="font-bold text-slate-100 text-sm flex items-center gap-1.5">
+                <CheckCircle className="w-4 h-4 text-orange-400" />팀원 가입 안내
+              </h4>
+              <a
+                href="https://docs.google.com/document/d/1fROW0udz5S_F-fDSLEueYsgH02M1iwN0gM8tYNoW2zM/edit?usp=drive_link"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="팀원 가입 안내 보러가기 (새 탭에서 열림)"
+                className="btn-secondary inline-flex min-h-11 items-center justify-center gap-2 px-5 py-3 text-xs font-bold text-white transition-all focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+              >
+                보러가기
+                <ExternalLink className="w-4 h-4" aria-hidden="true" />
+              </a>
             </div>
           </div>
         </div>

@@ -207,28 +207,29 @@ export const MOCK_ROSTER: RosterMember[] = [
 export const MOCK_TIMELINE: ClubTimelineItem[] = [
   {
     year: '2026년 현재',
-    title: '신입 부원 모집 & 브랜드 리뉴얼',
+    title: '신입 팀원 모집 & 브랜드 리뉴얼',
     description: '성장하는 즐거움을 함께할 한늬즈 모집중.',
     badge: '진행중'
   },
   {
-    year: '201?년 ?월',
-    title: '제??회 어셉배 준우승',
+    year: '2018년 8월',
+    title: '제15회 어셉배 준우승',
     description: '선출대회에서 비선출멤버로 준우승을 해냈습니다',
-    badge: '대회 입상'
+    badge: '대회입상'
   },
   {
-    year: '201?년 ?월',
+    year: '2015년 11월',
     title: '서울시 생활체육 여성농구 리그 3위',
-    description: '.',
-    badge: '대회 입상'
+    description: '-',
+    badge: '대회입상'
   },
   {
     year: '2015년 10월',
     title: '제2회 한늬배 우승',
     description: '.',
-    badge: '우승'
+    badge: '대회입상'
   },
+
   {
     year: '2014년 10월',
     title: '제1회 한늬배 개최',
