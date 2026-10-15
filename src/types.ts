@@ -76,9 +76,11 @@ export interface JoinFormData {
   agreedTerms: boolean;
 }
 
+export const FAQ_CATEGORIES = ['정모', '회비', '가입안내',] as const;
+
 export interface FaqItem {
   id: string;
   question: string;
   answer: string;
-  category: '가입안내' | '훈련/장소' | '준비물' | '회비';
+  category: (typeof FAQ_CATEGORIES)[number];
 }

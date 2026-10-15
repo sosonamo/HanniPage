@@ -16,10 +16,7 @@ import {
   Clock,
   Users,
   Car,
-  CheckCircle2,
-  Copy,
   ChevronRight,
-  ExternalLink,
 } from 'lucide-react';
 import type { CalendarStatus } from '../App';
 
@@ -67,7 +64,6 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
 }) => {
   const [step, setStep] = useState<number>(1);
   const [submitted, setSubmitted] = useState<boolean>(false);
-  const [copiedAddress, setCopiedAddress] = useState<string | null>(null);
 
   const { startDate, endDateExclusive } = getCurrentWeekRange();
   const filteredSchedules = schedules
@@ -96,12 +92,6 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
-
-  const handleCopyAddress = (address: string) => {
-    navigator.clipboard.writeText(address);
-    setCopiedAddress(address);
-    window.setTimeout(() => setCopiedAddress(null), 2000);
-  };
 
   const handleInputChange = (field: keyof JoinFormData, value: any) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -182,7 +172,7 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
           </p>
         </div>
 
-                {/* Schedule Cards Grid */}
+        {/* Schedule Cards Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {filteredSchedules.map((item) => {
             const hasCapacity = item.currentRsvp !== undefined && item.maxCapacity !== undefined;
@@ -193,9 +183,9 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
                 key={item.id}
                 className="bg-slate-900/90 rounded-2xl border border-slate-800 p-6 flex flex-col justify-between hover:border-orange-500/40 transition-all shadow-xl group"
               >
-                <div className="space-y-4">
-                  {/* Top Badge & Time */}
-                  <div className="flex items-center justify-between">
+                <div className="space-y-4 text-center sm:text-left">
+                  {/* Date & Time */}
+                  <div className="flex flex-col items-center sm:items-start gap-2">
                     <span className="px-3 py-1 rounded-full text-xs font-bold bg-orange-500/15 text-white border border-orange-500/30">
                       {item.dayOfWeek}
                     </span>
@@ -212,22 +202,21 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
 
                   {/* Location & Details */}
                   <div className="space-y-2 text-xs text-slate-300">
-                    <div className="flex items-start gap-2">
+                    <div className="flex items-start justify-center sm:justify-start gap-2">
                       <MapPin className="w-4 h-4 text-orange-400 shrink-0 mt-0.5" />
                       <div>
                         <p className="font-bold text-slate-100">{item.location}</p>
-                        <p className="text-slate-400 text-[11px]">{item.address}</p>
                       </div>
                     </div>
 
                     {item.courtDetails && (
-                      <div className="flex items-center justify-between text-[11px] text-slate-400 pt-1">
+                      <div className="flex items-center justify-center sm:justify-between text-[11px] text-slate-400 pt-1">
                         <span>🏀 코트: {item.courtDetails}</span>
                       </div>
                     )}
 
                     {item.parkingInfo && (
-                      <div className="flex items-center gap-1.5 text-[11px] text-slate-400">
+                      <div className="flex items-center justify-center sm:justify-start gap-1.5 text-[11px] text-slate-400">
                         <Car className="w-3.5 h-3.5 text-slate-500" />
                         <span>{item.parkingInfo}</span>
                       </div>
@@ -236,7 +225,7 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
 
                   {/* Capacity Progress */}
                   {hasCapacity && <div className="space-y-1.5 pt-2">
-                    <div className="flex items-center justify-between text-xs">
+                    <div className="flex items-center justify-center gap-2 sm:justify-between text-xs">
                       <span className="text-slate-400 font-medium flex items-center gap-1">
                         <Users className="w-3.5 h-3.5 text-orange-400" />
                         참석 확정 현황
@@ -262,31 +251,6 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
 
                 {/* Card Footer Actions */}
                 <div className="pt-6 mt-6 border-t border-slate-800 flex items-center gap-2">
-                  <button
-                    onClick={() => handleCopyAddress(item.address)}
-                    className="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition-colors text-xs font-semibold flex items-center gap-1"
-                    title="주소 복사"
-                  >
-                    {copiedAddress === item.address ? (
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                    ) : (
-                      <Copy className="w-4 h-4" />
-                    )}
-                    <span>{copiedAddress === item.address ? '복사됨' : '주소복사'}</span>
-                  </button>
-
-                  {item.sourceUrl && (
-                    <a
-                      href={item.sourceUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition-colors"
-                      title="Google Calendar에서 보기"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
-                  )}
-
                   <button
                     onClick={() => onRsvpClick(item)}
                     disabled={isRsvpUnavailable}

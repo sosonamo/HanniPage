@@ -52,7 +52,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ timeline }) => {
             <div className="w-12 h-12 rounded-2xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center text-orange-400">
               <Shield className="w-6 h-6" />
             </div>
-            <h3 className="text-xl font-extrabold text-white">클린 코트 (Respect)</h3>
+            <h3 className="text-xl font-extrabold text-white">페어플레이 (Fair Play)</h3>
             <p className="text-xs text-slate-300 leading-relaxed">
               부상 예방을 최우선으로 하고, 비매너 행위를 차단합니다.<br/>누구나 즐겁게 농구하는 환경을 만듭니다.
             </p>

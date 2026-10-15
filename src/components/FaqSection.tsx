@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { FaqItem } from '../types';
+import { FAQ_CATEGORIES, type FaqItem } from '../types';
 import { HelpCircle, ChevronDown, ChevronUp, MessageSquare } from 'lucide-react';
+
+const categories = ['전체', ...FAQ_CATEGORIES] as const;
 
 interface FaqSectionProps {
   faqs: FaqItem[];
@@ -8,9 +10,7 @@ interface FaqSectionProps {
 
 export const FaqSection: React.FC<FaqSectionProps> = ({ faqs }) => {
   const [openId, setOpenId] = useState<string | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState<string>('전체');
-
-  const categories = ['전체', '가입안내', '준비물', '회비', '훈련/장소'];
+  const [selectedCategory, setSelectedCategory] = useState<'전체' | FaqItem['category']>('전체');
 
   const filteredFaqs = selectedCategory === '전체'
     ? faqs
@@ -31,10 +31,10 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ faqs }) => {
             자주 묻는 질문 (FAQ)
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            궁금하신 사항을 <span className="heading-accent">빠르고 명쾌하게</span> 안내해 드립니다
+            <span className="heading-accent">궁금하신 사항</span>을 <br className="sm:hidden" />빠르게 안내해 드립니다
           </h2>
           <p className="text-sm text-slate-400">
-            신입 가입, 준비물, 체육관 주차, 회비 관련 궁금한 내용을 확인하세요.
+            신입가입, 준비물, 체육관주차, 회비 등 궁금한 내용을 확인하세요.
           </p>
         </div>
 
@@ -43,20 +43,25 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ faqs }) => {
           {categories.map((cat) => (
             <button
               key={cat}
-              onClick={() => setSelectedCategory(cat)}
+              type="button"
+              aria-pressed={selectedCategory === cat}
+              onClick={() => {
+                setSelectedCategory(cat);
+                setOpenId(null);
+              }}
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
                 selectedCategory === cat
                   ? 'bg-orange-500 text-white shadow-md'
                   : 'bg-slate-900 text-slate-400 hover:text-white border border-slate-800'
               }`}
             >
-              {cat}
+              {cat} ({cat === '전체' ? faqs.length : faqs.filter(faq => faq.category === cat).length})
             </button>
           ))}
         </div>
 
         {/* Accordion List */}
-        <div className="space-y-4">
+        <div key={selectedCategory} className="space-y-4">
           {filteredFaqs.map((faq) => {
             const isOpen = openId === faq.id;
             return (

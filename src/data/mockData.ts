@@ -69,13 +69,13 @@ export const MOCK_ROSTER: RosterMember[] = [
     name: '유지수',
     nickname: '에이스',
     role: '선수',
-    position: 'PG',
+    position: 'SF',
     heightCm: 162,
     experienceStartYear: 2012,
     favoriteMove: '빠른 드리블 후 돌파 & 킥아웃 패스',
     image: characterNo7,
     stats: { shooting: 85, passing: 95, defense: 80, speed: 90, stamina: 88 },
-    intro: '빠른 스피드와 날카로운 시야를 가진 포인트가드. 팀의 공격을 조율하며 경기 흐름을 지배하는 에이스 플레이메이커입니다.'
+    intro: '공격과 수비를 두루 소화하는 다재다능한 에이스.'
   },
   {
     id: 'm-2',
@@ -89,7 +89,7 @@ export const MOCK_ROSTER: RosterMember[] = [
     favoriteMove: '3점슛',
     image: characterNo11,
     stats: { shooting: 92, passing: 88, defense: 90, speed: 82, stamina: 85 },
-    intro: '한늬를 이끄는 온화하고 똑부러지는 캡틴. 팀원들을 북돋우는 강한 리더십을 보유하고 있습니다. 센스있는 수비를 하는 클러치 슈터이기도 합니다. '
+    intro: '한늬를 이끄는 캡틴. 센스있는 수비를 하는 클러치슈터.'
   },
   {
     id: 'm-3',
@@ -103,7 +103,7 @@ export const MOCK_ROSTER: RosterMember[] = [
     favoriteMove: '미들슛 / 리바운드 / 블록슛',
     image: characterNo6,
     stats: { shooting: 96, passing: 75, defense: 78, speed: 85, stamina: 82 },
-    intro: '한늬 최고의 블록슛 마스터! 경기의 흐름을 바꾸는 멋진 블록슛.'
+    intro: '경기의 흐름을 바꾸는 블록슛마스터.'
   },
   {
     id: 'm-4',
@@ -117,7 +117,7 @@ export const MOCK_ROSTER: RosterMember[] = [
     favoriteMove: '원드리블 점퍼 / 훅슛',
     image: characterNo9,
     stats: { shooting: 82, passing: 83, defense: 92, speed: 88, stamina: 96 },
-    intro: '왼손 훅슛 마스터.'
+    intro: '열정 만렙의 슈팅스타.'
   },
   {
     id: 'm-5',
@@ -131,7 +131,7 @@ export const MOCK_ROSTER: RosterMember[] = [
     favoriteMove: '캐치 앤 슛',
     image: characterNo10,
     stats: { shooting: 78, passing: 76, defense: 94, speed: 76, stamina: 90 },
-    intro: '적극적인 박스아웃과 허슬 플레이로 팀의 골밑을 든든하게 지켜주는 파워풀한 보물 포워드입니다.'
+    intro: '적극적인 박스아웃과 허슬 플레이의 보물포워드.'
   },
   {
     id: 'm-6',
@@ -145,7 +145,7 @@ export const MOCK_ROSTER: RosterMember[] = [
     favoriteMove: '돌파 & 패스',
     image: characterNo3,
     stats: { shooting: 75, passing: 82, defense: 98, speed: 70, stamina: 86 },
-    intro: '넓은 시야의 포인트가드. 팀의 공격을 조율하며 경기 흐름을 지배하는 플레이메이커'
+    intro: '넓은 시야로 경기를 조율하는 플레이메이커.'
   },
   {
     id: 'm-7',
@@ -159,7 +159,7 @@ export const MOCK_ROSTER: RosterMember[] = [
     favoriteMove: '리바운드',
     image: characterNo13,
     stats: { shooting: 75, passing: 82, defense: 98, speed: 70, stamina: 86 },
-    intro: '달리는 센터의 정석. 스피드와 높이를 함께 갖춘 팀의 골밑 지킴이. 리바운드와 블록슛에 강점을 가진 센터.'
+    intro: '스피드와 높이를 함께 갖춘 골밑지킴이.'
   },
   {
     id: 'm-8',
@@ -173,34 +173,37 @@ export const MOCK_ROSTER: RosterMember[] = [
     favoriteMove: '리바운드',
     image: characterNo33,
     stats: { shooting: 75, passing: 82, defense: 98, speed: 70, stamina: 86 },
-    intro: '정통센터. 골밑에서의 리바운드와 블록슛에 강점을 가진 센터.'
+    intro: '파워풀한 플레이를 하는 팀의 에너자이저'
   },
   {
     id: 'm-17',
     number: 17,
     name: '17번 선수',
+    nickname: '무늬',
     role: '선수',
     position: 'PF',
     image: characterNo17,
-    intro: '넓은 활동범위로 코트 곳곳에 힘을 보태는 파워포워드. 상황을 읽는 센스 있는 플레이로 팀에 활력을 더합니다.'
+    intro: '넓은 활동범위와 농구 센스를 갖춘 올라운더.'
   },
   {
     id: 'm-22',
     number: 22,
     name: '22번 선수',
+    nickname: '로하',
     role: '선수',
     position: 'SG',
     image: characterNo22,
-    intro: '매 경기 무서운 성장세를 보여주는 신입 슈팅가드. 새로운 플레이를 빠르게 익히며 다음 경기를 더욱 기대하게 만드는 선수입니다.'
+    intro: '매 경기 무서운 성장세를 보여주는 라이징슈터.'
   },
   {
     id: 'm-37',
     number: 37,
     name: '37번 선수',
+    nickname: '코네',
     role: '선수',
     position: 'SF',
     image: characterNo37,
-    intro: '공격과 수비를 두루 소화하는 다재다능한 스몰포워드. 어느 자리에서든 제 몫을 해내며 한늬의 차기 에이스로 기대를 모으고 있습니다.'
+    intro: '리듬감 있는 돌파와 화려한 마무리가 돋보이는 테크니션.'
   }
 ];
 
@@ -214,19 +217,19 @@ export const MOCK_TIMELINE: ClubTimelineItem[] = [
   {
     year: '2018년 8월',
     title: '제15회 어셉배 준우승',
-    description: '선출대회에서 비선출멤버로 준우승을 해냈습니다',
+    description: '선출대회에서 비선출멤버로 준우승',
     badge: '대회입상'
   },
   {
     year: '2015년 11월',
-    title: '서울시 생활체육 여성농구 리그 3위',
+    title: '서울시 생활체육 여성농구 3위',
     description: '-',
     badge: '대회입상'
   },
   {
     year: '2015년 10월',
     title: '제2회 한늬배 우승',
-    description: '.',
+    description: '-',
     badge: '대회입상'
   },
 
@@ -239,7 +242,7 @@ export const MOCK_TIMELINE: ClubTimelineItem[] = [
   {
     year: '2008년 05월',
     title: '여성 농구 클럽 "한늬" 창단',
-    description: '농구를 열정적으로 사랑하는 6명의 초기 멤버들이 모여 주말 동호회로 첫발을 내딛었습니다.',
+    description: '농구를 사랑하는 여성들이 모여 주말 동호회 창단',
     badge: '창단'
   },
 
@@ -284,27 +287,39 @@ export const MOCK_GALLERY: GalleryItem[] = [
 
 export const MOCK_FAQS: FaqItem[] = [
   {
-    id: 'faq-1',
-    category: '가입안내',
-    question: '농구를 한 번도 안 해본 왕초보인데 가입할 수 있나요?',
-    answer: '네, 적극 환영합니다! 한늬 회원 중 40% 이상이 농구를 처음 시작한 분들이었습니다. 기초 슈팅, 드리블, 규칙부터 차근차근 가르쳐 드리는 일요일 입문자 클래스 및 1:1 멘토링이 준비되어 있습니다.'
+    id: 'faq-11',
+    category: '정모',
+    question: '농구를 한 번도 안 해본 왕초보인데 참석할 수 있나요?',
+    answer: '네, 적극 환영합니다! 한늬 회원 중 40% 이상이 농구를 처음 시작한 분들이었습니다. 규칙부터 드리블, 패스, 슛까지! 정모를 통해 배우실 수 있습니다.'
   },
   {
-    id: 'faq-2',
-    category: '준비물',
+    id: 'faq-12',
+    category: '정모',
     question: '정모에 참석할 때 어떤 준비물이 필요한가요?',
-    answer: '실내 농구화(또는 깨끗한 바닥의 운동화), 편안한 운동복(반팔/반바지), 개인 수건 및 음료를 준비해 주시면 됩니다. 팀 유니폼 및 연습용 농구공, 훈련 용품은 클럽에서 구비해 드립니다.'
+    answer: '실내 농구화(또는 깨끗한 바닥의 운동화), 편안한 운동복(반팔/반바지), 기타 개인용품을 준비해 주시면 됩니다. 연습용 농구공, 훈련 용품은 준비되어 있습니다.'
   },
   {
-    id: 'faq-3',
+    id: 'faq-21',
     category: '회비',
-    question: '클럽 회비는 어떻게 운영되나요?',
-    answer: '신입 가입 시 입단비(초기 유니폼/웰컴키트 포함) 3만원, 월 정기 회비는 4만원입니다. 회비는 체육관 대관료, 음료/프로틴 제공, 코칭 비용, 대회 참가비 지원으로 전액 투명하게 사용되며 매월 정산 내역이 공개됩니다.'
+    question: '팀원 회비는 어떻게 되나요?',
+    answer: '월 정기 회비는 3만원 입니다. 회비는 체육관 대관료, 대회 참가비 지원, 행사 비용 지원 등으로 사용되며,모임계좌를 통해 내역을 확인하실 수 있습니다.'
   },
   {
-    id: 'faq-4',
-    category: '훈련/장소',
-    question: '매주 꼭 참석해야 하나요? 게스트 참여도 가능한가요?',
-    answer: '학업이나 직장 생활 일정에 맞춰 자율적으로 참석하실 수 있습니다. 정기 부원 신청 전에 일일 게스트(체험 참관 1회 1만원)로 먼저 참여해 보시는 것도 언제든 환영합니다!'
+    id: 'faq-22',
+    category: '회비',
+    question: '불가피하게 장기간 참석이 어려운 경우는 어떻게 되나요?',
+    answer: '부상, 학업 등 불가피한 상황으로 인해 장기간 참석이 어려운 경우, 해당 기간 동안의 회비는 면제됩니다.'
+  },
+  {
+    id: 'faq-31',
+    category: '가입안내',
+    question: '가입비는 어떻게 되나요?',
+    answer: '가입비는 3만원 입니다. 불가피한 상황으로 탈퇴하실 경우, 재가입 시에도 가입비를 다시 납부하셔야 합니다.'
+  },
+  {
+    id: 'faq-32',
+    category: '가입안내',
+    question: '팀원이 되면 매주 꼭 참석해야 하나요?',
+    answer: '개인 일정에 맞춰 자율적으로 참석하실 수 있습니다. 전체 정모시간의 일부도 참석 가능합니다.'
   }
 ];

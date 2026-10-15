@@ -222,7 +222,7 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, cal
               체육관 오시는 길
             </div>
             <h3 className="text-2xl font-bold text-white">
-              <span className="heading-accent">부천/인천</span> 소재의<br className="sm:hidden" /> 실내체육관에서 진행합니다
+              <span className="heading-accent">인천/부천</span> 소재의<br className="sm:hidden" /> 실내체육관에서 진행합니다
             </h3>
             <div className="grid grid-cols-3 gap-4 text-xs pt-2">
               <div className="min-w-0 p-3 bg-slate-950 rounded-xl border border-slate-800 [container-type:inline-size] sm:[container-type:normal]">
