@@ -69,15 +69,15 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, cal
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Title */}
         <div className="flex flex-col items-center text-center sm:items-stretch sm:text-left md:flex-row md:items-end justify-between gap-4 mb-10 pb-6 border-b border-slate-800">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-white border border-orange-500/20 text-xs font-bold uppercase tracking-wider mb-2">
+          <div className="space-y-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-white border border-orange-500/20 text-xs font-bold uppercase tracking-wider">
               <Calendar className="w-3.5 h-3.5 text-orange-400" />
               정모일정 & 체육관 안내
             </div>
-            <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
               월간 <span className="heading-accent">정모</span> 일정
             </h2>
-            <p className="text-slate-400 text-sm mt-1">
+            <p className="text-slate-400 text-sm">
               이번 달과 다음 달 정모 날짜를 달력에서 확인하세요.
             </p>
           </div>

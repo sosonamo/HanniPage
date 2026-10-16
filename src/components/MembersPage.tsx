@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { isMembersConfigured, loginMember, type MemberContent } from '../services/members';
-import { MEMBER_PLAYLIST } from '../data/memberVideos';
+import { MEMBER_PLAYLISTS } from '../data/memberVideos';
 import { ExternalLink, LockKeyhole, Megaphone, Play, X, Users } from 'lucide-react';
 
 export function MembersPage() {
@@ -13,7 +13,6 @@ export function MembersPage() {
   const visibleContent = content || (import.meta.env.DEV && preview ? {
     videoId: 'nirLJaNBQXY', videoTitle: '경기 영상', notice: '공지내용',
   } : null);
-  const videoUrl = MEMBER_PLAYLIST.url;
 
   async function handleLogin(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -66,22 +65,22 @@ export function MembersPage() {
               <div className="space-y-5">
                 <h3 className="text-2xl font-bold">YouTube 경기 영상</h3>
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/70">
-                <a href={videoUrl} target="_blank" rel="noopener noreferrer" className="group relative block aspect-video bg-gradient-to-br from-red-950 to-slate-950 focus-visible:outline-2 focus-visible:outline-red-400" aria-label="한늬 경기 영상 재생목록 YouTube에서 보기 (새 탭)">
-                  <span className="absolute inset-0 flex flex-col gap-4 items-center justify-center bg-black/20 group-hover:bg-black/40">
-                    <Play className="h-14 w-14 rounded-full bg-red-600 p-4 text-white" aria-hidden="true" />
-                    <span className="text-sm font-bold">경기 영상 모아보기</span>
-                  </span>
-                </a>
-                <div className="space-y-4 p-6">
-                  <h3 className="text-lg font-bold">{MEMBER_PLAYLIST.title}</h3>
-                  <a href={videoUrl} target="_blank" rel="noopener noreferrer" className="btn-secondary inline-flex min-h-11 items-center gap-2 px-5 py-3 text-sm font-bold">
-                    재생목록 보러가기 <ExternalLink className="h-4 w-4" aria-hidden="true" />
-                    <span className="sr-only">(새 탭에서 열림)</span>
-                  </a>
-                </div>
-              </div>
-
+                  {MEMBER_PLAYLISTS.map((playlist) => (
+                    <div key={playlist.id} className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/70">
+                      <a href={playlist.url} target="_blank" rel="noopener noreferrer" className="group relative block aspect-video bg-gradient-to-br from-red-950 to-slate-950 focus-visible:outline-2 focus-visible:outline-red-400" aria-label={`${playlist.title} YouTube에서 보기 (새 탭)`}>
+                        <span className="absolute inset-0 flex flex-col gap-4 items-center justify-center bg-black/20 group-hover:bg-black/40">
+                          <Play className="h-14 w-14 rounded-full bg-red-600 p-4 text-white" aria-hidden="true" />
+                          <h4 className="text-lg font-bold">{playlist.title}</h4>
+                        </span>
+                      </a>
+                      <div className="space-y-4 px-6 pb-6 pt-0 text-center">
+                        <a href={playlist.url} target="_blank" rel="noopener noreferrer" className="btn-secondary inline-flex min-h-11 items-center gap-2 px-5 py-3 text-sm font-bold">
+                          재생목록 보러가기 <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                          <span className="sr-only">(새 탭에서 열림)</span>
+                        </a>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>

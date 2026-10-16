@@ -30,15 +30,15 @@ export const RosterSection: React.FC<RosterSectionProps> = ({ roster }) => {
         
         {/* Section Header */}
         <div className="flex flex-col text-center sm:text-left md:flex-row md:items-end justify-between gap-4 border-b border-slate-800 pb-6">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-white border border-orange-500/20 text-xs font-bold uppercase tracking-wider mb-2">
+          <div className="space-y-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-white border border-orange-500/20 text-xs font-bold uppercase tracking-wider">
               <Users className="w-3.5 h-3.5 text-orange-400" />
               팀원소개 (Roster)
             </div>
-            <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
               코트를 빛내는 <span className="heading-accent">한늬즈</span>
             </h2>
-            <p className="text-sm text-slate-400 mt-1">
+            <p className="text-sm text-slate-400">
               각 포지션에서 열정을 다하는 멤버들의 프로필을 확인하세요.
             </p>
           </div>
