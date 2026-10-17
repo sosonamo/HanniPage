@@ -1,18 +1,20 @@
+import {
+  hanniLogo,
+  characterNo3,
+  characterNo6,
+  characterNo7,
+  characterNo9,
+  characterNo10,
+  characterNo11,
+  characterNo13,
+  characterNo17,
+  characterNo22,
+  characterNo33,
+  characterNo37,
+} from '../assets/images';
 import React from 'react';
 import { SectionId } from '../types';
 import { ArrowRight, Flame, MapPin, ShieldCheck } from 'lucide-react';
-import hanniLogo from '../../assets/한늬로고_최종_White.png';
-import characterNo3 from '../../assets/character_No3_final.png';
-import characterNo6 from '../../assets/character_No6_final.png';
-import characterNo7 from '../../assets/character_No7_final.png';
-import characterNo9 from '../../assets/character_No9_final.png';
-import characterNo10 from '../../assets/character_No10_final.png';
-import characterNo11 from '../../assets/character_No11_final.png';
-import characterNo13 from '../../assets/character_No13_final.png';
-import characterNo17 from '../../assets/character_No17_final.png';
-import characterNo22 from '../../assets/character_No22_final.png';
-import characterNo33 from '../../assets/character_No33_final.png';
-import characterNo37 from '../../assets/character_No37_final.png';
 
 interface HeroSectionProps {
   onNavigate: (sectionId: SectionId) => void;

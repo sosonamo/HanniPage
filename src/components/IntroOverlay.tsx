@@ -1,48 +1,44 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
-interface IntroOverlayProps {
-  onComplete: () => void;
-}
-
-const INTRO_COMPLETE_MESSAGE = 'hanni-intro-complete';
-const FADE_DURATION_MS = 800;
+interface IntroOverlayProps { onComplete: () => void; }
+const SESSION_KEY = 'hanni-intro-seen';
 
 export default function IntroOverlay({ onComplete }: IntroOverlayProps) {
-  const [isExiting, setIsExiting] = useState(false);
-  const hasCompletedRef = useRef(false);
-
-  useEffect(() => {
-    const handleMessage = (event: MessageEvent) => {
-      if (
-        event.origin !== window.location.origin ||
-        event.data?.type !== INTRO_COMPLETE_MESSAGE ||
-        hasCompletedRef.current
-      ) {
-        return;
-      }
-
-      hasCompletedRef.current = true;
-      setIsExiting(true);
-
-      window.setTimeout(onComplete, FADE_DURATION_MS);
-    };
-
-    window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
+  const frame = useRef<HTMLIFrameElement>(null);
+  const [hidden] = useState(() => {
+    try {
+      return sessionStorage.getItem(SESSION_KEY) === 'true'
+        || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    } catch { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+  });
+  const complete = useCallback(() => {
+    try { sessionStorage.setItem(SESSION_KEY, 'true'); } catch { /* Storage may be disabled. */ }
+    onComplete();
   }, [onComplete]);
 
+  useEffect(() => {
+    if (hidden) { complete(); return; }
+    const timer = window.setTimeout(complete, 15_000);
+    const message = (event: MessageEvent) => {
+      if (event.origin === window.location.origin && event.source === frame.current?.contentWindow
+        && event.data?.type === 'hanni-intro-complete') complete();
+    };
+    const key = (event: KeyboardEvent) => { if (event.key === 'Escape') complete(); };
+    window.addEventListener('message', message);
+    window.addEventListener('keydown', key);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('message', message);
+      window.removeEventListener('keydown', key);
+    };
+  }, [complete, hidden]);
+
+  if (hidden) return null;
   return (
-    <div
-      className={`fixed inset-0 z-[1000] bg-black transition-opacity duration-[800ms] ease-out ${
-        isExiting ? 'pointer-events-none opacity-0' : 'opacity-100'
-      }`}
-      aria-label="한늬 농구클럽 시작 인트로"
-    >
-      <iframe
-        className="h-full w-full border-0"
-        src={`${import.meta.env.BASE_URL}index_ball.html`}
-        title="농구공 시작 애니메이션"
-      />
+    <div className="fixed inset-0 z-[1000] bg-black" aria-label="한늬 농구클럽 시작 인트로">
+      <iframe ref={frame} className="h-full w-full border-0"
+        src={`${import.meta.env.BASE_URL}index_ball.html`} title="농구공 시작 애니메이션"
+        onError={complete} />
     </div>
   );
 }

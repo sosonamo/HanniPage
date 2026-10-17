@@ -10,7 +10,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ timeline }) => {
   return (
     <section id="about" className="py-20 bg-slate-950 text-white relative border-b border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-        
+
         {/* Section Header */}
         <div className="text-center sm:text-left max-w-3xl mx-auto sm:mx-0 space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-white border border-orange-500/20 text-xs font-bold uppercase tracking-wider">
@@ -21,7 +21,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ timeline }) => {
             코트 위에서 <span className="heading-accent">하나되는 한늬</span>
           </h2>
           <p className="text-sm sm:text-base text-slate-300">
-            '한늬'는 '끝까지 무언가를 꾸준히 그리고 열심히 함'<br className="sm:hidden" /> 을 의미하는 순우리말 표현입니다. 
+            '한늬'는 '끝까지 무언가를 꾸준히 그리고 열심히 함'<br className="sm:hidden" /> 을 의미하는 순우리말 표현입니다.
             <br/>농구를 좋아하는 사람들이 모여 원팀이 되는 곳입니다.
           </p>
         </div>
@@ -60,7 +60,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ timeline }) => {
         </div>
 
         {/* Left Column: Membership Guide & Fees Info */}
-        <div className="lg:col-span-5 space-y-6">
+        <div className="space-y-6">
           <div className="bg-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-800 space-y-6 shadow-xl">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-orange-500/20 border border-orange-500/40 flex items-center justify-center text-orange-400">
@@ -93,7 +93,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ timeline }) => {
                 <div className="p-3 bg-slate-900 rounded-xl border border-slate-800">
                   <span className="text-slate-400 block text-[11px]">가입비 (최초 1회)</span>
                   <span className="text-lg font-bold text-white font-mono">30,000원</span>
-                  <p className="text-[10px] text-slate-500 mt-1"></p>
+
                 </div>
                 <div className="p-3 bg-slate-900 rounded-xl border border-slate-800">
                   <span className="text-slate-400 block text-[11px]">월 회비</span>
@@ -131,10 +131,10 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ timeline }) => {
 
           <div className="relative border-l-2 border-orange-500/30 pl-6 sm:pl-8 space-y-8 ml-2">
             {timeline.map((item, idx) => (
-              <div key={idx} className="relative group">
+              <div key={`${item.year}-${item.title}`} className="relative group">
                 {/* Timeline Dot */}
                 <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-orange-500 border-4 border-slate-950 group-hover:scale-125 transition-transform" />
-                
+
                 <div className="space-y-1">
                   <div className="flex items-center gap-3">
                     <span className="font-mono text-xs font-bold text-white">{item.year}</span>

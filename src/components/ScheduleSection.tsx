@@ -1,3 +1,5 @@
+import { useCalendarNow } from '../hooks/useCalendarNow';
+import { calendarDateKey } from '../services/scheduleDates';
 import React, { useMemo, useState } from 'react';
 import { Calendar, CheckCircle2, Navigation, LoaderCircle, MapPin } from 'lucide-react';
 import { ScheduleEvent } from '../types';
@@ -39,7 +41,9 @@ const getStartTime = (time: string) => {
 
 export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, calendarStatus }) => {
   const [monthOffset, setMonthOffset] = useState<MonthOffset>(0);
-  const today = useMemo(() => new Date(), []);
+  const now = useCalendarNow();
+  const key = calendarDateKey(now, import.meta.env.VITE_CALENDAR_TIME_ZONE || 'Asia/Seoul');
+  const today = useMemo(() => new Date(`${key}T12:00:00`), [key]);
   const todayKey = toDateKey(today);
   const visibleMonth = useMemo(
     () => new Date(today.getFullYear(), today.getMonth() + monthOffset, 1),
@@ -82,6 +86,7 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, cal
             </p>
           </div>
           <div className="text-xs font-semibold text-slate-400 flex items-center gap-2">
+            {calendarStatus === 'fallback' && <span>일정 연결 준비 중입니다.</span>}
             {calendarStatus === 'loading' && (
               <><LoaderCircle className="w-4 h-4 animate-spin text-orange-400" /> 캘린더 동기화 중</>
             )}
@@ -89,7 +94,7 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, cal
               <><CheckCircle2 className="w-4 h-4 text-emerald-400" /> Google Calendar 연동됨</>
             )}
             {calendarStatus === 'error' && (
-              <span className="text-white">캘린더 연결 실패 · 임시 일정을 표시합니다</span>
+              <span role="alert" className="text-red-300">일정을 불러오지 못했어요. 이전에 불러온 일정이 있다면 유지됩니다.</span>
             )}
           </div>
         </div>

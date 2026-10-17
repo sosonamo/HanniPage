@@ -1,7 +1,7 @@
+import { hanniLogo } from '../assets/images';
 import React, { useState, useEffect } from 'react';
 import { SectionId } from '../types';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
-import hanniLogo from '../../assets/한늬로고_최종_White.png';
 
 interface HeaderProps {
   activeSection: SectionId;
@@ -53,7 +53,9 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate, onOpe
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Brand Logo */}
-        <div
+        <button
+          type="button"
+          aria-label="홈으로 이동"
           onClick={() => handleNavClick('hero')}
           className="flex items-center gap-3 cursor-pointer group shrink-0"
         >
@@ -70,7 +72,7 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate, onOpe
               Women's Basketball Club
             </p>
           </div>
-        </div>
+        </button>
 
         {/* Desktop Navigation Links */}
         <nav className="hidden xl:flex items-center gap-5">
@@ -110,7 +112,9 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate, onOpe
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="xl:hidden p-2 bg-slate-900 text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-700 transition-colors"
-          aria-label="Toggle menu"
+          aria-label="메뉴 열기/닫기"
+          aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-navigation"
         >
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
@@ -118,7 +122,7 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate, onOpe
 
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
-        <div className="xl:hidden bg-black border-b border-red-500/30 px-4 pt-3 pb-6 space-y-2 animate-in fade-in slide-in-from-top-2 duration-200">
+        <div id="mobile-navigation" className="xl:hidden bg-black border-b border-red-500/30 px-4 pt-3 pb-6 space-y-2 animate-in fade-in slide-in-from-top-2 duration-200">
           <div className="grid grid-cols-1 gap-1.5 pt-2">
             {navItems.map((item) => {
               const isActive = activeSection === item.id;

@@ -1,7 +1,7 @@
+import { hanniLogo } from '../assets/images';
 import React from 'react';
 import { SectionId } from '../types';
 import { Instagram, ArrowUp } from 'lucide-react';
-import hanniLogo from '../../assets/한늬로고_최종_White.png';
 
 interface FooterProps {
   onNavigate: (sectionId: SectionId) => void;

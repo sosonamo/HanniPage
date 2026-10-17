@@ -1,3 +1,5 @@
+import { useCalendarNow } from '../hooks/useCalendarNow';
+import { calendarWeek } from '../services/scheduleDates';
 import React, { useState } from 'react';
 import { JoinFormData, PlayerPosition, ScheduleEvent } from '../types';
 import {
@@ -23,54 +25,27 @@ import type { CalendarStatus } from '../App';
 const CALENDAR_TIME_ZONE = import.meta.env.VITE_CALENDAR_TIME_ZONE || 'Asia/Seoul';
 const SHOW_HOMEPAGE_APPLICATION_FORM = false;
 
-const getCurrentWeekRange = () => {
-  const parts = new Intl.DateTimeFormat('en-CA', {
-    timeZone: CALENDAR_TIME_ZONE,
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  }).formatToParts(new Date());
-  const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
-  const todayAsUtc = Date.UTC(
-    Number(values.year),
-    Number(values.month) - 1,
-    Number(values.day),
-  );
-  const dayOfWeek = new Date(todayAsUtc).getUTCDay();
-  const daysSinceMonday = (dayOfWeek + 6) % 7;
-  const weekStart = new Date(todayAsUtc - daysSinceMonday * 86_400_000);
-  const nextWeekStart = new Date(weekStart.getTime() + 7 * 86_400_000);
-
-  return {
-    startDate: weekStart.toISOString().slice(0, 10),
-    endDateExclusive: nextWeekStart.toISOString().slice(0, 10),
-  };
-};
-
 interface JoinFormSectionProps {
   schedules: ScheduleEvent[];
   calendarStatus: CalendarStatus;
   onRsvpClick: (schedule: ScheduleEvent) => void;
-  isOpenModal?: boolean;
-  onCloseModal?: () => void;
 }
 
 export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
   schedules,
   calendarStatus,
   onRsvpClick,
-  isOpenModal,
-  onCloseModal,
 }) => {
   const [step, setStep] = useState<number>(1);
   const [submitted, setSubmitted] = useState<boolean>(false);
 
-  const { startDate, endDateExclusive } = getCurrentWeekRange();
+  const now = useCalendarNow();
+  const { startDate, endDateExclusive } = calendarWeek(now, CALENDAR_TIME_ZONE);
   const filteredSchedules = schedules
     .filter((schedule) => (
       schedule.date >= startDate
       && schedule.date < endDateExclusive
-      && schedule.title.trim() === '정모'
+      && schedule.type === 'regular'
     ))
     .sort((a, b) => (
       a.date.localeCompare(b.date)
@@ -88,12 +63,12 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
     heightCm: '165',
     motivation: '',
     availableDays: ['수요일 야간', '토요일 오후'],
-    agreedTerms: true,
+    agreedTerms: false,
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const handleInputChange = (field: keyof JoinFormData, value: any) => {
+  const handleInputChange = <K extends keyof JoinFormData,>(field: K, value: JoinFormData[K]) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) {
       setErrors((prev) => ({ ...prev, [field]: '' }));
@@ -150,7 +125,7 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
       heightCm: '165',
       motivation: '',
       availableDays: ['수요일 야간', '토요일 오후'],
-      agreedTerms: true,
+      agreedTerms: false,
     });
   };
 
@@ -276,8 +251,8 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
           {filteredSchedules.length === 0 && calendarStatus !== 'loading' && (
             <div className="lg:col-span-3 rounded-2xl border border-dashed border-slate-700 bg-slate-900/50 px-6 py-14 text-center">
               <Calendar className="w-8 h-8 text-slate-600 mx-auto mb-3" />
-              <p className="font-bold text-slate-200">이번 주 한늬 일정이 없습니다.</p>
-              <p className="text-xs text-slate-500 mt-1">다음 주 월요일에 일정을 다시 확인해주세요.</p>
+              <p className="font-bold text-slate-200">{calendarStatus === 'error' ? '일정을 불러오지 못했어요.' : calendarStatus === 'fallback' ? '일정 연결 준비 중입니다.' : '이번 주 한늬 일정이 없습니다.'}</p>
+              <p className="text-xs text-slate-500 mt-1">잠시 후 다시 확인하거나 카카오톡으로 문의해주세요.</p>
             </div>
           )}
         </div>
@@ -422,7 +397,7 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
                           ].map((lvl) => (
                             <label
                               key={lvl}
-                              onClick={() => handleInputChange('experienceLevel', lvl)}
+                              onClick={() => handleInputChange('experienceLevel', lvl as JoinFormData['experienceLevel'])}
                               className={`flex items-center gap-3 p-3.5 rounded-xl border cursor-pointer transition-all ${
                                 formData.experienceLevel === lvl
                                   ? 'bg-orange-500/10 border-orange-500 text-white font-bold'
@@ -628,7 +603,7 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
                 {/* Kakao Open Chat Invitation Button */}
                 <div className="pt-2 space-y-3">
                   <a
-                    href="https://open.kakao.com"
+                    href="https://open.kakao.com/o/gm9r16ub"
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-amber-400 text-slate-950 font-bold text-xs hover:bg-amber-300 transition-colors shadow-lg"

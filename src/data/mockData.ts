@@ -1,15 +1,18 @@
+import {
+  galleryImages,
+  characterNo3,
+  characterNo6,
+  characterNo7,
+  characterNo9,
+  characterNo10,
+  characterNo11,
+  characterNo13,
+  characterNo33,
+  characterNo17,
+  characterNo22,
+  characterNo37,
+} from '../assets/images';
 import { ScheduleEvent, RosterMember, ClubTimelineItem, GalleryItem, FaqItem } from '../types';
-import characterNo3 from '../../assets/character_No3_final.png';
-import characterNo6 from '../../assets/character_No6_final.png';
-import characterNo7 from '../../assets/character_No7_final.png';
-import characterNo9 from '../../assets/character_No9_final.png';
-import characterNo10 from '../../assets/character_No10_final.png';
-import characterNo11 from '../../assets/character_No11_final.png';
-import characterNo13 from '../../assets/character_No13_final.png';
-import characterNo33 from '../../assets/character_No33_final.png';
-import characterNo17 from '../../assets/character_No17_final.png';
-import characterNo22 from '../../assets/character_No22_final.png';
-import characterNo37 from '../../assets/character_No37_final.png';
 
 export const MOCK_SCHEDULES: ScheduleEvent[] = [
   {
@@ -178,7 +181,7 @@ export const MOCK_ROSTER: RosterMember[] = [
   {
     id: 'm-17',
     number: 17,
-    name: '17번 선수',
+    name: '이무늬',
     nickname: '무늬',
     role: '선수',
     position: 'PF',
@@ -188,7 +191,7 @@ export const MOCK_ROSTER: RosterMember[] = [
   {
     id: 'm-22',
     number: 22,
-    name: '22번 선수',
+    name: '조 이로하',
     nickname: '로하',
     role: '선수',
     position: 'SG',
@@ -198,7 +201,7 @@ export const MOCK_ROSTER: RosterMember[] = [
   {
     id: 'm-37',
     number: 37,
-    name: '37번 선수',
+    name: '다나카 코토네',
     nickname: '코네',
     role: '선수',
     position: 'SF',
@@ -213,6 +216,12 @@ export const MOCK_TIMELINE: ClubTimelineItem[] = [
     title: '신입 팀원 모집 & 브랜드 리뉴얼',
     description: '성장하는 즐거움을 함께할 한늬즈 모집중.',
     badge: '진행중'
+  },
+  {
+    year: '2026년 9월',
+    title: '제2회 새싹리그 2위',
+    description: '5명으로 이뤄낸 값진 결과',
+    badge: '대회입상'
   },
   {
     year: '2018년 8월',
@@ -256,7 +265,7 @@ export const MOCK_GALLERY: GalleryItem[] = [
     title: '2024 리그 우승 순간의 감동',
     category: '대회',
     date: '2024.10.20',
-    imageUrl: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&q=80&w=800',
+    imageUrl: galleryImages.championship,
     caption: '우승 트로피를 들고 환호하는 한늬 선수단'
   },
   {
@@ -264,7 +273,7 @@ export const MOCK_GALLERY: GalleryItem[] = [
     title: '열기 넘치는 수요일 야간 전술 훈련',
     category: '훈련',
     date: '2026-07-15',
-    imageUrl: 'https://images.unsplash.com/photo-1519766304817-4f37bda74a29?auto=format&fit=crop&q=80&w=800',
+    imageUrl: galleryImages.training,
     caption: '기초 슈팅 교정과 픽앤롤 전술을 연습하는 모습'
   },
   {
@@ -272,7 +281,7 @@ export const MOCK_GALLERY: GalleryItem[] = [
     title: '한늬 봄맞이 피크닉 & 단합대회',
     category: '소모임',
     date: '2026-04-12',
-    imageUrl: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&q=80&w=800',
+    imageUrl: galleryImages.picnic,
     caption: '코트 밖에서도 웃음꽃 피우는 우리 팀원들'
   },
   {
@@ -280,7 +289,7 @@ export const MOCK_GALLERY: GalleryItem[] = [
     title: '전반기 단체 프로필 촬영',
     category: '단체사진',
     date: '2026-02-28',
-    imageUrl: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&q=80&w=800',
+    imageUrl: galleryImages.teamPhoto,
     caption: '한늬 전용 오렌지/네이비 유니폼 착용 단체컷'
   }
 ];

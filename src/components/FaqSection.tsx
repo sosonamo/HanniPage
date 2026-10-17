@@ -70,6 +70,8 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ faqs }) => {
                 className="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden transition-all duration-200"
               >
                 <button
+                  aria-expanded={isOpen}
+                  aria-controls={`faq-answer-${faq.id}`}
                   onClick={() => toggleAccordion(faq.id)}
                   className="w-full p-5 text-left flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-slate-100 hover:text-white transition-colors"
                 >
@@ -87,7 +89,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ faqs }) => {
                 </button>
 
                 {isOpen && (
-                  <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-300 border-t border-slate-800/80 leading-relaxed bg-slate-950/40">
+                  <div id={`faq-answer-${faq.id}`} className="px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-300 border-t border-slate-800/80 leading-relaxed bg-slate-950/40">
                     {faq.answer}
                   </div>
                 )}
@@ -108,7 +110,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ faqs }) => {
             </div>
           </div>
           <a
-            href="https://open.kakao.com"
+            href="https://open.kakao.com/o/gm9r16ub"
             target="_blank"
             rel="noreferrer"
             className="px-5 py-2.5 rounded-xl bg-[#FEE500] text-[#3C1E1E] font-black text-xs hover:bg-[#FADA0A] transition-colors shrink-0"

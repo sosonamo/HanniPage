@@ -26,6 +26,7 @@ type GoogleCalendarEvent = {
 
 type GoogleCalendarResponse = {
   items?: GoogleCalendarEvent[];
+  nextPageToken?: string;
   error?: {
     message?: string;
   };
@@ -126,33 +127,6 @@ const getStartOfDayInTimeZone = (
   return new Date(instant);
 };
 
-const getCurrentWeekRange = (timeZone: string) => {
-  const today = getDatePartsInTimeZone(new Date(), timeZone);
-  const todayAsUtc = Date.UTC(today.year, today.month - 1, today.day);
-  const dayOfWeek = new Date(todayAsUtc).getUTCDay();
-  const daysSinceMonday = (dayOfWeek + 6) % 7;
-  const mondayAsUtc = new Date(todayAsUtc - daysSinceMonday * 86_400_000);
-  const nextMondayAsUtc = new Date(mondayAsUtc.getTime() + 7 * 86_400_000);
-  const weekStart = getStartOfDayInTimeZone(
-    {
-      year: mondayAsUtc.getUTCFullYear(),
-      month: mondayAsUtc.getUTCMonth() + 1,
-      day: mondayAsUtc.getUTCDate(),
-    },
-    timeZone,
-  );
-  const weekEnd = getStartOfDayInTimeZone(
-    {
-      year: nextMondayAsUtc.getUTCFullYear(),
-      month: nextMondayAsUtc.getUTCMonth() + 1,
-      day: nextMondayAsUtc.getUTCDate(),
-    },
-    timeZone,
-  );
-
-  return { weekStart, weekEnd };
-};
-
 const getCurrentAndNextMonthRange = (timeZone: string) => {
   const today = getDatePartsInTimeZone(new Date(), timeZone);
   const rangeStart = getStartOfDayInTimeZone(
@@ -170,14 +144,6 @@ const getCurrentAndNextMonthRange = (timeZone: string) => {
   );
 
   return { rangeStart, rangeEnd };
-};
-
-export const getMillisecondsUntilNextCalendarWeek = () => {
-  const timeZone = import.meta.env.VITE_CALENDAR_TIME_ZONE || DEFAULT_TIME_ZONE;
-  const { weekEnd } = getCurrentWeekRange(timeZone);
-
-  // 월요일 자정 경계 직후에 조회되도록 1초의 여유를 둡니다.
-  return Math.max(weekEnd.getTime() - Date.now() + 1_000, 1_000);
 };
 
 const parseDescription = (description = ''): CalendarMetadata => {
@@ -217,6 +183,7 @@ const inferScheduleType = (
 ): ScheduleEvent['type'] => {
   const value = `${explicitType ?? ''} ${title} ${description}`.toLowerCase();
 
+  if (explicitType && /^(regular|정모|정기|정기모임)$/i.test(explicitType.trim())) return 'regular';
   if (/beginner|입문|초보/.test(value)) return 'beginner';
   if (/scrimmage|match|게임|경기|매치|자체전/.test(value)) return 'scrimmage';
   if (/tactics|training|전술|훈련|트레이닝/.test(value)) return 'tactics';
@@ -224,8 +191,11 @@ const inferScheduleType = (
 };
 
 const formatDateLabel = (start: GoogleCalendarDate, timeZone: string) => {
-  const value = start.dateTime ?? `${start.date}T00:00:00`;
-  const date = new Date(value);
+  const date = start.dateTime ? new Date(start.dateTime)
+    : getStartOfDayInTimeZone({
+      year: Number(start.date!.slice(0, 4)), month: Number(start.date!.slice(5, 7)),
+      day: Number(start.date!.slice(8, 10)),
+    }, timeZone);
 
   return new Intl.DateTimeFormat('ko-KR', {
     timeZone,
@@ -311,7 +281,7 @@ export const isGoogleCalendarConfigured = () =>
       import.meta.env.VITE_GOOGLE_CALENDAR_API_KEY,
   );
 
-export const fetchGoogleCalendarSchedules = async (): Promise<ScheduleEvent[]> => {
+export const fetchGoogleCalendarSchedules = async (signal?: AbortSignal): Promise<ScheduleEvent[]> => {
   const calendarId = import.meta.env.VITE_GOOGLE_CALENDAR_ID;
   const apiKey = import.meta.env.VITE_GOOGLE_CALENDAR_API_KEY;
   const timeZone = import.meta.env.VITE_CALENDAR_TIME_ZONE || DEFAULT_TIME_ZONE;
@@ -335,17 +305,43 @@ export const fetchGoogleCalendarSchedules = async (): Promise<ScheduleEvent[]> =
     maxResults: String(maxResults),
     timeZone,
   });
-  const response = await fetch(
-    `${CALENDAR_API_BASE}/${encodeURIComponent(calendarId)}/events?${query}`,
-  );
-  const payload = (await response.json()) as GoogleCalendarResponse;
-
-  if (!response.ok) {
-    throw new Error(payload.error?.message || 'Google Calendar 일정을 불러오지 못했습니다.');
+  const controller = new AbortController();
+  const abort = () => controller.abort();
+  signal?.addEventListener('abort', abort, { once: true });
+  if (signal?.aborted) controller.abort();
+  const timeout = setTimeout(abort, 15_000);
+  const events: GoogleCalendarEvent[] = [];
+  const seenTokens = new Set<string>();
+  try {
+    let pageToken: string | undefined;
+    do {
+      if (pageToken) query.set('pageToken', pageToken);
+      const response = await fetch(
+        `${CALENDAR_API_BASE}/${encodeURIComponent(calendarId)}/events?${query}`,
+        { signal: controller.signal },
+      );
+      if (!response.ok) {
+        throw new Error(`Google Calendar 연결 실패 (HTTP ${response.status})`);
+      }
+      let payload: GoogleCalendarResponse;
+      try {
+        payload = await response.json();
+      } catch {
+        throw new Error('Google Calendar 응답을 읽을 수 없습니다.');
+      }
+      if (!payload || (payload.items !== undefined && !Array.isArray(payload.items))) {
+        throw new Error('Google Calendar 응답 형식이 올바르지 않습니다.');
+      }
+      events.push(...(payload.items ?? []));
+      pageToken = payload.nextPageToken;
+      if (pageToken && seenTokens.has(pageToken)) throw new Error('캘린더 페이지가 반복되었습니다.');
+      if (pageToken) seenTokens.add(pageToken);
+    } while (pageToken);
+    return events.filter(event => event.status !== 'cancelled')
+      .map(event => mapCalendarEvent(event, timeZone))
+      .filter((event): event is ScheduleEvent => event !== null);
+  } finally {
+    clearTimeout(timeout);
+    signal?.removeEventListener('abort', abort);
   }
-
-  return (payload.items ?? [])
-    .filter((event) => event.status !== 'cancelled')
-    .map((event) => mapCalendarEvent(event, timeZone))
-    .filter((event): event is ScheduleEvent => event !== null);
 };

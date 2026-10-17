@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { SectionId, ScheduleEvent } from './types';
-import { MOCK_SCHEDULES, MOCK_ROSTER, MOCK_TIMELINE, MOCK_FAQS } from './data/mockData';
+import { MOCK_ROSTER, MOCK_TIMELINE, MOCK_FAQS } from './data/mockData';
 import { NoticeBanner } from './components/NoticeBanner';
 import { Header } from './components/Header';
 import { HeroSection } from './components/HeroSection';
@@ -15,57 +15,54 @@ import IntroOverlay from './components/IntroOverlay';
 import { MembersSection } from './components/MembersSection';
 import {
   fetchGoogleCalendarSchedules,
-  getMillisecondsUntilNextCalendarWeek,
   isGoogleCalendarConfigured,
 } from './services/googleCalendar';
+
+import { useCalendarNow } from './hooks/useCalendarNow';
+import { calendarDateKey, nextSchedule } from './services/scheduleDates';
 
 export type CalendarStatus = 'fallback' | 'loading' | 'connected' | 'error';
 
 export default function App() {
   const [showIntro, setShowIntro] = useState(true);
   const [activeSection, setActiveSection] = useState<SectionId>('hero');
-  const [schedules, setSchedules] = useState<ScheduleEvent[]>(MOCK_SCHEDULES);
+  const [schedules, setSchedules] = useState<ScheduleEvent[]>([]);
   const [calendarStatus, setCalendarStatus] = useState<CalendarStatus>('fallback');
+
+  const now = useCalendarNow();
+  const timeZone = import.meta.env.VITE_CALENDAR_TIME_ZONE || 'Asia/Seoul';
+  const dateKey = calendarDateKey(now, timeZone);
+  const upcoming = nextSchedule(schedules, now, timeZone);
 
   useEffect(() => {
     if (!isGoogleCalendarConfigured()) return;
+    const controller = new AbortController();
+    setCalendarStatus('loading');
+    fetchGoogleCalendarSchedules(controller.signal).then(events => {
+      if (controller.signal.aborted) return;
+      setSchedules(events);
+      setCalendarStatus('connected');
+    }).catch(error => {
+      if (controller.signal.aborted) return;
+      console.error('Google Calendar 연동 실패:', error);
+      setCalendarStatus('error');
+    });
+    return () => controller.abort();
+  }, [dateKey]);
 
-    let isActive = true;
-    let weeklyRefreshTimer: number | undefined;
-
-    const loadSchedules = () => {
-      setCalendarStatus('loading');
-
-      fetchGoogleCalendarSchedules()
-        .then((events) => {
-          if (!isActive) return;
-          setSchedules(events);
-          setCalendarStatus('connected');
-        })
-        .catch((error) => {
-          if (!isActive) return;
-          console.error('Google Calendar 연동 실패:', error);
-          setCalendarStatus('error');
-        });
-    };
-
-    const scheduleNextWeeklyRefresh = () => {
-      weeklyRefreshTimer = window.setTimeout(() => {
-        if (!isActive) return;
-        loadSchedules();
-        scheduleNextWeeklyRefresh();
-      }, getMillisecondsUntilNextCalendarWeek());
-    };
-
-    loadSchedules();
-    scheduleNextWeeklyRefresh();
-
-    return () => {
-      isActive = false;
-      if (weeklyRefreshTimer !== undefined) {
-        window.clearTimeout(weeklyRefreshTimer);
+  useEffect(() => {
+    const update = () => {
+      const sections = ['hero', 'schedule', 'join', 'about', 'roster', 'members', 'faq'] as SectionId[];
+      let current: SectionId = 'hero';
+      for (const id of sections) {
+        const element = document.getElementById(id);
+        if (element && element.getBoundingClientRect().top <= 180) current = id;
       }
+      setActiveSection(current);
     };
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+    return () => window.removeEventListener('scroll', update);
   }, []);
 
   const scrollToSection = (sectionId: SectionId) => {
@@ -96,8 +93,8 @@ export default function App() {
 
       {/* Notice Banner */}
       <NoticeBanner
-        nextSchedule={schedules[0]}
-        onRsvpClick={() => handleRsvpClick(schedules[0])}
+        nextSchedule={upcoming}
+        onRsvpClick={() => handleRsvpClick(upcoming)}
         onJoinClick={handleOpenJoinForm}
       />
 

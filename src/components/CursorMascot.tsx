@@ -1,5 +1,4 @@
-import mascotOne from '../../assets/character_No0-1_final.png';
-import mascotTwo from '../../assets/character_No0-2_final.png';
+import { mascotOne, mascotTwo } from '../assets/images';
 
 const RANDOM_MASCOT_IMAGE = Math.random() < 0.5 ? mascotOne : mascotTwo;
 

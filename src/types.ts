@@ -68,7 +68,7 @@ export interface JoinFormData {
   phone: string;
   email: string;
   location: string;
-  experienceLevel: '입문 (농구 공을 처음 잡음)' | '초급 (기본 슛/드블 가능)' | '중급 (동호회/동아리 경험)' | '상급 (대회 출전 경험)';
+  experienceLevel: '입문 (농구 공을 처음 잡음)' | '초급 (기본 슛/드리블 가능)' | '중급 (동호회/동아리 경험)' | '상급 (대회 출전 경험)';
   preferredPosition: PlayerPosition;
   heightCm: string;
   motivation: string;

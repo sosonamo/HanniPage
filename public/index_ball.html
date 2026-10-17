@@ -595,6 +595,7 @@
       skipButton.addEventListener("click", completeAnimation);
 
       window.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") completeAnimation();
         if (event.key.toLowerCase() === "r" && !isRunning) {
           startAnimation();
         }
