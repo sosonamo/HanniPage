@@ -29,7 +29,7 @@ export const AttendanceModal: React.FC<AttendanceModalProps> = ({ schedule, onCl
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-slate-950 border border-slate-800 rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-6 relative shadow-2xl"
+        className="bg-slate-950 border border-slate-800 rounded-3xl max-w-lg w-full panel-padding space-y-6 relative shadow-2xl"
       >
         <button
           onClick={onClose}
@@ -44,9 +44,9 @@ export const AttendanceModal: React.FC<AttendanceModalProps> = ({ schedule, onCl
               <span className="text-xs font-bold text-white bg-orange-500/10 px-2.5 py-0.5 rounded border border-orange-500/20">
                 정모 참석 (RSVP) 신청
               </span>
-              <h3 className="text-2xl font-black text-white mt-1">{schedule.title}</h3>
+              <h3 className="heading-subsection text-white mt-1">{schedule.title}</h3>
               <p className="text-xs text-slate-400 flex items-center gap-1.5 mt-1">
-                <Calendar className="w-3.5 h-3.5 text-orange-400" />
+                <Calendar className="heading-label-icon text-orange-400" />
                 {schedule.dayOfWeek} • {schedule.time}
               </p>
             </div>
@@ -129,7 +129,7 @@ export const AttendanceModal: React.FC<AttendanceModalProps> = ({ schedule, onCl
             <div className="w-14 h-14 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center mx-auto">
               <CheckCircle2 className="w-7 h-7" />
             </div>
-            <h3 className="text-xl font-bold text-white">
+            <h3 className="heading-card text-white">
               {name}님, {schedule.dayOfWeek} 참석 명단에 반영되었습니다!
             </h3>
             <p className="text-xs text-slate-300">

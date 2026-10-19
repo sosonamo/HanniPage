@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { SectionId, ScheduleEvent } from './types';
-import { MOCK_ROSTER, MOCK_TIMELINE, MOCK_FAQS } from './data/mockData';
+import { MOCK_ROSTER, MOCK_TIMELINE, MOCK_FAQS, MOCK_GALLERY } from './data/mockData';
 import { NoticeBanner } from './components/NoticeBanner';
 import { Header } from './components/Header';
 import { HeroSection } from './components/HeroSection';
@@ -73,7 +73,7 @@ export default function App() {
     }
     const el = document.getElementById(sectionId);
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
@@ -95,7 +95,6 @@ export default function App() {
       <NoticeBanner
         nextSchedule={upcoming}
         onRsvpClick={() => handleRsvpClick(upcoming)}
-        onJoinClick={handleOpenJoinForm}
       />
 
       {/* Main Header */}
@@ -133,15 +132,17 @@ export default function App() {
       {/* 3. About Us Section */}
       <AboutSection
         timeline={MOCK_TIMELINE}
+        gallery={MOCK_GALLERY}
       />
 
       {/* 4. Roster Section */}
       <RosterSection roster={MOCK_ROSTER} />
 
-      {/* FAQ Section */}
-      <MembersSection />
-
+      {/* 5. FAQ Section */}
       <FaqSection faqs={MOCK_FAQS} />
+
+      {/* 6. Members Section */}
+      {/* <MembersSection /> */}
 
       {/* Footer */}
       <Footer

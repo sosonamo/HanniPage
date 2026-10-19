@@ -213,6 +213,30 @@ textarea:focus-visible {
   transform: translateY(-2px);
 }
 
+.member-logout-button {
+  min-height: 29.33px;
+  gap: 5.33px;
+  padding: 0 10.67px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  font-size: 13px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.member-logout-button:hover {
+  border-color: var(--hanni-red);
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.member-logout-button:focus-visible {
+  outline: 2px solid var(--hanni-red);
+  outline-offset: 4px;
+}
+
 .hanni-header::after {
   position: absolute;
   right: 0;
@@ -542,5 +566,71 @@ textarea:focus-visible {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* Heading roles: shared typography independent of HTML heading level. */
+@layer components {
+  .heading-section {
+    @apply text-3xl sm:text-4xl font-extrabold leading-tight;
+  }
+  .heading-subsection {
+    @apply text-2xl font-extrabold leading-snug;
+  }
+  .heading-card {
+    @apply text-xl font-bold leading-snug;
+  }
+  .heading-item {
+    @apply text-sm font-bold leading-snug;
+  }
+  .heading-menu {
+    @apply text-4xl sm:text-6xl font-bold;
+  }
+  .heading-menu-card {
+    @apply text-2xl sm:text-4xl font-bold;
+  }
+  .heading-row {
+    @apply flex items-start gap-3;
+  }
+  .heading-subsection-icon, .heading-subsection > svg {
+    @apply w-6 h-6 shrink-0;
+  }
+  .heading-row > .heading-subsection-icon {
+    margin-top: 0.28125rem;
+  }
+  .heading-card-icon, .heading-card > svg {
+    @apply w-5 h-5 shrink-0;
+  }
+  .heading-item-icon, .heading-item > svg {
+    @apply w-4 h-4 shrink-0;
+  }
+  .heading-label-icon {
+    @apply w-3.5 h-3.5 shrink-0;
+  }
+}
+
+/* Shared spacing by container role. Keep image, control and calendar-cell
+   spacing local: those sizes depend on their individual interactions. */
+@layer components {
+  .site-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  .panel-padding {
+    @apply p-6 sm:p-8;
+  }
+  .card-padding {
+    @apply p-6;
+  }
+  .compact-padding {
+    @apply p-4;
+  }
+  .faq-question-padding {
+    @apply p-6;
+  }
+  .faq-answer-padding {
+    @apply px-6 pb-6 pt-4;
+  }
+  .image-dialog-padding {
+    @apply p-6 pt-16 sm:p-8 sm:pt-16;
   }
 }

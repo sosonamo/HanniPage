@@ -1,136 +1,60 @@
 import React from 'react';
-import { ClubTimelineItem } from '../types';
+import { about, membership, fees, timelineTitle } from '../data/clubContent';
+const valueIcons = { Heart, Sparkles, Shield };
+import { ClubTimelineItem, GalleryItem } from '../types';
+import { ClubGallerySection } from './ClubGallerySection';
 import { Dribbble, Heart, Shield, Sparkles, History, CheckCircle, ExternalLink } from 'lucide-react';
 
 interface AboutSectionProps {
   timeline: ClubTimelineItem[];
+  gallery: GalleryItem[];
 }
 
-export const AboutSection: React.FC<AboutSectionProps> = ({ timeline }) => {
+export const AboutSection: React.FC<AboutSectionProps> = ({ timeline, gallery }) => {
   return (
     <section id="about" className="py-20 bg-slate-950 text-white relative border-b border-slate-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+      <div className="site-container space-y-16">
 
         {/* Section Header */}
         <div className="text-center sm:text-left max-w-3xl mx-auto sm:mx-0 space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-white border border-orange-500/20 text-xs font-bold uppercase tracking-wider">
-            <Dribbble className="w-3.5 h-3.5 text-orange-400" />
-            한늬소개 (About Us)
+            <Dribbble className="heading-label-icon text-orange-400" />
+            {about.label}
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            코트 위에서 <span className="heading-accent">하나되는 한늬</span>
+          <h2 className="heading-section text-white tracking-tight">
+            {about.title} <span className="heading-accent">{about.titleAccent}</span>
           </h2>
-          <p className="text-sm sm:text-base text-slate-300">
-            '한늬'는 '끝까지 무언가를 꾸준히 그리고 열심히 함'<br className="sm:hidden" /> 을 의미하는 순우리말 표현입니다.
-            <br/>농구를 좋아하는 사람들이 모여 원팀이 되는 곳입니다.
-          </p>
+          <p className="text-sm sm:text-base text-slate-300 whitespace-pre-line">{about.description}</p>
         </div>
 
         {/* 3 Core Identity Values */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-slate-900/80 p-8 rounded-3xl border border-slate-800 space-y-4 hover:border-orange-500/40 transition-all">
-            <div className="w-12 h-12 rounded-2xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center text-orange-400">
-              <Heart className="w-6 h-6" />
-            </div>
-            <h3 className="text-xl font-extrabold text-white">포용적 팀 문화 (Inclusive)</h3>
-            <p className="text-xs text-slate-300 leading-relaxed">
-              서로를 북돋우는 따뜻한 분위기를 지향합니다.<br/>나이, 직업을 넘어 농구로 소통합니다.
-            </p>
-          </div>
-
-          <div className="bg-slate-900/80 p-8 rounded-3xl border border-slate-800 space-y-4 hover:border-amber-500/40 transition-all">
-            <div className="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
-              <Sparkles className="w-6 h-6" />
-            </div>
-            <h3 className="text-xl font-extrabold text-white">함께하는 성장 (Growth)</h3>
-            <p className="text-xs text-slate-300 leading-relaxed">
-              팀원 서로가 가르쳐주고 배우며 함께 성장합니다.
-            </p>
-          </div>
-
-          <div className="bg-slate-900/80 p-8 rounded-3xl border border-slate-800 space-y-4 hover:border-orange-500/40 transition-all">
-            <div className="w-12 h-12 rounded-2xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center text-orange-400">
-              <Shield className="w-6 h-6" />
-            </div>
-            <h3 className="text-xl font-extrabold text-white">페어플레이 (Fair Play)</h3>
-            <p className="text-xs text-slate-300 leading-relaxed">
-              부상 예방을 최우선으로 하고, 비매너 행위를 차단합니다.<br/>누구나 즐겁게 농구하는 환경을 만듭니다.
-            </p>
-          </div>
-        </div>
-
-        {/* Left Column: Membership Guide & Fees Info */}
-        <div className="space-y-6">
-          <div className="bg-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-800 space-y-6 shadow-xl">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-orange-500/20 border border-orange-500/40 flex items-center justify-center text-orange-400">
-                <Sparkles className="w-5 h-5" />
-              </div>
-              <div>
-                <h3 className="text-lg font-bold text-white">신입 팀원 가입 안내</h3>
-                <p className="text-xs text-slate-400">한늬 가입 방법 및 회비 안내</p>
-              </div>
-            </div>
-
-            {/* Recruitment Eligibility */}
-            <div className="space-y-3 text-xs text-slate-300">
-              <h4 className="font-bold text-slate-100 text-sm flex items-center gap-1.5">
-                <CheckCircle className="w-4 h-4 text-orange-400" /> 모집 대상
-              </h4>
-              <ul className="space-y-1.5 pl-6 list-disc text-slate-300">
-                <li>농구를 좋아하는 모든 성인 여성</li>
-                <li>매너 있는 코트 에티켓과 상호 존중 마인드를 가지신 분</li>
-                <li>정모 1회 이상 참석 (필수)</li>
-              </ul>
-            </div>
-
-            {/* Membership Fee Breakdown */}
-            <div className="space-y-3 pt-4 border-t border-slate-800">
-              <h4 className="font-bold text-slate-100 text-sm flex items-center gap-1.5">
-                <CheckCircle className="w-4 h-4 text-orange-400" /> 가입비 및 회비
-              </h4>
-              <div className="grid grid-cols-2 gap-3 text-xs">
-                <div className="p-3 bg-slate-900 rounded-xl border border-slate-800">
-                  <span className="text-slate-400 block text-[11px]">가입비 (최초 1회)</span>
-                  <span className="text-lg font-bold text-white font-mono">30,000원</span>
-
+          {about.values.map((value) => {
+            const Icon = valueIcons[value.icon as keyof typeof valueIcons] ?? Heart;
+            const amber = value.icon === 'Sparkles';
+            return (
+              <div key={value.title} className={`bg-slate-900/80 card-padding rounded-3xl border border-slate-800 space-y-4 transition-all ${amber ? 'hover:border-amber-500/40' : 'hover:border-orange-500/40'}`}>
+                <div className="flex items-center gap-3">
+                  <div className={`w-12 h-12 shrink-0 rounded-2xl border flex items-center justify-center ${amber ? 'bg-amber-500/10 border-amber-500/30 text-amber-400' : 'bg-orange-500/10 border-orange-500/30 text-orange-400'}`}>
+                    <Icon className="heading-card-icon" />
+                  </div>
+                  <h3 className="heading-card min-w-0 text-white">{value.title}</h3>
                 </div>
-                <div className="p-3 bg-slate-900 rounded-xl border border-slate-800">
-                  <span className="text-slate-400 block text-[11px]">월 회비</span>
-                  <span className="text-lg font-bold text-white font-mono">30,000원</span>
-                  <p className="text-[10px] text-slate-500 mt-1">체육관 대관료 & 행사 지원</p>
-                </div>
+                <p className="pl-[3.75rem] text-xs text-slate-300 leading-relaxed whitespace-pre-line">{value.description}</p>
               </div>
-            </div>
-
-            {/* Membership Registration Information */}
-            <div className="space-y-3 pt-4 border-t border-slate-800">
-              <h4 className="font-bold text-slate-100 text-sm flex items-center gap-1.5">
-                <CheckCircle className="w-4 h-4 text-orange-400" />팀원 가입 안내
-              </h4>
-              <a
-                href="https://docs.google.com/document/d/1fROW0udz5S_F-fDSLEueYsgH02M1iwN0gM8tYNoW2zM/edit?usp=drive_link"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="팀원 가입 안내 보러가기 (새 탭에서 열림)"
-                className="btn-secondary inline-flex min-h-11 items-center justify-center gap-2 px-5 py-3 text-xs font-bold text-white transition-all focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
-              >
-                보러가기
-                <ExternalLink className="w-4 h-4" aria-hidden="true" />
-              </a>
-            </div>
-          </div>
+            );
+          })}
         </div>
 
         {/* Timeline Section */}
-        <div className="bg-slate-900/90 rounded-3xl border border-slate-800 p-8 sm:p-12 space-y-8">
-          <div className="flex items-center gap-3 border-b border-slate-800 pb-4">
-            <History className="w-6 h-6 text-orange-500" />
-            <h3 className="text-2xl font-black text-white">한늬 발자국</h3>
+        <div className="bg-slate-900/90 rounded-3xl border border-slate-800 panel-padding space-y-8">
+          <div className="heading-row border-b border-slate-800 pb-4">
+            <History className="heading-subsection-icon text-orange-400" />
+            <h3 className="heading-subsection text-white">{timelineTitle}</h3>
           </div>
 
           <div className="relative border-l-2 border-orange-500/30 pl-6 sm:pl-8 space-y-8 ml-2">
-            {timeline.map((item, idx) => (
+            {timeline.map((item) => (
               <div key={`${item.year}-${item.title}`} className="relative group">
                 {/* Timeline Dot */}
                 <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-orange-500 border-4 border-slate-950 group-hover:scale-125 transition-transform" />
@@ -144,7 +68,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ timeline }) => {
                       </span>
                     )}
                   </div>
-                  <h4 className="text-lg font-bold text-white transition-colors">
+                  <h4 className="heading-card text-white transition-colors">
                     {item.title}
                   </h4>
                   <p className="text-xs text-slate-300 leading-relaxed">
@@ -153,6 +77,67 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ timeline }) => {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* Gallery Section */}
+        <ClubGallerySection gallery={gallery} />
+
+        {/* Membership Guide & Fees Info */}
+        <div className="space-y-6">
+          <div className="bg-slate-950 panel-padding rounded-3xl border border-slate-800 space-y-6 shadow-xl">
+            <div className="heading-row">
+              <Sparkles className="heading-subsection-icon text-orange-400" />
+              <div>
+                <h3 className="heading-subsection text-white">{membership.title}</h3>
+              </div>
+            </div>
+
+            {/* Recruitment Eligibility */}
+            <div className="space-y-3 text-xs text-slate-300">
+              <h4 className="heading-item text-slate-100 flex items-center gap-1.5">
+                <CheckCircle className="heading-item-icon text-orange-400" /> {membership.eligibilityTitle}
+              </h4>
+              <ul className="space-y-1.5 pl-6 list-disc text-slate-300">
+                {membership.eligibility.map(item => <li key={item}>{item}</li>)}
+              </ul>
+            </div>
+
+            {/* Membership Fee Breakdown */}
+            <div className="space-y-3 pt-4 border-t border-slate-800">
+              <h4 className="heading-item text-slate-100 flex items-center gap-1.5">
+                <CheckCircle className="heading-item-icon text-orange-400" /> {membership.feesTitle}
+              </h4>
+              <div className="grid grid-cols-2 gap-3 text-xs">
+                <div className="p-3 bg-slate-900 rounded-xl border border-slate-800">
+                  <span className="text-slate-400 block text-[11px]">{membership.joiningLabel}</span>
+                  <span className="text-lg font-bold text-white font-mono">{fees.joining}</span>
+
+                </div>
+                <div className="p-3 bg-slate-900 rounded-xl border border-slate-800">
+                  <span className="text-slate-400 block text-[11px]">{membership.monthlyLabel}</span>
+                  <span className="text-lg font-bold text-white font-mono">{fees.monthly}</span>
+                  <p className="text-[10px] text-slate-500 mt-1">{membership.monthlyDescription}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Membership Registration Information */}
+            <div className="space-y-3 pt-4 border-t border-slate-800">
+              <h4 className="heading-item text-slate-100 flex items-center gap-1.5">
+                <CheckCircle className="heading-item-icon text-orange-400" />{membership.guideTitle}
+              </h4>
+              <a
+                href={membership.guideUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${membership.guideTitle} ${membership.guideLabel} (새 탭에서 열림)`}
+                className="btn-secondary inline-flex min-h-11 items-center justify-center gap-2 px-5 py-3 text-xs font-bold text-white transition-all focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+              >
+                {membership.guideLabel}
+                <ExternalLink className="w-4 h-4" aria-hidden="true" />
+              </a>
+            </div>
           </div>
         </div>
 

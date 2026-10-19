@@ -1,0 +1,55 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function googleUser() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.firebase.sign_in_provider == 'google.com';
+    }
+    function uidApproved() {
+      return exists(/databases/$(database)/documents/memberUID/$(request.auth.uid))
+        && get(/databases/$(database)/documents/memberUID/$(request.auth.uid)).data.active == true;
+    }
+    function emailApproved() {
+      return request.auth.token.email is string
+        && exists(/databases/$(database)/documents/memberEmails/$(request.auth.token.email.lower()))
+        && get(/databases/$(database)/documents/memberEmails/$(request.auth.token.email.lower())).data.active == true;
+    }
+    function activeMember() {
+      return googleUser() && (uidApproved() || emailApproved());
+    }
+    match /memberEmails/{email} {
+      allow get: if googleUser() && request.auth.token.email is string
+        && request.auth.token.email.lower() == email;
+      allow list, create, update, delete: if false;
+    }
+    match /memberUID/{uid} {
+      // Members can see their own approval status, never the membership list.
+      allow get: if googleUser() && request.auth.uid == uid;
+      allow list, create, update, delete: if false;
+    }
+    match /memberPresence/{session} {
+      allow read: if activeMember();
+      function validPresence() {
+        return request.resource.data.keys().hasAll(['uid', 'name', 'lastSeen'])
+          && request.resource.data.keys().hasOnly(['uid', 'name', 'lastSeen'])
+          && request.resource.data.uid == request.auth.uid
+          && request.resource.data.name is string
+          && request.resource.data.name.size() > 0
+          && request.resource.data.name.size() <= 200
+          && request.resource.data.lastSeen == request.time;
+      }
+      allow create: if activeMember() && validPresence();
+      allow update: if activeMember() && resource.data.uid == request.auth.uid && validPresence();
+      // A revoked member may still remove their own session, but cannot read any.
+      allow delete: if googleUser() && resource.data.uid == request.auth.uid;
+    }
+    match /memberContent/main {
+      allow get: if activeMember();
+      allow list, create, update, delete: if false;
+    }
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

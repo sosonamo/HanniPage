@@ -1,33 +1,37 @@
 import { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Image as ImageIcon, X } from 'lucide-react';
-import { GalleryItem } from '../../types';
+import { GalleryItem } from '../types';
+import galleryConfig from '../data/gallery.json';
 
 interface ClubGallerySectionProps {
   gallery: GalleryItem[];
 }
 
-// 보관된 갤러리 섹션입니다. AboutSection에서 import해 렌더링하면 다시 사용할 수 있습니다.
+// AboutSection에서 사용하는 클럽 사진 갤러리입니다.
 export const ClubGallerySection = ({ gallery }: ClubGallerySectionProps) => {
   const [selectedGalleryCategory, setSelectedGalleryCategory] = useState('전체');
   const [activeImageModal, setActiveImageModal] = useState<GalleryItem | null>(null);
-  const galleryCategories = ['전체', '훈련', '대회', '소모임', '단체사진'];
+  const galleryCategories = ['전체', ...new Set([...galleryConfig.categories, ...gallery.map((item) => item.category)].filter((category) => category !== '전체'))];
   const filteredGallery = selectedGalleryCategory === '전체'
     ? gallery
     : gallery.filter((item) => item.category === selectedGalleryCategory);
 
   return (
     <>
-      <div className="space-y-6">
+      <div className="rounded-3xl border border-slate-800 bg-slate-900/90 panel-padding space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <ImageIcon className="w-5 h-5 text-orange-400" />
-            <h3 className="text-2xl font-extrabold text-white">클럽 갤러리 & 활동 모습</h3>
+          <div className="heading-row">
+            <ImageIcon className="heading-subsection-icon text-orange-400" />
+            <h3 className="heading-subsection text-white">한늬 갤러리</h3>
           </div>
 
           <div className="flex flex-wrap gap-1.5 bg-slate-900 p-1.5 rounded-xl border border-slate-800">
             {galleryCategories.map((category) => (
               <button
                 key={category}
+                type="button"
+                aria-pressed={selectedGalleryCategory === category}
                 onClick={() => setSelectedGalleryCategory(category)}
                 className={`px-3 py-1 rounded-lg text-xs font-bold transition-all ${
                   selectedGalleryCategory === category
@@ -45,23 +49,28 @@ export const ClubGallerySection = ({ gallery }: ClubGallerySectionProps) => {
           {filteredGallery.map((image) => (
             <div
               key={image.id}
-              onClick={() => setActiveImageModal(image)}
-              className="group relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 aspect-[4/3] cursor-pointer hover:border-orange-500/50 transition-all shadow-lg"
+              onClick={() => image.imageUrl && setActiveImageModal(image)}
+              className="group relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 transition-all shadow-lg"
             >
-              <img
+              {image.imageUrl && <div className="aspect-[4/3] w-full bg-black/30">
+                <img
                 src={image.imageUrl}
                 alt={image.title}
                 referrerPolicy="no-referrer"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent opacity-80 group-hover:opacity-95 transition-opacity" />
-              <div className="absolute inset-0 p-4 flex flex-col justify-between">
-                <span className="self-start text-[10px] font-bold px-2 py-0.5 rounded bg-slate-950/80 text-white border border-slate-800">
-                  {image.category}
-                </span>
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-contain"
+                />
+              </div>}
+              <div className="card-padding flex flex-col gap-3">
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-950/80 text-white border border-slate-800">
+                    {image.category}
+                  </span>
+                  <span className="text-[10px] text-slate-400 font-mono">{image.date}</span>
+                </div>
                 <div>
-                  <span className="text-[10px] text-slate-400 font-mono block">{image.date}</span>
-                  <h4 className="text-sm font-bold text-white transition-colors">
+                  <h4 className="heading-card text-white transition-colors">
                     {image.title}
                   </h4>
                 </div>
@@ -71,14 +80,14 @@ export const ClubGallerySection = ({ gallery }: ClubGallerySectionProps) => {
         </div>
       </div>
 
-      {activeImageModal && (
+      {activeImageModal && createPortal(
         <div
           onClick={() => setActiveImageModal(null)}
-          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4"
+          className="fixed inset-0 z-[60] bg-black/90 backdrop-blur-md flex items-center justify-center p-4"
         >
           <div
             onClick={(event) => event.stopPropagation()}
-            className="relative bg-slate-950 rounded-3xl max-w-3xl w-full border border-slate-800 overflow-hidden space-y-4 p-4 sm:p-6"
+            className="relative bg-slate-950 rounded-3xl max-w-3xl w-full border border-slate-800 max-h-[calc(100dvh-2rem)] overflow-y-auto space-y-4 image-dialog-padding"
           >
             <button
               onClick={() => setActiveImageModal(null)}
@@ -92,7 +101,7 @@ export const ClubGallerySection = ({ gallery }: ClubGallerySectionProps) => {
               src={activeImageModal.imageUrl}
               alt={activeImageModal.title}
               referrerPolicy="no-referrer"
-              className="w-full h-80 sm:h-96 object-cover rounded-2xl"
+              className="w-full h-auto max-h-[65dvh] object-contain rounded-2xl"
             />
 
             <div className="space-y-1">
@@ -100,11 +109,12 @@ export const ClubGallerySection = ({ gallery }: ClubGallerySectionProps) => {
                 <span className="text-xs text-white font-bold">{activeImageModal.category}</span>
                 <span className="text-xs text-slate-500">• {activeImageModal.date}</span>
               </div>
-              <h3 className="text-xl font-bold text-white">{activeImageModal.title}</h3>
+              <h3 className="heading-card text-white">{activeImageModal.title}</h3>
               <p className="text-xs text-slate-300">{activeImageModal.caption}</p>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );

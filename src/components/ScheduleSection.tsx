@@ -70,15 +70,15 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, cal
 
   return (
     <section id="schedule" className="py-20 bg-slate-950 text-white relative border-b border-slate-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="site-container">
         {/* Section Title */}
         <div className="flex flex-col items-center text-center sm:items-stretch sm:text-left md:flex-row md:items-end justify-between gap-4 mb-10 pb-6 border-b border-slate-800">
           <div className="space-y-3">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-white border border-orange-500/20 text-xs font-bold uppercase tracking-wider">
-              <Calendar className="w-3.5 h-3.5 text-orange-400" />
+              <Calendar className="heading-label-icon text-orange-400" />
               정모일정 & 체육관 안내
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            <h2 className="heading-section text-white tracking-tight">
               월간 <span className="heading-accent">정모</span> 일정
             </h2>
             <p className="text-slate-400 text-sm">
@@ -101,10 +101,10 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, cal
 
         {/* Monthly Calendar */}
         <div className="overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/80 shadow-2xl">
-          <div className="flex flex-col items-center text-center gap-4 border-b border-slate-800 px-5 py-5 sm:flex-row sm:text-left sm:items-center sm:justify-between sm:px-7">
+          <div className="flex flex-col items-center text-center gap-4 border-b border-slate-800 panel-padding sm:flex-row sm:text-left sm:items-center sm:justify-between">
             <div>
               <p className="text-xs font-bold text-white">MONTHLY SCHEDULE</p>
-              <h3 className="mt-1 text-2xl font-black text-white">
+              <h3 className="heading-subsection mt-1 text-white">
                 {visibleYear}년 {visibleMonthIndex + 1}월
               </h3>
             </div>
@@ -220,13 +220,13 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, cal
         </div>
 
         {/* Gym Location Interactive Card Box */}
-        <div className="mt-12 bg-slate-900 rounded-3xl border border-slate-800 p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="mt-12 bg-slate-900 rounded-3xl border border-slate-800 panel-padding grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-6 space-y-4 text-center sm:text-left">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-white text-xs font-bold">
-              <Navigation className="w-3.5 h-3.5 text-orange-400" />
+              <Navigation className="heading-label-icon text-orange-400" />
               체육관 오시는 길
             </div>
-            <h3 className="text-2xl font-bold text-white">
+            <h3 className="heading-subsection text-white">
               <span className="heading-accent">인천/부천</span> 소재의<br className="sm:hidden" /> 실내체육관에서 진행합니다
             </h3>
             <div className="grid grid-cols-3 gap-4 text-xs pt-2">

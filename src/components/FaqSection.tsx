@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
-import { FAQ_CATEGORIES, type FaqItem } from '../types';
+import { type FaqItem } from '../types';
+import { faqContent } from '../data/clubContent';
 import { HelpCircle, ChevronDown, ChevronUp, MessageSquare } from 'lucide-react';
 
-const categories = ['전체', ...FAQ_CATEGORIES] as const;
+
 
 interface FaqSectionProps {
   faqs: FaqItem[];
 }
 
 export const FaqSection: React.FC<FaqSectionProps> = ({ faqs }) => {
+  const categories = ['전체', ...new Set([...faqContent.categories, ...faqs.map(item => item.category)].filter(category => category !== '전체'))];
   const [openId, setOpenId] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<'전체' | FaqItem['category']>('전체');
 
@@ -22,19 +24,19 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ faqs }) => {
 
   return (
     <section id="faq" className="py-20 bg-slate-950 text-white relative border-b border-slate-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+      <div className="site-container space-y-10">
         
         {/* Section Header */}
         <div className="text-center sm:text-left space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-white border border-orange-500/20 text-xs font-bold uppercase tracking-wider">
-            <HelpCircle className="w-3.5 h-3.5 text-orange-400" />
-            자주 묻는 질문 (FAQ)
+            <HelpCircle className="heading-label-icon text-orange-400" />
+            {faqContent.label}
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            <span className="heading-accent">궁금하신 사항</span>을 <br className="sm:hidden" />빠르게 안내해 드립니다
+          <h2 className="heading-section text-white tracking-tight">
+            <span className="heading-accent">{faqContent.titleAccent}</span>{faqContent.title}
           </h2>
           <p className="text-sm text-slate-400">
-            신입가입, 준비물, 체육관주차, 회비 등 궁금한 내용을 확인하세요.
+            {faqContent.description}
           </p>
         </div>
 
@@ -73,7 +75,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ faqs }) => {
                   aria-expanded={isOpen}
                   aria-controls={`faq-answer-${faq.id}`}
                   onClick={() => toggleAccordion(faq.id)}
-                  className="w-full p-5 text-left flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-slate-100 hover:text-white transition-colors"
+                  className="w-full faq-question-padding text-left flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-slate-100 hover:text-white transition-colors"
                 >
                   <div className="flex items-center gap-3">
                     <span className="px-2.5 py-0.5 rounded bg-orange-500/10 text-white text-xs font-mono font-bold shrink-0">
@@ -89,7 +91,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ faqs }) => {
                 </button>
 
                 {isOpen && (
-                  <div id={`faq-answer-${faq.id}`} className="px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-300 border-t border-slate-800/80 leading-relaxed bg-slate-950/40">
+                  <div id={`faq-answer-${faq.id}`} className="faq-answer-padding text-xs sm:text-sm text-slate-300 border-t border-slate-800/80 leading-relaxed whitespace-pre-line bg-slate-950/40">
                     {faq.answer}
                   </div>
                 )}
@@ -99,23 +101,23 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ faqs }) => {
         </div>
 
         {/* Kakao Customer Support Banner */}
-        <div className="p-6 rounded-3xl bg-slate-900 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="panel-padding rounded-3xl bg-slate-900 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3 text-center sm:text-left">
             <div className="w-10 h-10 rounded-2xl bg-[#FEE500] text-[#3C1E1E] hidden sm:flex items-center justify-center font-bold shrink-0">
               <MessageSquare className="w-5 h-5" strokeWidth={3} />
             </div>
             <div>
-              <h4 className="text-sm font-bold text-white">더 궁금한 점이 있으신가요?</h4>
-              <p className="text-xs text-slate-400">카카오톡 오픈채팅 '여성농구 한늬'로 1:1 편하게 문의주세요.</p>
+              <h4 className="heading-item text-white">{faqContent.contact.title}</h4>
+              <p className="text-xs text-slate-400">{faqContent.contact.description}</p>
             </div>
           </div>
           <a
-            href="https://open.kakao.com/o/gm9r16ub"
+            href={faqContent.contact.url}
             target="_blank"
             rel="noreferrer"
             className="px-5 py-2.5 rounded-xl bg-[#FEE500] text-[#3C1E1E] font-black text-xs hover:bg-[#FADA0A] transition-colors shrink-0"
           >
-            카카오톡 문의하기
+            {faqContent.contact.label}
           </a>
         </div>
 

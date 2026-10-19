@@ -15,7 +15,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenJoinForm }) =>
 
   return (
     <footer className="footer-shell bg-black text-slate-400 text-xs border-t border-red-500/40 relative pt-16 pb-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <div className="site-container space-y-12">
         <div className="flex justify-center">
           <div className="flex items-center justify-center gap-5 text-center">
             <img src={hanniLogo} alt="한늬 더 블레이저스" className="h-20 w-20 object-contain" />

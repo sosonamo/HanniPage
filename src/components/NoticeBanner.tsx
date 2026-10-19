@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { ScheduleEvent } from '../types';
-import { Flame, Calendar, MapPin, ArrowUpRight } from 'lucide-react';
+import { Flame, Calendar, MapPin } from 'lucide-react';
 
 interface NoticeBannerProps {
   nextSchedule?: ScheduleEvent;
   onRsvpClick: () => void;
-  onJoinClick: () => void;
 }
 
 const getTimeLeft = (startDateTime?: string) => {
@@ -21,7 +20,7 @@ const getTimeLeft = (startDateTime?: string) => {
   };
 };
 
-export const NoticeBanner: React.FC<NoticeBannerProps> = ({ nextSchedule, onRsvpClick, onJoinClick }) => {
+export const NoticeBanner: React.FC<NoticeBannerProps> = ({ nextSchedule, onRsvpClick }) => {
   const [timeLeft, setTimeLeft] = useState(() => getTimeLeft(nextSchedule?.startDateTime));
 
   useEffect(() => {
@@ -39,7 +38,7 @@ export const NoticeBanner: React.FC<NoticeBannerProps> = ({ nextSchedule, onRsvp
         {/* Left marquee / announcement */}
         <div className="flex items-center gap-2 overflow-x-auto whitespace-nowrap scrollbar-none w-full md:w-auto">
           <span className="inline-flex items-center gap-1 bg-black text-white font-black px-2.5 py-1 text-[10px] tracking-widest">
-            <Flame className="w-3.5 h-3.5 animate-pulse" />
+            <Flame className="w-3.5 h-3.5 text-orange-400 animate-pulse" />
             공지
           </span>
           <span className="text-white font-black tracking-wide">
@@ -84,13 +83,6 @@ export const NoticeBanner: React.FC<NoticeBannerProps> = ({ nextSchedule, onRsvp
                 : '일정 없음'}
           </button>
 
-          <button
-            onClick={onJoinClick}
-            className="text-[10px] bg-white hover:bg-black text-black hover:text-white font-black px-3 py-1.5 transition-all flex items-center gap-1 tracking-wide"
-          >
-            JOIN US
-            <ArrowUpRight className="w-3 h-3" />
-          </button>
         </div>
       </div>
     </div>

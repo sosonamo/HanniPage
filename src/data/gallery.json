@@ -1,0 +1,38 @@
+{
+  "categories": [ "정모", "교류전", "대회", "행사"],
+
+  "items": [
+    {
+      "id": "gal-4",
+      "title": "2026 새싹리그 2위",
+      "category": "대회",
+      "date": "2026.09.27",
+      "caption": "새싹리그",
+      "url": "https://drive.google.com/file/d/1Gnp9sNCDRJLIc6nPEsiy3AP1mzf-I0yu/view?usp=drive_link"
+    },
+    {
+      "id": "gal-3",
+      "title": "다함께 훈련",
+      "category": "정모",
+      "date": "2026.07.25",
+      "caption": "훈련&게임",
+      "url": "https://drive.google.com/file/d/1Z3LXcHemKziSX1tmL7HnO73mzDuMFY4V/view?usp=drive_link"
+    },
+    {
+      "id": "gal-2",
+      "title": "서울 교류전",
+      "category": "교류전",
+      "date": "2026.06.21",
+      "caption": "JDC 교류전",
+      "url": "https://drive.google.com/file/d/1j6BQ6knNKfbDbjkzCBsGLOEYsOMNYs5y/view?usp=drive_link"
+    },
+    {
+      "id": "gal-1",
+      "title": "부천 직관",
+      "category": "행사",
+      "date": "2026.01.30",
+      "caption": "직관",
+      "url": "https://drive.google.com/file/d/1F2IO9hDiE1OIMkLGILOvOLpGW9wb_zEw/view?usp=drive_link"
+    }
+  ]
+}

@@ -26,16 +26,16 @@ export const RosterSection: React.FC<RosterSectionProps> = ({ roster }) => {
 
   return (
     <section id="roster" className="py-20 bg-slate-900 text-white relative border-b border-slate-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <div className="site-container space-y-12">
         
         {/* Section Header */}
         <div className="flex flex-col text-center sm:text-left md:flex-row md:items-end justify-between gap-4 border-b border-slate-800 pb-6">
           <div className="space-y-3">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-white border border-orange-500/20 text-xs font-bold uppercase tracking-wider">
-              <Users className="w-3.5 h-3.5 text-orange-400" />
+              <Users className="heading-label-icon text-orange-400" />
               팀원소개 (Roster)
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            <h2 className="heading-section text-white tracking-tight">
               코트를 빛내는 <span className="heading-accent">한늬즈</span>
             </h2>
             <p className="text-sm text-slate-400">
@@ -73,7 +73,7 @@ export const RosterSection: React.FC<RosterSectionProps> = ({ roster }) => {
               <div>
                 {/* Image & Number Header */}
                 <div className="roster-visual relative aspect-[4/3] overflow-hidden bg-slate-900">
-                  <img
+                  {member.image && <img
                     src={
                       hoveredMemberId === member.id && member.animatedImage
                         ? member.animatedImage
@@ -82,7 +82,7 @@ export const RosterSection: React.FC<RosterSectionProps> = ({ roster }) => {
                     alt={`한늬 ${member.number}번 선수 캐릭터`}
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-contain p-5 pb-0 transition-transform duration-500 group-hover:scale-105"
-                  />
+                  />}
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
 
                   {/* Back Number Badge */}
@@ -102,11 +102,11 @@ export const RosterSection: React.FC<RosterSectionProps> = ({ roster }) => {
                 </div>
 
                 {/* Card Content */}
-                <div className="p-6 space-y-4">
+                <div className="card-padding space-y-4">
                   {SHOW_PLAYER_NAMES && (
                   <div>
                     <div className="flex items-center justify-between">
-                      <h3 className="text-xl font-black text-white">
+                      <h3 className="heading-card text-white">
                         {member.name}
                       </h3>
                       {member.nickname && (
@@ -124,7 +124,7 @@ export const RosterSection: React.FC<RosterSectionProps> = ({ roster }) => {
                     <div className="p-3 bg-slate-900/80 rounded-xl border border-slate-800 text-xs space-y-1">
                       <span className="text-slate-400 text-[10px] uppercase font-bold block">주무기 / 시그니처 무브</span>
                       <span className="font-bold text-slate-200 flex items-center gap-1">
-                        <Flame className="w-3.5 h-3.5 text-orange-400" />
+                        <Flame className="heading-label-icon text-orange-400" />
                         {member.favoriteMove}
                       </span>
                     </div>

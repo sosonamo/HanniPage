@@ -1,0 +1,21 @@
+{
+  "title": "신입 팀원 가입 안내",
+  "subtitle": "한늬 가입 방법 및 회비 안내",
+  "eligibilityTitle": "모집 대상",
+  "eligibility": [
+    "농구를 좋아하는 모든 성인 여성",
+    "매너 있는 코트 에티켓과 상호 존중 마인드를 가지신 분",
+    "정모 1회 이상 참석 (필수)"
+  ],
+  "feesTitle": "가입비 및 회비",
+  "fees": {
+    "joining": 30000,
+    "monthly": 30000
+  },
+  "joiningLabel": "가입비 (최초 1회)",
+  "monthlyLabel": "월 회비",
+  "monthlyDescription": "체육관 대관료 & 행사 지원",
+  "guideTitle": "팀원 가입 안내",
+  "guideUrl": "https://docs.google.com/document/d/1fROW0udz5S_F-fDSLEueYsgH02M1iwN0gM8tYNoW2zM/edit?usp=drive_link",
+  "guideLabel": "보러가기"
+}

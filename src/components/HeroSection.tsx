@@ -1,17 +1,5 @@
-import {
-  hanniLogo,
-  characterNo3,
-  characterNo6,
-  characterNo7,
-  characterNo9,
-  characterNo10,
-  characterNo11,
-  characterNo13,
-  characterNo17,
-  characterNo22,
-  characterNo33,
-  characterNo37,
-} from '../assets/images';
+import { hanniLogo } from '../assets/images';
+import { roster } from '../data/sectionContent';
 import React from 'react';
 import { SectionId } from '../types';
 import { ArrowRight, Flame, MapPin, ShieldCheck } from 'lucide-react';
@@ -26,7 +14,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onOpenJoin
     <section className="hero-shell relative overflow-hidden border-b border-slate-800 text-white">
       <div className="hero-court" aria-hidden="true" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-20 lg:py-24">
+      <div className="site-container relative z-10 py-6 sm:py-20 lg:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center sm:min-h-[580px] lg:min-h-[650px]">
           
           {/* Left Column: Text Content & CTAs */}
@@ -86,17 +74,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onOpenJoin
             <div className="hero-logo-halo" aria-hidden="true">
               <img src={hanniLogo} alt="" className="h-full w-full object-contain opacity-[0.14] grayscale" />
             </div>
-            <img src={characterNo17} alt="한늬 17번 선수 캐릭터" className="hero-character hero-character-17" />
-            <img src={characterNo22} alt="한늬 22번 선수 캐릭터" className="hero-character hero-character-22" />
-            <img src={characterNo37} alt="한늬 37번 선수 캐릭터" className="hero-character hero-character-37" />
-            <img src={characterNo9} alt="한늬 9번 선수 캐릭터" className="hero-character hero-character-9" />
-            <img src={characterNo3} alt="한늬 3번 선수 캐릭터" className="hero-character hero-character-3" />
-            <img src={characterNo6} alt="한늬 6번 선수 캐릭터" className="hero-character hero-character-6" />
-            <img src={characterNo7} alt="한늬 7번 선수 캐릭터" className="hero-character hero-character-7" />
-            <img src={characterNo10} alt="한늬 10번 선수 캐릭터" className="hero-character hero-character-10" />
-            <img src={characterNo11} alt="한늬 11번 선수 캐릭터" className="hero-character hero-character-11" />
-            <img src={characterNo13} alt="한늬 13번 선수 캐릭터" className="hero-character hero-character-13" />
-            <img src={characterNo33} alt="한늬 33번 선수 캐릭터" className="hero-character hero-character-33" />
+            {[17, 22, 37, 9, 3, 6, 7, 10, 11, 13, 33].map((number) => {
+              const member = roster.find((player) => player.number === number);
+              return member?.image ? <img key={member.id} src={member.image} alt={`한늬 ${number}번 선수 캐릭터`} className={`hero-character hero-character-${number}`} /> : null;
+            })}
             <div className="absolute bottom-0 left-2 right-2 flex items-center gap-3 text-[9px] font-black tracking-[0.24em] text-slate-500">
               <span>HANNI THE BLAZERS</span>
               <span className="h-px flex-1 bg-gradient-to-r from-red-500 to-transparent" />

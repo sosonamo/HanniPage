@@ -1,6 +1,6 @@
 import React from 'react';
 import { SectionId } from '../types';
-import { ArrowUpRight, CalendarDays, Flame, Shield, Users } from 'lucide-react';
+import { CalendarDays, Flame, Shield, Users } from 'lucide-react';
 
 interface CoreMenuGridProps {
   onNavigate: (sectionId: SectionId) => void;
@@ -49,11 +49,11 @@ export const CoreMenuGrid: React.FC<CoreMenuGridProps> = ({ onNavigate, onOpenJo
 
   return (
     <section id="core-menu" className="core-menu-shell relative overflow-hidden border-b border-slate-800 py-16 sm:py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="site-container">
         <div className="mb-10 flex flex-col items-center text-center sm:text-left gap-4 border-b border-slate-800 pb-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="section-kicker">Explore Hanni</p>
-            <h2 className="headline-font mt-2 text-4xl sm:text-6xl text-white">
+            <h2 className="heading-menu headline-font mt-2 text-white">
               FIND YOUR <span className="text-white">PLAY.</span>
             </h2>
           </div>
@@ -84,17 +84,13 @@ export const CoreMenuGrid: React.FC<CoreMenuGridProps> = ({ onNavigate, onOpenJo
                     <p className="hidden sm:block mb-2 text-[9px] font-black uppercase tracking-[0.12em] sm:tracking-[0.28em] text-white">
                       {card.eyebrow}
                     </p>
-                    <h3 className="headline-font text-2xl sm:text-4xl text-white transition-transform duration-300 group-hover:translate-x-1">
+                    <h3 className="heading-menu-card headline-font text-white transition-transform duration-300 group-hover:translate-x-1">
                       {card.title}
                     </h3>
                     <p className="mt-1 text-xs sm:text-sm font-black text-slate-200">{card.korean}</p>
                     <p className="hidden sm:block mt-4 max-w-[16rem] text-xs leading-relaxed text-slate-500 transition-colors group-hover:text-slate-300">
                       {card.description}
                     </p>
-                    <div className="hidden sm:flex mt-6 items-center justify-between border-t border-slate-800 pt-4 text-[10px] font-black tracking-[0.16em] text-white">
-                      <span>VIEW MORE</span>
-                      <ArrowUpRight className="h-4 w-4 text-red-500 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
-                    </div>
                   </div>
                 </div>
               </button>

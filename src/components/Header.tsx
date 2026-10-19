@@ -1,7 +1,8 @@
 import { hanniLogo } from '../assets/images';
 import React, { useState, useEffect } from 'react';
+import { flushSync } from 'react-dom';
 import { SectionId } from '../types';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { Menu, X, ArrowUpRight, CalendarDays, Flame, Shield, Users, UserRound, CircleHelp, type LucideIcon } from 'lucide-react';
 
 interface HeaderProps {
   activeSection: SectionId;
@@ -25,13 +26,13 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate, onOpe
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navItems: { id: SectionId; label: string; index: string }[] = [
-    { id: 'schedule', label: 'SCHEDULE', index: '01' },
-    { id: 'join', label: 'JOIN US', index: '02' },
-    { id: 'about', label: 'ABOUT', index: '03' },
-    { id: 'roster', label: 'ROSTER', index: '04' },
-    { id: 'members', label: 'MEMBERS', index: '05' },
-    { id: 'faq', label: 'FAQ', index: '06' },
+  const navItems: { id: SectionId; label: string; icon: LucideIcon }[] = [
+    { id: 'schedule', label: 'SCHEDULE', icon: CalendarDays },
+    { id: 'join', label: 'JOIN US', icon: Flame },
+    { id: 'about', label: 'ABOUT', icon: Shield },
+    { id: 'roster', label: 'ROSTER', icon: Users },
+    { id: 'faq', label: 'FAQ', icon: CircleHelp },
+    { id: 'members', label: 'MEMBERS', icon: UserRound },
   ];
 
   const handleNavClick = (id: SectionId) => {
@@ -39,8 +40,9 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate, onOpe
       window.location.assign(`${import.meta.env.BASE_URL}members.html`);
       return;
     }
+    // Remove the drawer from layout before measuring the destination section.
+    flushSync(() => setMobileMenuOpen(false));
     onNavigate(id);
-    setMobileMenuOpen(false);
   };
 
   return (
@@ -51,7 +53,7 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate, onOpe
           : 'bg-black/90 backdrop-blur-sm border-b border-white/10 py-3'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <div className="site-container flex items-center justify-between">
         {/* Brand Logo */}
         <button
           type="button"
@@ -78,6 +80,7 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate, onOpe
         <nav className="hidden xl:flex items-center gap-5">
           {navItems.map((item) => {
             const isActive = activeSection === item.id;
+            const Icon = item.icon;
             return (
               <button
                 key={item.id}
@@ -88,7 +91,7 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate, onOpe
                     : 'text-slate-300 hover:text-white'
                 }`}
               >
-                <span className="font-mono text-[9px] text-slate-600">{item.index}</span>
+                <Icon aria-hidden="true" className="h-4 w-4 shrink-0 text-orange-400" strokeWidth={1.6} />
                 {item.label}
               </button>
             );
@@ -126,6 +129,7 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate, onOpe
           <div className="grid grid-cols-1 gap-1.5 pt-2">
             {navItems.map((item) => {
               const isActive = activeSection === item.id;
+              const Icon = item.icon;
               return (
                 <button
                   key={item.id}
@@ -137,7 +141,7 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate, onOpe
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <span className="font-mono text-[10px] text-slate-500">{item.index}</span>
+                    <Icon aria-hidden="true" className="h-5 w-5 shrink-0 text-orange-400" strokeWidth={1.6} />
                     <span>{item.label}</span>
                   </div>
                   <ArrowUpRight className="w-4 h-4 text-slate-500" />

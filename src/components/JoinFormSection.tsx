@@ -131,15 +131,15 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
 
   return (
     <section id="join" className="py-20 bg-slate-900 text-white relative border-b border-slate-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="site-container">
         
         {/* Section Header */}
         <div className="text-center sm:text-left max-w-3xl mx-auto sm:mx-0 space-y-3 mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-white border border-orange-500/20 text-xs font-bold uppercase tracking-wider">
-            <UserPlus className="w-3.5 h-3.5 text-orange-400" />
+            <UserPlus className="heading-label-icon text-orange-400" />
             참가신청서 (Join Us)
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          <h2 className="heading-section text-white tracking-tight">
             한늬랑 농구하실<br className="sm:hidden" /><span className="heading-accent"> 게스트를 모집</span>합니다!
           </h2>
           <p className="text-sm sm:text-base text-slate-300">
@@ -156,7 +156,7 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
             return (
               <div
                 key={item.id}
-                className="bg-slate-900/90 rounded-2xl border border-slate-800 p-6 flex flex-col justify-between hover:border-orange-500/40 transition-all shadow-xl group"
+                className="bg-slate-900/90 rounded-2xl border border-slate-800 card-padding flex flex-col justify-between hover:border-orange-500/40 transition-all shadow-xl group"
               >
                 <div className="space-y-4 text-center sm:text-left">
                   {/* Date & Time */}
@@ -171,7 +171,7 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-xl font-bold text-white transition-colors">
+                  <h3 className="heading-card text-white transition-colors">
                     {item.title}
                   </h3>
 
@@ -202,7 +202,7 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
                   {hasCapacity && <div className="space-y-1.5 pt-2">
                     <div className="flex items-center justify-center gap-2 sm:justify-between text-xs">
                       <span className="text-slate-400 font-medium flex items-center gap-1">
-                        <Users className="w-3.5 h-3.5 text-orange-400" />
+                        <Users className="heading-label-icon text-orange-400" />
                         참석 확정 현황
                       </span>
                       <span className="font-bold text-slate-200">
@@ -265,7 +265,7 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
           {/* Right Column: Multi-Step Interactive Form */}
-          <div className="lg:col-span-7 bg-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-2xl relative">
+          <div className="lg:col-span-7 bg-slate-950 panel-padding rounded-3xl border border-slate-800 shadow-2xl relative">
             
             {!submitted ? (
               <div>
@@ -301,7 +301,7 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
                   {/* STEP 1: Basic Info */}
                   {step === 1 && (
                     <div className="space-y-4 animate-in fade-in duration-300">
-                      <h3 className="text-lg font-bold text-white mb-2">Step 1. 기본 인적사항을 입력해주세요</h3>
+                      <h3 className="heading-card text-white mb-2">Step 1. 기본 인적사항을 입력해주세요</h3>
                       
                       {/* Name */}
                       <div>
@@ -381,7 +381,7 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
                   {/* STEP 2: Basketball Level & Position */}
                   {step === 2 && (
                     <div className="space-y-5 animate-in fade-in duration-300">
-                      <h3 className="text-lg font-bold text-white mb-2">Step 2. 농구 경험 및 선호 포지션</h3>
+                      <h3 className="heading-card text-white mb-2">Step 2. 농구 경험 및 선호 포지션</h3>
 
                       {/* Level Selection */}
                       <div>
@@ -468,7 +468,7 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
                   {/* STEP 3: Days & Submit */}
                   {step === 3 && (
                     <div className="space-y-5 animate-in fade-in duration-300">
-                      <h3 className="text-lg font-bold text-white mb-2">Step 3. 가능 일정 & 가입 동기</h3>
+                      <h3 className="heading-card text-white mb-2">Step 3. 가능 일정 & 가입 동기</h3>
 
                       {/* Days Checkbox */}
                       <div>
@@ -512,7 +512,7 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
                       </div>
 
                       {/* Terms Agreement */}
-                      <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
+                      <div className="compact-padding rounded-xl bg-slate-900 border border-slate-800 space-y-2">
                         <label className="flex items-center gap-2 cursor-pointer">
                           <input
                             type="checkbox"
@@ -572,7 +572,7 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
                 </div>
 
                 <div className="space-y-2">
-                  <h3 className="text-2xl font-black text-white">
+                  <h3 className="heading-card text-white">
                     {formData.name}님, 참가신청이 정상 완료되었습니다! 🎉
                   </h3>
                   <p className="text-xs sm:text-sm text-slate-300 max-w-md mx-auto">
@@ -581,7 +581,7 @@ export const JoinFormSection: React.FC<JoinFormSectionProps> = ({
                 </div>
 
                 {/* Summary Card */}
-                <div className="bg-slate-900 p-5 rounded-2xl border border-slate-800 text-left text-xs space-y-2 max-w-md mx-auto">
+                <div className="bg-slate-900 card-padding rounded-2xl border border-slate-800 text-left text-xs space-y-2 max-w-md mx-auto">
                   <div className="flex justify-between border-b border-slate-800 pb-2">
                     <span className="text-slate-400">신청자명:</span>
                     <span className="font-bold text-white">{formData.name}</span>

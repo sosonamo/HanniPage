@@ -25,3 +25,11 @@ pnpm-debug.log*
 .vite/
 
 backup/
+
+# Private migration data: never publish or commit
+firebase-private/
+.firebase/
+
+# Generated web copies of Drive photos
+public/drive-images/
+src/assets/generated/

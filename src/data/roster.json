@@ -1,0 +1,192 @@
+[
+  {
+    "id": "m-1",
+    "number": 7,
+    "name": "유지수",
+    "nickname": "에이스",
+    "role": "선수",
+    "position": "SF",
+    "heightCm": 162,
+    "experienceStartYear": 2012,
+    "favoriteMove": "빠른 드리블 후 돌파 & 킥아웃 패스",
+    "stats": {
+      "shooting": 85,
+      "passing": 95,
+      "defense": 80,
+      "speed": 90,
+      "stamina": 88
+    },
+    "intro": "공격과 수비를 두루 소화하는 다재다능한 에이스.",
+    "url": "https://drive.google.com/file/d/1JyApschldY8AsERD1DfUXPKJtR5BskLQ/view?usp=drive_link"
+  },
+  {
+    "id": "m-2",
+    "number": 11,
+    "name": "조소연",
+    "nickname": "조라몬",
+    "role": "주장",
+    "position": "SG",
+    "heightCm": 159,
+    "experienceStartYear": 2014,
+    "favoriteMove": "3점슛",
+    "stats": {
+      "shooting": 92,
+      "passing": 88,
+      "defense": 90,
+      "speed": 82,
+      "stamina": 85
+    },
+    "intro": "한늬를 이끄는 캡틴. 센스있는 수비를 하는 클러치슈터.",
+    "url": "https://drive.google.com/file/d/1kWiVJ2X8T1ZWpnBUNdlL1iaBjc5kWSLM/view?usp=drive_link"
+  },
+  {
+    "id": "m-3",
+    "number": 6,
+    "name": "최유리",
+    "nickname": "유리",
+    "role": "선수",
+    "position": "PF",
+    "heightCm": 168,
+    "experienceStartYear": 2021,
+    "favoriteMove": "미들슛 / 리바운드 / 블록슛",
+    "stats": {
+      "shooting": 96,
+      "passing": 75,
+      "defense": 78,
+      "speed": 85,
+      "stamina": 82
+    },
+    "intro": "경기의 흐름을 바꾸는 블록슛마스터.",
+    "url": "https://drive.google.com/file/d/1w6VYYNRVtHuQATpo62ukq314td-IEWWH/view?usp=drive_link"
+  },
+  {
+    "id": "m-4",
+    "number": 9,
+    "name": "김도예",
+    "nickname": "동메",
+    "role": "선수",
+    "position": "SF",
+    "heightCm": 166,
+    "experienceStartYear": 2023,
+    "favoriteMove": "원드리블 점퍼 / 훅슛",
+    "stats": {
+      "shooting": 82,
+      "passing": 83,
+      "defense": 92,
+      "speed": 88,
+      "stamina": 96
+    },
+    "intro": "열정 만렙의 슈팅스타.",
+    "url": "https://drive.google.com/file/d/1X3pafBANAkm8wlXIh6-C6CqZ4KThJB1o/view?usp=drive_link"
+  },
+  {
+    "id": "m-5",
+    "number": 10,
+    "name": "이수빈",
+    "nickname": "수빈",
+    "role": "선수",
+    "position": "PF",
+    "heightCm": 170,
+    "experienceStartYear": 2024,
+    "favoriteMove": "캐치 앤 슛",
+    "stats": {
+      "shooting": 78,
+      "passing": 76,
+      "defense": 94,
+      "speed": 76,
+      "stamina": 90
+    },
+    "intro": "적극적인 박스아웃과 허슬 플레이의 보물포워드.",
+    "url": "https://drive.google.com/file/d/1ozXGLZG0ehzLM-3ROhQoG6e-WOZWvYMS/view?usp=drive_link"
+  },
+  {
+    "id": "m-6",
+    "number": 3,
+    "name": "김지은",
+    "nickname": "지은",
+    "role": "선수",
+    "position": "PG",
+    "heightCm": 156,
+    "experienceStartYear": 2024,
+    "favoriteMove": "돌파 & 패스",
+    "stats": {
+      "shooting": 75,
+      "passing": 82,
+      "defense": 98,
+      "speed": 70,
+      "stamina": 86
+    },
+    "intro": "넓은 시야로 경기를 조율하는 플레이메이커.",
+    "url": "https://drive.google.com/file/d/1L5AT30VLD2-iDcczJWuEHwi5vIMVt-vr/view?usp=drive_link"
+  },
+  {
+    "id": "m-7",
+    "number": 13,
+    "name": "여소리",
+    "nickname": "소리",
+    "role": "선수",
+    "position": "C",
+    "heightCm": 180,
+    "experienceStartYear": 2021,
+    "favoriteMove": "리바운드",
+    "stats": {
+      "shooting": 75,
+      "passing": 82,
+      "defense": 98,
+      "speed": 70,
+      "stamina": 86
+    },
+    "intro": "스피드와 높이를 함께 갖춘 골밑지킴이.",
+    "url": "https://drive.google.com/file/d/1nB4jkLsnZtO0MlZ4qogPWO0k4hFxwoNZ/view?usp=drive_link"
+  },
+  {
+    "id": "m-8",
+    "number": 33,
+    "name": "장혜진",
+    "nickname": "혜진",
+    "role": "선수",
+    "position": "C",
+    "heightCm": 170,
+    "experienceStartYear": 2021,
+    "favoriteMove": "리바운드",
+    "stats": {
+      "shooting": 75,
+      "passing": 82,
+      "defense": 98,
+      "speed": 70,
+      "stamina": 86
+    },
+    "intro": "파워풀한 플레이를 하는 팀의 에너자이저",
+    "url": "https://drive.google.com/file/d/1dYl5CrHRKFFQBlcs0alZwTVs8zRIQt1j/view?usp=drive_link"
+  },
+  {
+    "id": "m-17",
+    "number": 17,
+    "name": "이무늬",
+    "nickname": "무늬",
+    "role": "선수",
+    "position": "PF",
+    "intro": "넓은 활동범위와 농구 센스를 갖춘 올라운더.",
+    "url": "https://drive.google.com/file/d/1LgK3ZHhNYJP__7b_eKLyEmHf7SCX13Of/view?usp=drive_link"
+  },
+  {
+    "id": "m-22",
+    "number": 22,
+    "name": "조 이로하",
+    "nickname": "로하",
+    "role": "선수",
+    "position": "SG",
+    "intro": "매 경기 무서운 성장세를 보여주는 라이징슈터.",
+    "url": "https://drive.google.com/file/d/14xXvXAXbYpaKDOgcBfyWQZhRiy7AJflM/view?usp=drive_link"
+  },
+  {
+    "id": "m-37",
+    "number": 37,
+    "name": "다나카 코토네",
+    "nickname": "코네",
+    "role": "선수",
+    "position": "SF",
+    "intro": "리듬감 있는 돌파와 화려한 마무리가 돋보이는 테크니션.",
+    "url": "https://drive.google.com/file/d/12CTPGZK1kRZfjGzOJG1arxLutZ_GJO4C/view?usp=drive_link"
+  }
+]

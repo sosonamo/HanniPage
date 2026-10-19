@@ -56,7 +56,7 @@ export interface ClubTimelineItem {
 export interface GalleryItem {
   id: string;
   title: string;
-  category: '훈련' | '대회' | '소모임' | '단체사진';
+  category: string;
   date: string;
   imageUrl: string;
   caption: string;
@@ -76,11 +76,10 @@ export interface JoinFormData {
   agreedTerms: boolean;
 }
 
-export const FAQ_CATEGORIES = ['정모', '회비', '가입안내',] as const;
 
 export interface FaqItem {
   id: string;
   question: string;
   answer: string;
-  category: (typeof FAQ_CATEGORIES)[number];
+  category: string;
 }
