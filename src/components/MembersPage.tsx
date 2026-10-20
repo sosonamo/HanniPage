@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { OnlineMembers } from './OnlineMembers';
 import { isMembersConfigured, loginMember, logoutMember, memberErrorMessage, subscribeMember, type MemberState } from '../services/members';
-import { ExternalLink, LockKeyhole, Megaphone, Play, LogOut, FolderOpen, Youtube, ArrowUp } from 'lucide-react';
+import { ExternalLink, LockKeyhole, Megaphone, LogOut, FolderOpen, Youtube, ArrowUp } from 'lucide-react';
 
 export function MembersPage() {
   const [state, setState] = useState<MemberState>({ status: 'loading' });
@@ -55,6 +55,28 @@ export function MembersPage() {
                 <div className="rounded-2xl border border-slate-800 bg-slate-900/70 card-padding whitespace-pre-wrap text-sm leading-relaxed text-slate-300">{visibleContent.notice}</div>
               </div>
 
+              {/* Match Resources */}
+              <div className="space-y-5 border-t border-slate-800 pt-10">
+                <h3 className="heading-subsection flex items-center gap-2"><FolderOpen className="heading-subsection-icon text-red-400" aria-hidden="true" /> 경기자료</h3>
+                {visibleContent.matchResources.length ? (
+                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {visibleContent.matchResources.map(resource => resource.url ? (
+                      <a key={resource.id} href={resource.url} target="_blank" rel="noopener noreferrer"
+                        className="flex min-h-16 items-center justify-between gap-4 rounded-2xl border border-slate-800 bg-slate-900/70 px-6 py-3 hover:border-orange-400 focus-visible:outline-2 focus-visible:outline-orange-400">
+                        <span className="min-w-0 break-words font-bold">{resource.title}</span>
+                        <ExternalLink className="h-5 w-5 shrink-0 text-orange-400" aria-hidden="true" />
+                        <span className="sr-only">경기자료 열기 (새 탭)</span>
+                      </a>
+                    ) : (
+                      <div key={resource.id} className="flex min-h-16 items-center justify-between gap-4 rounded-2xl border border-slate-800 bg-slate-900/70 px-6 py-3">
+                        <span className="min-w-0 break-words font-bold">{resource.title}</span>
+                        <span className="shrink-0 text-xs text-slate-400">준비 중</span>
+                      </div>
+                    ))}
+                  </div>
+                ) : <p className="text-sm text-slate-400">등록된 경기자료가 없습니다.</p>}
+              </div>
+
               {/* Shared Resources */}
               <div className="space-y-5 border-t border-slate-800 pt-10">
                 <h3 className="heading-subsection flex items-center gap-2"><FolderOpen className="heading-subsection-icon text-red-400" aria-hidden="true" /> 공유 자료</h3>
@@ -75,24 +97,18 @@ export function MembersPage() {
               {/* YouTube List */}
               <div className="space-y-5 border-t border-slate-800 pt-10">
                 <h3 className="heading-subsection flex items-center gap-2"><Youtube className="heading-subsection-icon text-red-400" aria-hidden="true" /> YouTube 영상</h3>
-                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                  {visibleContent.playlists.map((playlist) => (
-                    <div key={playlist.id} className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/70">
-                      <a href={playlist.url} target="_blank" rel="noopener noreferrer" className="group relative block aspect-video bg-gradient-to-br from-red-950 to-slate-950 focus-visible:outline-2 focus-visible:outline-red-400" aria-label={`${playlist.title} YouTube에서 보기 (새 탭)`}>
-                        <span className="absolute inset-0 flex flex-col gap-4 items-center justify-center bg-black/20 group-hover:bg-black/40">
-                          <Play className="h-14 w-14 rounded-full bg-red-600 p-4 text-white" aria-hidden="true" />
-                          <h4 className="heading-card ">{playlist.title}</h4>
-                        </span>
+                {visibleContent.playlists.length ? (
+                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {visibleContent.playlists.map(playlist => (
+                      <a key={playlist.id} href={playlist.url} target="_blank" rel="noopener noreferrer"
+                        className="flex min-h-16 items-center justify-between gap-4 rounded-2xl border border-slate-800 bg-slate-900/70 px-6 py-3 hover:border-orange-400 focus-visible:outline-2 focus-visible:outline-orange-400">
+                        <span className="min-w-0 break-words font-bold">{playlist.title}</span>
+                        <ExternalLink className="h-5 w-5 shrink-0 text-orange-400" aria-hidden="true" />
+                        <span className="sr-only">YouTube에서 보기 (새 탭)</span>
                       </a>
-                      <div className="space-y-4 card-padding pt-0 text-center">
-                        <a href={playlist.url} target="_blank" rel="noopener noreferrer" className="btn-secondary inline-flex min-h-11 items-center gap-2 px-5 py-3 text-sm font-bold">
-                          재생목록 보러가기 <ExternalLink className="h-4 w-4" aria-hidden="true" />
-                          <span className="sr-only">(새 탭에서 열림)</span>
-                        </a>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                ) : <p className="text-sm text-slate-400">등록된 YouTube 영상이 없습니다.</p>}
               </div>
 
             </div>

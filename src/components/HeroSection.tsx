@@ -31,7 +31,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onOpenJoin
               </h1>
               <p className="text-sm sm:text-base text-slate-300 font-medium leading-relaxed max-w-xl mx-auto lg:mx-0 break-keep">
                 농구를 사랑하는 여성들이 함께 달리고, 부딪히고, 성장하는 코트.
-                열정으로 하나 되는 <strong className="text-white">한늬 더 블레이저스</strong>에서 당신의 플레이를 시작하세요.
+                <br />열정으로 하나 되는 <strong className="text-white">한늬 더 블레이저스</strong>에서 당신의 농구를 시작하세요.
               </p>
             </div>
 
@@ -52,6 +52,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onOpenJoin
             </div>
 
             {/* CTA Buttons */}
+            {/*}
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-4">
               <button
                 onClick={() => onNavigate('schedule')}
@@ -68,6 +69,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onOpenJoin
                 <ArrowRight className="w-5 h-5" />
               </button>
             </div>
+            */}
+
           </div>
 
           <div className="lg:col-span-5 relative h-[410px] sm:h-[520px] lg:h-[620px]" aria-label="한늬 선수 캐릭터 11명">

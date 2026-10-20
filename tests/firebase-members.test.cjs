@@ -120,3 +120,11 @@ test('Google Docs and Sheets links accepted; malformed and spoofed links rejecte
   for (const url of ["https://docs.google.com/document/d/doc_123/edit?usp=sharing","https://docs.google.com/spreadsheets/d/sheet-123/edit?usp=sharing#gid=0","https://docs.google.com/document/u/0/d/doc_123/edit"]) assert.doesNotThrow(() => parseMemberContent({ notice: '공지', playlists: [], resources: [{ id: 'id', title: '자료', url }] }));
   for (const url of ["https://docs.google.com.evil/document/d/x/edit","https://docs.google.com@evil.com/document/d/x/edit","http://docs.google.com/document/d/x/edit","https://docs.google.com/document/d/","https://docs.google.com/spreadsheets/","https://evil.com/document/d/x/edit"]) assert.throws(() => parseMemberContent({ notice: '공지', playlists: [], resources: [{ id: 'id', title: '자료', url }] }));
 });
+
+test('match resources support old documents and pending links, reject invalid rows', () => {
+  const base = { notice: '공지', playlists: [] };
+  const item = { id: 'match', title: '경기', url: '' };
+  assert.equal(parseMemberContent(base).matchResources.length, 0);
+  assert.equal(parseMemberContent({ ...base, matchResources: [item] }).matchResources[0].url, '');
+  for (const matchResources of [null, {}, [item, item], [{ ...item, title: '' }], [{ ...item, url: 'javascript:alert(1)' }]]) assert.throws(() => parseMemberContent({ ...base, matchResources }));
+});

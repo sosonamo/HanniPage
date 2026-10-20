@@ -133,11 +133,9 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, cal
                   <div
                     key={weekday}
                     className={`py-3 text-center text-xs font-bold ${
-                      index === 0
-                        ? 'text-white'
-                        : index === 6
-                          ? 'text-blue-400'
-                          : 'text-slate-400'
+                      index === 0 || index === 6
+                        ? 'text-[#0EBC5F]'
+                        : 'text-slate-400'
                     }`}
                   >
                     {weekday}
@@ -168,11 +166,9 @@ export const ScheduleSection: React.FC<ScheduleSectionProps> = ({ schedules, cal
                             isToday
                               ? 'bg-orange-500 text-white'
                               : isVisibleMonth
-                                ? date.getDay() === 0
-                                  ? 'text-white'
-                                  : date.getDay() === 6
-                                    ? 'text-blue-400'
-                                    : 'text-slate-200'
+                                ? date.getDay() === 0 || date.getDay() === 6
+                                  ? 'text-[#0EBC5F]'
+                                  : 'text-slate-200'
                                 : 'text-slate-600'
                           }`}
                         >

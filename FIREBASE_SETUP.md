@@ -59,7 +59,7 @@ Firestore Data 탭에서 다음 문서를 만듭니다.
 }
 ```
 
-기존 영상 목록 11개는 이 컴퓨터의 `firebase-private/member-content.json`으로 옮겨 두었습니다. `.gitignore`에 포함되어 저장소와 사이트 빌드에는 들어가지 않습니다. 이 파일을 보면서 실제 목록을 등록하세요. ‘2026 교류전’ 주소는 올바른 주소인지 먼저 확인해야 합니다. Firebase 콘솔의 Data 탭은 JSON 파일을 그대로 업로드하는 화면이 아니므로 필드를 생성해 넣습니다.
+초기 영상 목록은 이 컴퓨터의 `backup/2026-10-20/firebase-private/member-content.json`에 보관되어 있습니다. 현재 운영 목록은 Firestore의 `memberContent/main`에 있으며, 이 JSON은 최신 운영 데이터가 아닐 수 있습니다. `backup/`은 `.gitignore`에 포함되어 저장소와 사이트 빌드에는 들어가지 않습니다. 수동 가져오기 도구 `scripts/import-member-videos.py`는 기본적으로 이 백업 파일을 읽으며, 다른 파일은 `--input`으로 지정할 수 있습니다. ‘2026 교류전’ 주소는 올바른 주소인지 먼저 확인해야 합니다. Firebase 콘솔의 Data 탭은 JSON 파일을 그대로 업로드하는 화면이 아니므로 필드를 생성해 넣습니다.
 
 기존 주소는 이전 배포·Git 기록에 남아 있을 수 있습니다. 새 빌드에서 제거하는 것으로 과거에 공개된 링크가 회수되지는 않습니다. YouTube 일부 공개 영상은 링크를 아는 사람이 계속 볼 수 있습니다.
 

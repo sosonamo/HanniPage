@@ -388,7 +388,8 @@ textarea:focus-visible {
   animation-delay: -3.2s;
 }
 
-.hero-character-22 {
+.hero-character-22,
+.hero-character-22:hover {
   z-index: 3;
   left: 88%;
   top: 59%;
@@ -398,6 +399,7 @@ textarea:focus-visible {
 }
 
 .hero-character-33 {
+  z-index: 4;
   left: 79%;
   top: 75%;
   width: 31%;
@@ -541,10 +543,6 @@ textarea:focus-visible {
 }
 
 @media (max-width: 639px) {
-  .hero-character-33 {
-    z-index: 4;
-  }
-
   .hero-title {
     font-size: clamp(3.2rem, 17vw, 4.7rem);
   }

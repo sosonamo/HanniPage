@@ -42,7 +42,7 @@ def firestore_playlists(playlists):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--apply', action='store_true', help='Firebase에 실제 반영 (기본은 미리보기)')
-    parser.add_argument('--input', default='firebase-private/member-content.json')
+    parser.add_argument('--input', default='backup/2026-10-20/firebase-private/member-content.json')
     parser.add_argument('--bundle', help='Cloud Shell에 업로드할 단일 파일 생성 (데이터 포함)')
     args = parser.parse_args()
     content = EMBEDDED_CONTENT if EMBEDDED_CONTENT is not None else json.loads(Path(args.input).read_text())

@@ -8,14 +8,17 @@ interface ClubGallerySectionProps {
   gallery: GalleryItem[];
 }
 
+const getGalleryFilter = (category: string) =>
+  category === '교류전' || category === '대회' ? '교류전/대회' : category;
+
 // AboutSection에서 사용하는 클럽 사진 갤러리입니다.
 export const ClubGallerySection = ({ gallery }: ClubGallerySectionProps) => {
   const [selectedGalleryCategory, setSelectedGalleryCategory] = useState('전체');
   const [activeImageModal, setActiveImageModal] = useState<GalleryItem | null>(null);
-  const galleryCategories = ['전체', ...new Set([...galleryConfig.categories, ...gallery.map((item) => item.category)].filter((category) => category !== '전체'))];
+  const galleryCategories = ['전체', ...new Set([...galleryConfig.categories, ...gallery.map((item) => item.category)].map(getGalleryFilter).filter((category) => category !== '전체'))];
   const filteredGallery = selectedGalleryCategory === '전체'
     ? gallery
-    : gallery.filter((item) => item.category === selectedGalleryCategory);
+    : gallery.filter((item) => getGalleryFilter(item.category) === selectedGalleryCategory);
 
   return (
     <>

@@ -22,14 +22,15 @@ test('encoding preserves order, multiline notice and literal titles', () => {
   assert.equal(encoded.fields.notice.stringValue, '첫 줄\n둘째 줄');
   assert.equal(encoded.fields.playlists.arrayValue.values[0].mapValue.fields.id.stringValue, 'one');
 });
+for (const matchRows of [null, [], [['match', '경기자료', '']], [['match', '경기자료', 'https://docs.google.com/document/d/example/edit']]]) {
 for (const resourceRows of [null, [], [['rules', '회칙', 'https://drive.google.com/file/d/example/view']]]) {
-test('publish patches only content; resources=' + JSON.stringify(resourceRows), () => {
+test('publish patches only content; resources=' + JSON.stringify(resourceRows) + '; matches=' + JSON.stringify(matchRows), () => {
   const calls = []; const backup = []; const messages = [];
   const current = { updateTime: '2026-10-19T00:00:00Z', fields: { notice: { stringValue: 'old' } } };
   const ui = { ButtonSet: { YES_NO: 'buttons' }, Button: { YES: 'yes' }, alert: (...args) => { messages.push(args); return 'yes'; } };
   const book = { getSheetByName: name => name === '공지' ? { getRange: () => ({ getDisplayValue: () => 'new', getValue: () => false }) }
     : name === '영상목록' ? { getLastRow: () => 2, getRange: () => ({ getDisplayValues: () => valid }) }
-    : name === '공유자료' ? (resourceRows === null ? null : { getLastRow: () => resourceRows.length + 1, getRange: () => ({ getDisplayValues: () => resourceRows }) }) : { getLastRow: () => backup.length, appendRow: row => backup.push(row) } };
+    : name === '공유자료' ? (resourceRows === null ? null : { getLastRow: () => resourceRows.length + 1, getRange: () => ({ getDisplayValues: () => resourceRows }) }) : name === '경기자료' && matchRows !== null ? { getLastRow: () => matchRows.length + 1, getRange: () => ({ getDisplayValues: () => matchRows }) } : null };
   let released = false;
   const c = load({ SpreadsheetApp: { getUi: () => ui, getActiveSpreadsheet: () => book },
     ScriptApp: { getOAuthToken: () => 'test-token' },
@@ -44,11 +45,14 @@ test('publish patches only content; resources=' + JSON.stringify(resourceRows), 
   assert.match(calls[1].url, /memberContent\/main\?updateMask.fieldPaths=notice&updateMask.fieldPaths=playlists/);
   assert.ok(calls[1].url.includes('currentDocument.updateTime='));
   assert.equal(calls[1].url.includes('updateMask.fieldPaths=resources'), resourceRows !== null);
-  assert.deepEqual(Object.keys(JSON.parse(calls[1].options.payload).fields), resourceRows === null ? ['notice', 'playlists'] : ['notice', 'playlists', 'resources']);
+  assert.deepEqual(Object.keys(JSON.parse(calls[1].options.payload).fields), ['notice', 'playlists', ...(resourceRows !== null ? ['resources'] : []), ...(matchRows !== null ? ['matchResources'] : [])]);
   if (resourceRows !== null) assert.equal(JSON.parse(calls[1].options.payload).fields.resources.arrayValue.values.length, resourceRows.length);
+  assert.equal(calls[1].url.includes('updateMask.fieldPaths=matchResources'), matchRows !== null);
+  if (matchRows !== null) assert.equal(JSON.parse(calls[1].options.payload).fields.matchResources.arrayValue.values.length, matchRows.length);
   assert.equal(released, true);
   assert.match(messages.at(-1)[0], /반영 완료/);
 });
+}
 }
 test('permission and conflict failures are actionable without exposing tokens', () => {
   for (const status of [403, 412, 404]) {
@@ -78,4 +82,10 @@ test('Google Docs and Sheets links accepted; malformed and spoofed links rejecte
   const c = load();
   for (const url of ["https://docs.google.com/document/d/doc_123/edit?usp=sharing","https://docs.google.com/spreadsheets/d/sheet-123/edit?usp=sharing#gid=0","https://docs.google.com/document/u/0/d/doc_123/edit"]) assert.doesNotThrow(() => c.validateResources_([['id', '자료', url]]));
   for (const url of ["https://docs.google.com.evil/document/d/x/edit","https://docs.google.com@evil.com/document/d/x/edit","http://docs.google.com/document/d/x/edit","https://docs.google.com/document/d/","https://docs.google.com/spreadsheets/","https://evil.com/document/d/x/edit"]) assert.throws(() => c.validateResources_([['id', '자료', url]]));
+});
+
+test('match rows allow pending links but reject duplicates and unsafe links', () => {
+  const c = load();
+  assert.equal(c.validateResources_([['m', '경기', '']], true)[0].url, '');
+  for (const rows of [[['m', '', '']], [['m', '경기', 'javascript:alert(1)']], [['m', '경기', ''], ['m', '경기2', '']]]) assert.throws(() => c.validateResources_(rows, true));
 });

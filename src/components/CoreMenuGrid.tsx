@@ -11,37 +11,33 @@ export const CoreMenuGrid: React.FC<CoreMenuGridProps> = ({ onNavigate, onOpenJo
   const cards = [
     {
       number: '01',
-      eyebrow: 'Game Plan',
       title: 'SCHEDULE',
       korean: '월간 정모 일정',
-      description: '이번 달 훈련과 경기 일정, 체육관 위치를 한눈에 확인하세요.',
+      description: '일정과 체육관 위치를 확인하세요.',
       icon: CalendarDays,
       action: () => onNavigate('schedule'),
     },
     {
       number: '02',
-      eyebrow: 'Join The Team',
       title: 'JOIN US',
       korean: '정모 참가 신청',
-      description: '첫 코트부터 한 팀이 되는 순간까지, 한늬가 함께합니다.',
+      description: '한늬와 함께 재밌는 농구하세요.',
       icon: Flame,
       action: onOpenJoinForm,
     },
     {
       number: '03',
-      eyebrow: 'Our Identity',
       title: 'ABOUT',
-      korean: '한늬의 이야기',
-      description: '2008년부터 이어진 열정, 포용, 성장의 팀 스토리를 만나보세요.',
+      korean: '한늬 이야기',
+      description: '열정과 성장의 팀 스토리를 만나보세요.',
       icon: Shield,
       action: () => onNavigate('about'),
     },
     {
       number: '04',
-      eyebrow: 'One Team',
       title: 'ROSTER',
       korean: '한늬 선수단',
-      description: '서로 다른 플레이가 모여 완성되는 한늬즈를 소개합니다.',
+      description: '매력 넘치는 한늬즈를 소개합니다.',
       icon: Users,
       action: () => onNavigate('roster'),
     },
@@ -79,11 +75,7 @@ export const CoreMenuGrid: React.FC<CoreMenuGridProps> = ({ onNavigate, onOpenJo
                     </span>
                     <Icon className="h-6 w-6 text-red-500" strokeWidth={1.6} />
                   </div>
-
                   <div className="mt-auto">
-                    <p className="hidden sm:block mb-2 text-[9px] font-black uppercase tracking-[0.12em] sm:tracking-[0.28em] text-white">
-                      {card.eyebrow}
-                    </p>
                     <h3 className="heading-menu-card headline-font text-white transition-transform duration-300 group-hover:translate-x-1">
                       {card.title}
                     </h3>

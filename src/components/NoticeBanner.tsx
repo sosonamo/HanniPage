@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ScheduleEvent } from '../types';
-import { Flame, Calendar, MapPin } from 'lucide-react';
+import { Flame, Calendar } from 'lucide-react';
 
 interface NoticeBannerProps {
   nextSchedule?: ScheduleEvent;
@@ -34,15 +34,15 @@ export const NoticeBanner: React.FC<NoticeBannerProps> = ({ nextSchedule, onRsvp
 
   return (
     <div className="notice-stripe bg-red-600 text-white border-b border-red-400/40 text-xs py-2 px-4 relative z-40 overflow-hidden">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2">
+      <div className="max-w-7xl mx-auto grid grid-cols-[minmax(0,max-content)_max-content] md:flex md:flex-row items-center md:justify-between gap-2">
         {/* Left marquee / announcement */}
-        <div className="flex items-center gap-2 overflow-x-auto whitespace-nowrap scrollbar-none w-full md:w-auto">
+        <div className="col-start-1 row-start-1 flex items-center gap-2 overflow-x-auto whitespace-nowrap scrollbar-none w-full md:w-auto md:min-w-0">
           <span className="inline-flex items-center gap-1 bg-black text-white font-black px-2.5 py-1 text-[10px] tracking-widest">
             <Flame className="w-3.5 h-3.5 text-orange-400 animate-pulse" />
             공지
           </span>
           <span className="text-white font-black tracking-wide">
-            2026 하반기 신입 부원 & 게스트 정기 모집 중 — 초보자 환영
+            신입 팀원 & 게스트 모집중 * 초보자 환영 *
           </span>
           <span className="text-white hidden sm:inline">/</span>
           <span className="text-white hidden sm:inline-flex items-center gap-1 font-semibold">
@@ -54,18 +54,18 @@ export const NoticeBanner: React.FC<NoticeBannerProps> = ({ nextSchedule, onRsvp
         </div>
 
         {/* Right countdown timer & CTA */}
-        <div className="flex items-center gap-3 shrink-0">
-          {timeLeft && <div className="hidden lg:flex items-center gap-1.5 text-[10px] font-bold text-white">
+        <div className="contents md:flex md:items-center md:gap-2 lg:gap-3 md:shrink-0">
+          {timeLeft && <div className="col-start-1 row-start-2 justify-self-end flex items-center gap-1 lg:gap-1.5 whitespace-nowrap text-[10px] font-bold text-white">
             <span>다음 정모까지</span>
-            <span className="bg-black text-white font-mono font-bold px-1.5 py-0.5 border border-black">
+            <span className="bg-black text-white font-mono font-bold px-1 lg:px-1.5 py-0.5 border border-black">
               {timeLeft.days}d
             </span>
             <span>:</span>
-            <span className="bg-black text-white font-mono font-bold px-1.5 py-0.5 border border-black">
+            <span className="bg-black text-white font-mono font-bold px-1 lg:px-1.5 py-0.5 border border-black">
               {String(timeLeft.hours).padStart(2, '0')}h
             </span>
             <span>:</span>
-            <span className="bg-black text-white font-mono font-bold px-1.5 py-0.5 border border-black">
+            <span className="bg-black text-white font-mono font-bold px-1 lg:px-1.5 py-0.5 border border-black">
               {String(timeLeft.minutes).padStart(2, '0')}m
             </span>
           </div>}
@@ -73,11 +73,10 @@ export const NoticeBanner: React.FC<NoticeBannerProps> = ({ nextSchedule, onRsvp
           <button
             onClick={onRsvpClick}
             disabled={!nextSchedule?.rsvpUrl}
-            className="text-[10px] bg-black/30 hover:bg-black disabled:opacity-50 disabled:cursor-not-allowed text-white font-black px-2.5 py-1.5 transition-colors border border-white/30 flex items-center gap-1 tracking-wide"
+            className="col-start-2 row-start-2 shrink-0 whitespace-nowrap text-[10px] bg-black/30 hover:bg-black disabled:opacity-50 disabled:cursor-not-allowed text-white font-black px-2.5 py-1.5 transition-colors border border-white/30 flex items-center gap-1 tracking-wide"
           >
-            <MapPin className="w-3 h-3 text-white" />
             {nextSchedule?.rsvpUrl
-              ? '다음 일정 참석'
+              ? '정모 참석'
               : nextSchedule
                 ? '신청 링크 준비 중'
                 : '일정 없음'}
